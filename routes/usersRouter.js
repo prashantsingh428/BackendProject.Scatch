@@ -1,23 +1,19 @@
-const express = require('express')
-const router = express.Router()
-const userModel = require("../models/user-model")
+const express = require("express");
+const router = express.Router();
+const isLoggedIn = require("../middlewares/isLoggedin");
+const { registerUser, loginUser, logout } = require("../controllers/authController");
 
-router.get("/" , function(req , res){
-    res.send("Heyyy its all done")
-})
+router.get("/", function (req, res) {
+    res.send("Heyyy its all done");
+});
 
-router.post("/" , async function (req , res){
-    try{
-    let{email , password ,  fullname } = req.body
-    
-    let user = await userModel.create({
-        email, 
-        password,
-        fullname
-    })
-    res.send(user);
-    }catch(err){
-        console.log(err.message); 
-    }
-})
+// Register
+router.post("/register", registerUser);
+
+// Login
+router.post("/login", loginUser);
+
+// Logout
+router.post("/logout", logout);
+
 module.exports = router;

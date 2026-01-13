@@ -4,12 +4,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Scatch</title>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom Font Import if needed, using backup for now since local file assumption is risky without font file check */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
 </head>
 
-<body class="font-['helvetica_now_display']">
-    <nav class="w-full fixed top-0 left-0 px-5 py-3">
-        <h3 class="text-xl">Scatch</h3>
+<body class="flex flex-col min-h-screen font-['helvetica_now_display']">
+    <nav
+        class="w-full fixed top-0 left-0 px-10 py-6 flex justify-between items-center z-50 bg-white/80 backdrop-blur-md border-b border-zinc-200">
+        <h3 class="text-xl font-semibold text-zinc-800 tracking-tight">Scatch</h3>
+
+        <% if(typeof loggedin !=='undefined' && loggedin){ %>
+            <!-- Centered Search Bar (Only for logged in users) -->
+            <div class="hidden md:block flex-grow max-w-xl mx-8">
+                <form action="/shop" method="GET" class="relative w-full">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                        <i class="ri-search-line text-zinc-400"></i>
+                    </div>
+                    <input type="text" name="search"
+                        class="w-full py-2.5 pl-10 pr-4 bg-zinc-100 border border-zinc-200 text-zinc-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block outline-none transition-all placeholder:text-zinc-400"
+                        placeholder="Search product or brand here...">
+                </form>
+            </div>
+
+            <div class="flex items-center gap-5 font-medium text-sm text-zinc-600">
+                <a class="hover:text-black transition-colors" href="/shop">Shop</a>
+                <a class="hover:text-black transition-colors" href="/cart">Cart</a>
+                <a class="hover:text-black transition-colors" href="/account">My Account</a>
+                <a class="hover:text-black transition-colors" href="/logout" class="text-red-500">Logout</a>
+                <button class="text-zinc-800 hover:text-black transition-colors text-xl ml-2">
+                    <i class="ri-menu-3-line"></i>
+                </button>
+            </div>
+            <% } else { %>
+                <!-- Login/Register Links (For logged out users) -->
+                <div class="flex items-center gap-5 font-medium text-sm text-zinc-600">
+                    <a class="hover:text-black transition-colors" href="/login">Login</a>
+                    <a class="hover:text-black transition-colors" href="/register">Register</a>
+                </div>
+                <% } %>
     </nav>
+    <main class="flex-grow w-full relative pt-20">

@@ -1,0 +1,259 @@
+<%- include('./partials/header') %>
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+
+    <div class="w-full min-h-screen bg-[#F8F9FD] pt-32 px-4 md:px-12 pb-20">
+        <div class="max-w-7xl mx-auto">
+
+            <!-- Page Header -->
+            <div class="mb-8 flex items-end justify-between">
+                <div>
+                    <h1 class="text-3xl font-bold text-zinc-900 tracking-tight mb-2">My Account</h1>
+                    <p class="text-zinc-500 text-sm">Welcome back, <%= user.fullname %>
+                    </p>
+                </div>
+                <!-- Mini Profile Widget -->
+                <div class="flex items-center gap-4 bg-white px-5 py-2.5 rounded-full shadow-sm border border-zinc-100">
+                    <div class="w-10 h-10 rounded-full bg-zinc-100 overflow-hidden">
+                        <% if (user.picture) { %>
+                            <img src="/images/uploads/<%= user.picture %>" class="w-full h-full object-cover">
+                            <% } else { %>
+                                <div class="w-full h-full flex items-center justify-center text-zinc-400"><i
+                                        class="ri-user-fill"></i></div>
+                                <% } %>
+                    </div>
+                    <div class="hidden md:block">
+                        <p class="text-sm font-bold text-zinc-900 leading-none">
+                            <%= user.fullname %>
+                        </p>
+                        <p class="text-xs text-zinc-500 mt-1">
+                            <%= user.email %>
+                        </p>
+                    </div>
+                    <a href="/logout"
+                        class="w-8 h-8 rounded-full bg-zinc-50 flex items-center justify-center text-zinc-600 hover:bg-zinc-200 transition-colors ml-2">
+                        <i class="ri-logout-box-r-line text-sm"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="flex flex-col lg:flex-row gap-8">
+                <!-- Sidebar (Formal Card) -->
+                <div class="w-full lg:w-1/4">
+                    <div
+                        class="bg-white rounded-2xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] overflow-hidden sticky top-32 border border-zinc-50">
+                        <div class="p-6 border-b border-zinc-50 bg-white">
+                            <h2 class="text-lg font-bold text-zinc-900">Dashboard</h2>
+                        </div>
+                        <nav class="flex flex-col p-3 space-y-1">
+                            <a href="/account"
+                                class="flex items-center gap-3 px-4 py-3 bg-zinc-900 text-white rounded-xl font-medium transition-all shadow-md shadow-zinc-200">
+                                <div class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center"><i
+                                        class="ri-layout-grid-line"></i></div>
+                                Overview
+                            </a>
+                            <a href="#"
+                                class="flex items-center gap-3 px-4 py-3 text-zinc-500 hover:bg-zinc-50 hover:text-zinc-900 rounded-xl font-medium transition-colors group">
+                                <div
+                                    class="w-8 h-8 rounded-lg bg-zinc-100 flex items-center justify-center text-zinc-400 group-hover:text-zinc-600 transition-colors">
+                                    <i class="ri-shopping-bag-3-line"></i>
+                                </div>
+                                My Orders
+                            </a>
+                            <a href="#"
+                                class="flex items-center gap-3 px-4 py-3 text-zinc-500 hover:bg-zinc-50 hover:text-zinc-900 rounded-xl font-medium transition-colors group">
+                                <div
+                                    class="w-8 h-8 rounded-lg bg-zinc-100 flex items-center justify-center text-zinc-400 group-hover:text-zinc-600 transition-colors">
+                                    <i class="ri-heart-line"></i>
+                                </div>
+                                Wishlist
+                            </a>
+                            <a href="#"
+                                class="flex items-center gap-3 px-4 py-3 text-zinc-500 hover:bg-zinc-50 hover:text-zinc-900 rounded-xl font-medium transition-colors group">
+                                <div
+                                    class="w-8 h-8 rounded-lg bg-zinc-100 flex items-center justify-center text-zinc-400 group-hover:text-zinc-600 transition-colors">
+                                    <i class="ri-map-pin-line"></i>
+                                </div>
+                                Addresses
+                            </a>
+                            <a href="#"
+                                class="flex items-center gap-3 px-4 py-3 text-zinc-500 hover:bg-zinc-50 hover:text-zinc-900 rounded-xl font-medium transition-colors group">
+                                <div
+                                    class="w-8 h-8 rounded-lg bg-zinc-100 flex items-center justify-center text-zinc-400 group-hover:text-zinc-600 transition-colors">
+                                    <i class="ri-settings-4-line"></i>
+                                </div>
+                                Settings
+                            </a>
+                        </nav>
+                        <div class="p-4 mt-2">
+                            <div class="bg-[#EFF4FF] rounded-xl p-4 border border-[#DBEAFE]">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <div
+                                        class="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center">
+                                        <i class="ri-customer-service-2-fill text-sm"></i>
+                                    </div>
+                                    <span class="font-bold text-sm text-zinc-900">Need Help?</span>
+                                </div>
+                                <p class="text-xs text-[#6B7280] leading-relaxed mb-3">Questions about an order? Check
+                                    our help center.</p>
+                                <button
+                                    class="w-full py-2 bg-white border border-blue-200 text-blue-600 text-xs font-bold rounded-lg hover:bg-blue-50 transition-colors shadow-sm">Help
+                                    Center</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Content Area -->
+                <div class="w-full lg:w-3/4 space-y-12">
+
+                    <!-- Recent Orders (Reference 0: Best Selling Store Style) -->
+                    <div>
+                        <div class="flex items-center justify-between mb-6">
+                            <h2 class="text-2xl font-bold text-zinc-900">Recent Orders</h2>
+                            <a href="#"
+                                class="text-sm font-semibold text-zinc-500 hover:text-zinc-900 transition-colors">See
+                                all →</a>
+                        </div>
+
+                        <% if (user.orders && user.orders.length> 0) { %>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <% user.orders.forEach(order=> { %>
+                                    <!-- Store Card Style -->
+                                    <div
+                                        class="bg-white rounded-[20px] p-5 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-zinc-100 hover:translate-y-[-2px] transition-transform duration-300">
+                                        <!-- Header -->
+                                        <div class="flex items-center gap-4 mb-6">
+                                            <div class="relative">
+                                                <div
+                                                    class="w-14 h-14 rounded-full bg-zinc-50 border border-zinc-100 flex items-center justify-center text-zinc-700">
+                                                    <i class="ri-store-2-line text-2xl"></i>
+                                                </div>
+                                                <!-- Blue Verified Badge -->
+                                                <div
+                                                    class="absolute -bottom-0 -right-0 w-5 h-5 bg-blue-500 rounded-full border-2 border-white flex items-center justify-center text-white text-[10px]">
+                                                    <i class="ri-check-fill"></i>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <h3 class="font-bold text-zinc-900 text-lg leading-tight">Order #<%=
+                                                        order._id.toString().slice(-4).toUpperCase() %>
+                                                </h3>
+                                                <p class="text-xs text-zinc-500 font-medium mt-0.5">Status: On the way
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <!-- Product Row -->
+                                        <div class="grid grid-cols-3 gap-3 mb-2">
+                                            <!-- Product 1 -->
+                                            <div class="group cursor-pointer">
+                                                <div
+                                                    class="aspect-square bg-[#F3F4F6] rounded-xl mb-2 overflow-hidden flex items-center justify-center relative">
+                                                    <img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=200"
+                                                        class="w-3/4 mix-blend-multiply group-hover:scale-110 transition-transform">
+                                                </div>
+                                                <p class="text-sm font-bold text-zinc-900 text-center">$120</p>
+                                            </div>
+                                            <!-- Product 2 -->
+                                            <div class="group cursor-pointer">
+                                                <div
+                                                    class="aspect-square bg-[#F3F4F6] rounded-xl mb-2 overflow-hidden flex items-center justify-center relative">
+                                                    <img src="https://images.unsplash.com/photo-1542272454315-4c01d7abdf4a?w=200"
+                                                        class="w-3/4 mix-blend-multiply group-hover:scale-110 transition-transform">
+                                                </div>
+                                                <p class="text-sm font-bold text-zinc-900 text-center">$85</p>
+                                            </div>
+                                            <!-- Product 3 -->
+                                            <div class="group cursor-pointer">
+                                                <div
+                                                    class="aspect-square bg-[#F3F4F6] rounded-xl mb-2 overflow-hidden flex items-center justify-center relative">
+                                                    <img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=200"
+                                                        class="w-3/4 mix-blend-multiply group-hover:scale-110 transition-transform">
+                                                </div>
+                                                <p class="text-sm font-bold text-zinc-900 text-center">$99</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <% }) %>
+                            </div>
+                            <% } else { %>
+                                <!-- Empty State Card -->
+                                <div class="bg-white rounded-[20px] p-10 text-center shadow-sm border border-zinc-100">
+                                    <div
+                                        class="w-20 h-20 mx-auto bg-zinc-50 rounded-full flex items-center justify-center text-zinc-300 mb-4">
+                                        <i class="ri-shopping-cart-2-line text-3xl"></i>
+                                    </div>
+                                    <h3 class="text-zinc-900 font-bold text-lg mb-2">No active orders</h3>
+                                    <p class="text-zinc-500 text-sm max-w-xs mx-auto mb-6">Looks like you haven't made
+                                        your first purchase yet.</p>
+                                    <a href="/shop"
+                                        class="inline-flex items-center justify-center px-8 py-3 bg-zinc-900 text-white font-semibold rounded-xl hover:bg-black transition-colors shadow-lg shadow-zinc-200">
+                                        Start Shopping
+                                    </a>
+                                </div>
+                                <% } %>
+                    </div>
+
+                    <!-- Recommended For You (Reference 1: Flash Sale Style) -->
+                    <!-- My Wishlist -->
+                    <div>
+                        <div class="flex items-center justify-between mb-6">
+                            <h2 class="text-2xl font-bold text-zinc-900">My Wishlist</h2>
+                        </div>
+
+                        <% if (user.wishlist && user.wishlist.length> 0) { %>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                <% user.wishlist.forEach(item=> { %>
+                                    <div
+                                        class="bg-white rounded-[18px] border border-zinc-100 p-3 shadow-sm hover:shadow-lg transition-shadow duration-300 group">
+                                        <div
+                                            class="aspect-[4/3] bg-[#F9FAFB] rounded-xl overflow-hidden relative mb-3 flex items-center justify-center">
+                                            <img src="/images/uploads/<%= item.image %>"
+                                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                            <a href="/addtocart/<%= item._id %>"
+                                                class="absolute top-2 right-2 w-7 h-7 bg-white rounded-full shadow-sm flex items-center justify-center text-zinc-400 hover:text-black transition-colors z-10"><i
+                                                    class="ri-shopping-cart-2-line text-sm"></i></a>
+                                        </div>
+                                        <div>
+                                            <h4
+                                                class="font-bold text-zinc-900 text-[13px] leading-tight mb-1 line-clamp-2 min-h-[32px]">
+                                                <%= item.name %>
+                                            </h4>
+                                            <!-- Price -->
+                                            <div class="flex items-baseline gap-2 mb-2">
+                                                <% if(item.discount> 0) { %>
+                                                    <span class="font-bold text-zinc-900 text-base">₹ <%= item.price -
+                                                            item.discount %></span>
+                                                    <span
+                                                        class="text-[10px] text-red-500 line-through decoration-red-500 decoration-1 opacity-70">₹
+                                                        <%= item.price %></span>
+                                                    <% } else { %>
+                                                        <span class="font-bold text-zinc-900 text-base">₹ <%= item.price
+                                                                %></span>
+                                                        <% } %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <% }) %>
+                            </div>
+                            <% } else { %>
+                                <div class="text-center py-12 bg-white rounded-2xl border border-zinc-100">
+                                    <p class="text-zinc-400 text-sm">Your wishlist is empty.</p>
+                                    <a href="/shop"
+                                        class="text-blue-600 font-semibold text-sm mt-2 inline-block hover:underline">Explore
+                                        Products</a>
+                                </div>
+                                <% } %>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <%- include('./partials/footer') %>

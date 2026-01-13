@@ -1,113 +1,105 @@
 <%- include('./partials/header') %>
-    <div class="w-full h-screen flex items-start px-20 py-20">
-        <div class="w-[25%] flex h-screen flex-col items-start">
-            <div class="flex flex-col">
-                <a class="block w-fit mb-2" href="">All Products</a>
-                <a class="block w-fit mb-2" href="">Create new product</a>
-            </div>
+
+    <% if(success.length>0){ %>
+        <div class="absolute top-24 left-1/2 -translate-x-1/2 p-3 rounded-md bg-blue-500 z-50 animate-fade-in-down">
+            <span class="inline-block text-white font-medium">
+                <%= success %>
+            </span>
         </div>
-        <div class="w-[75%] flex flex-col gap-5 h-screen">
-            <a class="text-red-500" href="">Delete all</a>
-            <div class="flex items-start gap-5">
-                <div class="w-60 bg-red-500">
-                    <div class="w-full h-52 bg-yellow-500"></div>
-                    <div class="flex justify-between items-center px-4 py-4">
-                        <div>
-                            <h3>Clinge Bag</h3>
-                            <h4>₹ 1200</h4>
+        <% } %>
+
+            <div
+                class="w-full min-h-screen flex flex-col md:flex-row items-start px-5 md:px-10 py-10 gap-10 bg-zinc-50">
+                <!-- Admin Sidebar -->
+                <div class="w-full md:w-[20%] sticky top-24 transition-all duration-300">
+                    <div class="bg-white p-6 rounded-xl border border-zinc-200 shadow-sm">
+                        <h3 class="text-xs font-bold text-zinc-400 uppercase tracking-widest mb-6">Admin Panel</h3>
+                        <div class="flex flex-col gap-3 text-sm font-medium text-zinc-600">
+                            <a class="flex items-center gap-3 px-4 py-3 bg-zinc-100 text-black rounded-lg transition-colors"
+                                href="/owners/admin">
+                                <i class="ri-dashboard-line"></i> Dashboard
+                            </a>
+                            <a class="flex items-center gap-3 px-4 py-3 hover:bg-zinc-50 hover:text-black rounded-lg transition-colors"
+                                href="/owners/create">
+                                <i class="ri-add-circle-line"></i> Create Product
+                            </a>
                         </div>
-                        <a class="w-7 h-7 flex items-center justify-center rounded-full bg-white" href="">
-                            <i class="ri-add-line"></i>
-                        </a>
+
+                        <div class="mt-8 pt-6 border-t border-zinc-100">
+                            <a class="flex items-center gap-3 px-4 py-3 text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                                href="">
+                                <i class="ri-delete-bin-line"></i> Delete All Products
+                            </a>
+                        </div>
                     </div>
                 </div>
-                <div class="w-60 bg-red-500">
-                    <div class="w-full h-52 bg-yellow-500"></div>
-                    <div class="flex justify-between items-center px-4 py-4">
+
+                <!-- Main Content -->
+                <div class="w-full md:w-[80%]">
+                    <div class="flex items-center justify-between mb-8">
                         <div>
-                            <h3>Clinge Bag</h3>
-                            <h4>₹ 1200</h4>
+                            <h1 class="text-2xl font-bold text-zinc-800">All Products</h1>
+                            <p class="text-zinc-500 text-sm mt-1">Manage your store inventory</p>
                         </div>
-                        <a class="w-7 h-7 flex items-center justify-center rounded-full bg-white" href="">
-                            <i class="ri-add-line"></i>
+                        <a href="/owners/create"
+                            class="px-5 py-2.5 bg-zinc-900 text-white text-sm font-medium rounded-lg hover:bg-black transition shadow-lg shadow-zinc-500/20">
+                            + Add Product
                         </a>
                     </div>
-                </div>
-                <div class="w-60 bg-red-500">
-                    <div class="w-full h-52 bg-yellow-500"></div>
-                    <div class="flex justify-between items-center px-4 py-4">
-                        <div>
-                            <h3>Clinge Bag</h3>
-                            <h4>₹ 1200</h4>
-                        </div>
-                        <a class="w-7 h-7 flex items-center justify-center rounded-full bg-white" href="">
-                            <i class="ri-add-line"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="w-60 bg-red-500">
-                    <div class="w-full h-52 bg-yellow-500"></div>
-                    <div class="flex justify-between items-center px-4 py-4">
-                        <div>
-                            <h3>Clinge Bag</h3>
-                            <h4>₹ 1200</h4>
-                        </div>
-                        <a class="w-7 h-7 flex items-center justify-center rounded-full bg-white" href="">
-                            <i class="ri-add-line"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="flex items-start gap-5">
-                <div class="w-60 bg-red-500">
-                    <div class="w-full h-52 bg-yellow-500"></div>
-                    <div class="flex justify-between items-center px-4 py-4">
-                        <div>
-                            <h3>Clinge Bag</h3>
-                            <h4>₹ 1200</h4>
-                        </div>
-                        <a class="w-7 h-7 flex items-center justify-center rounded-full bg-white" href="">
-                            <i class="ri-add-line"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="w-60 bg-red-500">
-                    <div class="w-full h-52 bg-yellow-500"></div>
-                    <div class="flex justify-between items-center px-4 py-4">
-                        <div>
-                            <h3>Clinge Bag</h3>
-                            <h4>₹ 1200</h4>
-                        </div>
-                        <a class="w-7 h-7 flex items-center justify-center rounded-full bg-white" href="">
-                            <i class="ri-add-line"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="w-60 bg-red-500">
-                    <div class="w-full h-52 bg-yellow-500"></div>
-                    <div class="flex justify-between items-center px-4 py-4">
-                        <div>
-                            <h3>Clinge Bag</h3>
-                            <h4>₹ 1200</h4>
-                        </div>
-                        <a class="w-7 h-7 flex items-center justify-center rounded-full bg-white" href="">
-                            <i class="ri-add-line"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="w-60 bg-red-500">
-                    <div class="w-full h-52 bg-yellow-500"></div>
-                    <div class="flex justify-between items-center px-4 py-4">
-                        <div>
-                            <h3>Clinge Bag</h3>
-                            <h4>₹ 1200</h4>
-                        </div>
-                        <a class="w-7 h-7 flex items-center justify-center rounded-full bg-white" href="">
-                            <i class="ri-add-line"></i>
-                        </a>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                        <% if (typeof products !=='undefined' && products.length> 0) { %>
+                            <% products.forEach(function(product){ %>
+                                <div
+                                    class="group relative bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 border border-zinc-100">
+                                    <!-- Image -->
+                                    <div
+                                        class="w-full h-48 flex items-center justify-center p-6 bg-[<%= product.bgcolor %>]/10">
+                                        <img class="h-full w-full object-contain mix-blend-multiply"
+                                            src="/images/uploads/<%= product.image %>" alt="<%= product.name %>">
+                                    </div>
+
+                                    <!-- Details -->
+                                    <div class="p-4 bg-[<%= product.panelcolor %>] text-[<%= product.textcolor %>]">
+                                        <h3 class="text-lg font-bold leading-tight mb-1 truncate">
+                                            <%= product.name %>
+                                        </h3>
+                                        <div class="flex items-center justify-between">
+                                            <h4 class="text-md font-medium opacity-80">₹ <%= product.price %>
+                                            </h4>
+                                            <div class="flex gap-2">
+                                                <a href="#"
+                                                    class="w-8 h-8 flex items-center justify-center rounded-full bg-white/20 hover:bg-white/40 backdrop-blur-sm transition-colors"
+                                                    title="Edit">
+                                                    <i class="ri-pencil-line"></i>
+                                                </a>
+                                                <a href="#"
+                                                    class="w-8 h-8 flex items-center justify-center rounded-full bg-red-500 text-white hover:bg-red-600 transition-colors shadow-sm"
+                                                    title="Delete">
+                                                    <i class="ri-delete-bin-line"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <% }) %>
+                                    <% } else { %>
+                                        <div
+                                            class="col-span-full py-20 bg-white rounded-xl border border-dashed border-zinc-300 flex flex-col items-center justify-center text-center">
+                                            <div
+                                                class="w-16 h-16 bg-zinc-50 rounded-full flex items-center justify-center mb-4 text-zinc-400">
+                                                <i class="ri-store-2-line text-3xl"></i>
+                                            </div>
+                                            <h3 class="text-lg font-medium text-zinc-800">No products found</h3>
+                                            <p class="text-zinc-500 text-sm mt-1 mb-6">Start by creating your first
+                                                product.</p>
+                                            <a href="/owners/create"
+                                                class="px-6 py-2 bg-blue-600 text-white text-sm font-medium rounded-full hover:bg-blue-700 transition">
+                                                Create Product
+                                            </a>
+                                        </div>
+                                        <% } %>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <%- include('./partials/footer') %>
+            <%- include('./partials/footer') %>
