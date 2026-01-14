@@ -4,6 +4,8 @@ const ownerModel = require("../models/owner-model");
 
 const productModel = require("../models/product-model");
 
+const upload = require("../config/multer-config"); // Ensure this is imported
+
 if (process.env.NODE_ENV === "development") {
     router.post("/create", async function (req, res) {
         let owners = await ownerModel.find();
@@ -29,7 +31,38 @@ if (process.env.NODE_ENV === "development") {
 router.get("/admin", async function (req, res) {
     let success = req.flash("success");
     let products = await productModel.find();
-    res.render("admin", { products, success });
+    let owner = await ownerModel.findOne();
+    res.render("admin", { products, success, owner });
+});
+
+router.post("/admin/gallery/upload", upload.single("image"), async function (req, res) {
+    try {
+        let owner = await ownerModel.findOne();
+        if (owner) {
+            owner.galleryImages.push(req.file.filename);
+            await owner.save();
+            req.flash("success", "Gallery image uploaded.");
+        }
+        res.redirect("/owners/admin");
+    } catch (err) {
+        req.flash("error", "Error uploading image");
+        res.redirect("/owners/admin");
+    }
+});
+
+router.get("/admin/gallery/delete/:filename", async function (req, res) {
+    try {
+        let owner = await ownerModel.findOne();
+        if (owner) {
+            owner.galleryImages = owner.galleryImages.filter(img => img !== req.params.filename);
+            await owner.save();
+            req.flash("success", "Image removed from gallery.");
+        }
+        res.redirect("/owners/admin");
+    } catch (err) {
+        req.flash("error", "Error removing image");
+        res.redirect("/owners/admin");
+    }
 });
 
 router.get("/create", function (req, res) {

@@ -51,38 +51,38 @@
                             <h2 class="text-lg font-bold text-zinc-900">Dashboard</h2>
                         </div>
                         <nav class="flex flex-col p-3 space-y-1">
-                            <a href="/account"
-                                class="flex items-center gap-3 px-4 py-3 bg-zinc-900 text-white rounded-xl font-medium transition-all shadow-md shadow-zinc-200">
+                            <a id="nav-overview" href="javascript:void(0)" onclick="showTab('overview')"
+                                class="flex items-center gap-3 px-4 py-3 bg-zinc-900 text-white rounded-xl font-medium transition-all shadow-md shadow-zinc-200 nav-item">
                                 <div class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center"><i
                                         class="ri-layout-grid-line"></i></div>
                                 Overview
                             </a>
-                            <a href="#"
-                                class="flex items-center gap-3 px-4 py-3 text-zinc-500 hover:bg-zinc-50 hover:text-zinc-900 rounded-xl font-medium transition-colors group">
+                            <a id="nav-orders" href="javascript:void(0)" onclick="showTab('orders')"
+                                class="flex items-center gap-3 px-4 py-3 text-zinc-500 hover:bg-zinc-50 hover:text-zinc-900 rounded-xl font-medium transition-colors group nav-item">
                                 <div
                                     class="w-8 h-8 rounded-lg bg-zinc-100 flex items-center justify-center text-zinc-400 group-hover:text-zinc-600 transition-colors">
                                     <i class="ri-shopping-bag-3-line"></i>
                                 </div>
                                 My Orders
                             </a>
-                            <a href="#"
-                                class="flex items-center gap-3 px-4 py-3 text-zinc-500 hover:bg-zinc-50 hover:text-zinc-900 rounded-xl font-medium transition-colors group">
+                            <a id="nav-wishlist" href="javascript:void(0)" onclick="showTab('wishlist')"
+                                class="flex items-center gap-3 px-4 py-3 text-zinc-500 hover:bg-zinc-50 hover:text-zinc-900 rounded-xl font-medium transition-colors group nav-item">
                                 <div
                                     class="w-8 h-8 rounded-lg bg-zinc-100 flex items-center justify-center text-zinc-400 group-hover:text-zinc-600 transition-colors">
                                     <i class="ri-heart-line"></i>
                                 </div>
                                 Wishlist
                             </a>
-                            <a href="#"
-                                class="flex items-center gap-3 px-4 py-3 text-zinc-500 hover:bg-zinc-50 hover:text-zinc-900 rounded-xl font-medium transition-colors group">
+                            <a id="nav-addresses" href="#"
+                                class="flex items-center gap-3 px-4 py-3 text-zinc-500 hover:bg-zinc-50 hover:text-zinc-900 rounded-xl font-medium transition-colors group nav-item">
                                 <div
                                     class="w-8 h-8 rounded-lg bg-zinc-100 flex items-center justify-center text-zinc-400 group-hover:text-zinc-600 transition-colors">
                                     <i class="ri-map-pin-line"></i>
                                 </div>
                                 Addresses
                             </a>
-                            <a href="#"
-                                class="flex items-center gap-3 px-4 py-3 text-zinc-500 hover:bg-zinc-50 hover:text-zinc-900 rounded-xl font-medium transition-colors group">
+                            <a id="nav-settings" href="#"
+                                class="flex items-center gap-3 px-4 py-3 text-zinc-500 hover:bg-zinc-50 hover:text-zinc-900 rounded-xl font-medium transition-colors group nav-item">
                                 <div
                                     class="w-8 h-8 rounded-lg bg-zinc-100 flex items-center justify-center text-zinc-400 group-hover:text-zinc-600 transition-colors">
                                     <i class="ri-settings-4-line"></i>
@@ -113,7 +113,7 @@
                 <div class="w-full lg:w-3/4 space-y-12">
 
                     <!-- Recent Orders (Reference 0: Best Selling Store Style) -->
-                    <div>
+                    <div id="tab-overview" class="tab-content block">
                         <div class="flex items-center justify-between mb-6">
                             <h2 class="text-2xl font-bold text-zinc-900">Recent Orders</h2>
                             <a href="#"
@@ -202,7 +202,7 @@
 
                     <!-- Recommended For You (Reference 1: Flash Sale Style) -->
                     <!-- My Wishlist -->
-                    <div>
+                    <div id="tab-wishlist" class="tab-content hidden">
                         <div class="flex items-center justify-between mb-6">
                             <h2 class="text-2xl font-bold text-zinc-900">My Wishlist</h2>
                         </div>
@@ -216,6 +216,9 @@
                                             class="aspect-[4/3] bg-[#F9FAFB] rounded-xl overflow-hidden relative mb-3 flex items-center justify-center">
                                             <img src="/images/uploads/<%= item.image %>"
                                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                            <a href="/removefromwishlist/<%= item._id %>"
+                                                class="absolute top-2 left-2 w-7 h-7 bg-white rounded-full shadow-sm flex items-center justify-center text-zinc-400 hover:text-red-500 transition-colors z-10"><i
+                                                    class="ri-close-line text-lg"></i></a>
                                             <a href="/addtocart/<%= item._id %>"
                                                 class="absolute top-2 right-2 w-7 h-7 bg-white rounded-full shadow-sm flex items-center justify-center text-zinc-400 hover:text-black transition-colors z-10"><i
                                                     class="ri-shopping-cart-2-line text-sm"></i></a>
@@ -232,7 +235,8 @@
                                                             item.discount %></span>
                                                     <span
                                                         class="text-[10px] text-red-500 line-through decoration-red-500 decoration-1 opacity-70">₹
-                                                        <%= item.price %></span>
+                                                        <%= item.price %>
+                                                    </span>
                                                     <% } else { %>
                                                         <span class="font-bold text-zinc-900 text-base">₹ <%= item.price
                                                                 %></span>
@@ -256,4 +260,59 @@
             </div>
         </div>
     </div>
+    <script>
+        function showTab(tabId) {
+            // Hide all contents
+            document.querySelectorAll('.tab-content').forEach(el => {
+                el.classList.add('hidden');
+                el.classList.remove('block');
+            });
+
+            // Show target
+            const target = document.getElementById('tab-' + tabId);
+            if (target) {
+                target.classList.remove('hidden');
+                target.classList.add('block');
+            } else if (tabId === 'orders') {
+                // For now, if 'orders' is clicked, show overview (or implement specific logic)
+                document.getElementById('tab-overview').classList.remove('hidden');
+                document.getElementById('tab-overview').classList.add('block');
+            }
+
+            // Update Nav Styles
+            const activeClass = "bg-zinc-900 text-white shadow-md shadow-zinc-200".split(" ");
+            const inactiveClass = "text-zinc-500 hover:bg-zinc-50 hover:text-zinc-900".split(" ");
+
+            document.querySelectorAll('.nav-item').forEach(el => {
+                // Reset to inactive
+                el.classList.remove(...activeClass);
+                el.classList.add(...inactiveClass);
+                // Reset icon bg
+                const iconDiv = el.querySelector('div');
+                if (iconDiv) {
+                    iconDiv.classList.remove('bg-white/10');
+                    iconDiv.classList.add('bg-zinc-100', 'text-zinc-400', 'group-hover:text-zinc-600');
+                }
+            });
+
+            // Set Active
+            const activeNav = document.getElementById('nav-' + tabId);
+            if (activeNav) {
+                activeNav.classList.remove(...inactiveClass);
+                activeNav.classList.add(...activeClass);
+                const activeIcon = activeNav.querySelector('div');
+                if (activeIcon) {
+                    activeIcon.classList.remove('bg-zinc-100', 'text-zinc-400', 'group-hover:text-zinc-600');
+                    activeIcon.classList.add('bg-white/10');
+                }
+            }
+        }
+
+        // Check for active tab in URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const activeTab = urlParams.get('active');
+        if (activeTab) {
+            showTab(activeTab);
+        }
+    </script>
     <%- include('./partials/footer') %>

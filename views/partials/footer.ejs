@@ -89,6 +89,32 @@
         </div>
     </div>
 </footer>
+
+<!-- Mobile Bottom Navigation (Android Friendly) -->
+<div
+    class="fixed bottom-0 left-0 w-full bg-white border-t border-zinc-200 py-3 px-6 flex justify-between items-center z-50 md:hidden pb-safe">
+    <a href="/" class="flex flex-col items-center gap-1 text-zinc-500 hover:text-black transition-colors">
+        <i class="ri-home-5-line text-xl"></i>
+        <span class="text-[10px] font-medium">Home</span>
+    </a>
+    <a href="/shop" class="flex flex-col items-center gap-1 text-zinc-900 transition-colors">
+        <i class="ri-store-2-fill text-xl"></i>
+        <span class="text-[10px] font-medium">Shop</span>
+    </a>
+    <a href="/cart" class="flex flex-col items-center gap-1 text-zinc-500 hover:text-black transition-colors relative">
+        <i class="ri-shopping-bag-3-line text-xl"></i>
+        <span class="text-[10px] font-medium">Cart</span>
+        <!-- Optional Badge -->
+        <% if(typeof user !=='undefined' && user && user.cart && user.cart.length> 0) { %>
+            <span class="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+            <% } %>
+    </a>
+    <a href="/account" class="flex flex-col items-center gap-1 text-zinc-500 hover:text-black transition-colors">
+        <i class="ri-user-3-line text-xl"></i>
+        <span class="text-[10px] font-medium">Account</span>
+    </a>
+</div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
     integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>

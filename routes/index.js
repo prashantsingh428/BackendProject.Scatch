@@ -4,6 +4,8 @@ const isLoggedIn = require("../middlewares/isLoggedin");
 const productModel = require("../models/product-model");
 const userModel = require("../models/user-model");
 
+const ownerModel = require("../models/owner-model");
+
 router.get("/", function (req, res) {
     let error = req.flash("error");
     res.render("index", { error, isLoggedIn: false });
@@ -23,8 +25,9 @@ router.get("/shop", isLoggedIn, async function (req, res) {
     let user = await userModel.findOne({ email: req.user.email });
     let products = await productModel.find();
     let flashSaleProducts = await productModel.find({ flashSale: true });
+    let owner = await ownerModel.findOne(); // Fetch the first owner/admin
     let success = req.flash("success");
-    res.render("shop", { products, flashSaleProducts, success, user });
+    res.render("shop", { products, flashSaleProducts, success, user, owner });
 });
 
 router.get("/addtocart/:productid", isLoggedIn, async function (req, res) {
@@ -37,10 +40,23 @@ router.get("/addtocart/:productid", isLoggedIn, async function (req, res) {
 
 router.get("/addtowishlist/:productid", isLoggedIn, async function (req, res) {
     let user = await userModel.findOne({ email: req.user.email });
-    user.wishlist.push(req.params.productid);
+    if (user.wishlist.indexOf(req.params.productid) === -1) {
+        user.wishlist.push(req.params.productid);
+        req.flash("success", "Added to wishlist");
+    } else {
+        user.wishlist.pull(req.params.productid);
+        req.flash("success", "Removed from wishlist");
+    }
     await user.save();
-    req.flash("success", "Added to wishlist");
     res.redirect("/shop");
+});
+
+router.get("/removefromwishlist/:productid", isLoggedIn, async function (req, res) {
+    let user = await userModel.findOne({ email: req.user.email });
+    user.wishlist.pull(req.params.productid);
+    await user.save();
+    req.flash("success", "Removed from wishlist");
+    res.redirect("/account?active=wishlist");
 });
 
 router.get("/cart/delete/:id", isLoggedIn, async function (req, res) {

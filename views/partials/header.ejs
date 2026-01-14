@@ -36,13 +36,22 @@
             </div>
 
             <div class="flex items-center gap-5 font-medium text-sm text-zinc-600">
-                <a class="hover:text-black transition-colors" href="/shop">Shop</a>
-                <a class="hover:text-black transition-colors" href="/cart">Cart</a>
-                <a class="hover:text-black transition-colors" href="/account">My Account</a>
-                <a class="hover:text-black transition-colors" href="/logout" class="text-red-500">Logout</a>
-                <button class="text-zinc-800 hover:text-black transition-colors text-xl ml-2">
-                    <i class="ri-menu-3-line"></i>
-                </button>
+                <a class="flex items-center gap-1 hover:text-black transition-colors" href="/shop">
+                    <i class="ri-store-line text-lg"></i>
+                    <span class="hidden md:block">Shop</span>
+                </a>
+                <a class="flex items-center gap-1 hover:text-black transition-colors" href="/cart">
+                    <i class="ri-shopping-bag-3-line text-lg"></i>
+                    <span class="hidden md:block">Cart</span>
+                </a>
+                <a class="flex items-center gap-1 hover:text-black transition-colors" href="/account">
+                    <i class="ri-user-3-line text-lg"></i>
+                    <span class="hidden md:block">My Account</span>
+                </a>
+                <a class="flex items-center gap-1 hover:text-red-600 transition-colors text-red-500" href="/logout">
+                    <i class="ri-logout-box-r-line text-lg"></i>
+                    <span class="hidden md:block">Logout</span>
+                </a>
             </div>
             <% } else { %>
                 <!-- Login/Register Links (For logged out users) -->
