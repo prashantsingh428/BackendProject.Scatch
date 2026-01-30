@@ -1,0 +1,116 @@
+<%- include('./partials/header') %>
+
+    <div class="w-full min-h-screen bg-zinc-50 py-10 px-5 md:px-20">
+        <h1 class="text-3xl font-bold text-zinc-800 mb-8">Shopping Cart</h1>
+
+        <% if (user.cart && user.cart.length> 0) { %>
+            <div class="flex flex-col lg:flex-row gap-10 items-start">
+                <!-- Cart Items List -->
+                <div class="w-full lg:w-[70%] flex flex-col gap-6">
+                    <% user.cart.forEach(function(item){ %>
+                        <div
+                            class="w-full bg-white rounded-xl overflow-hidden border border-zinc-200 shadow-sm flex flex-col sm:flex-row">
+                            <!-- Item Image -->
+                            <div
+                                class="w-full sm:w-40 h-40 sm:h-auto flex-shrink-0 flex items-center justify-center bg-[<%= item.bgcolor %>]/10 p-4">
+                                <img class="h-full object-contain mix-blend-multiply"
+                                    src="/images/uploads/<%= item.image %>" alt="<%= item.name %>">
+                            </div>
+
+                            <!-- Item Details -->
+                            <div class="flex-grow p-6 flex flex-col justify-between">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <h3 class="text-xl font-bold text-zinc-800 mb-1">
+                                            <%= item.name %>
+                                        </h3>
+                                        <p class="text-sm text-zinc-500">Color: <%= item.panelcolor %>
+                                        </p>
+                                    </div>
+                                    <h4 class="text-lg font-semibold text-zinc-800">₹ <%= item.price %>
+                                    </h4>
+                                </div>
+
+                                <div class="flex justify-between items-end mt-4 sm:mt-0">
+                                    <div class="flex items-center gap-3 bg-zinc-100 rounded-full px-3 py-1">
+                                        <button
+                                            class="w-6 h-6 flex items-center justify-center rounded-full bg-white text-zinc-600 hover:text-black shadow-sm transition-colors text-xs">
+                                            <i class="ri-subtract-line"></i>
+                                        </button>
+                                        <span class="text-sm font-medium">01</span>
+                                        <button
+                                            class="w-6 h-6 flex items-center justify-center rounded-full bg-white text-zinc-600 hover:text-black shadow-sm transition-colors text-xs">
+                                            <i class="ri-add-line"></i>
+                                        </button>
+                                    </div>
+                                    <a href="/cart/delete/<%= item._id %>"
+                                        class="text-red-500 hover:text-red-600 text-sm font-medium transition-colors">
+                                        Remove
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <% }) %>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="w-full lg:w-[30%] sticky top-24">
+                    <div class="bg-white rounded-xl border border-zinc-200 shadow-sm p-6">
+                        <h3 class="text-xl font-bold text-zinc-800 mb-6">Order Summary</h3>
+
+                        <div class="space-y-4">
+                            <div class="flex justify-between text-zinc-600">
+                                <span>Total MRP</span>
+                                <% let totalMRP=0; let totalDiscount=0; user.cart.forEach(item=> {
+                                    totalMRP += Number(item.price);
+                                    totalDiscount += Number(item.discount);
+                                    });
+                                    %>
+                                    <span>₹ <%= totalMRP %></span>
+                            </div>
+                            <div class="flex justify-between text-zinc-600">
+                                <span>Discount</span>
+                                <span class="text-green-600">- ₹ <%= totalDiscount %></span>
+                            </div>
+                            <div class="flex justify-between text-zinc-600">
+                                <span>Platform Fee</span>
+                                <span>₹ 20</span>
+                            </div>
+                            <div class="flex justify-between text-zinc-600">
+                                <span>Shipping</span>
+                                <span class="text-green-600">FREE</span>
+                            </div>
+
+                            <div class="border-t border-zinc-100 pt-4 mt-4">
+                                <div class="flex justify-between items-center mb-6">
+                                    <span class="text-lg font-bold text-zinc-800">Total Amount</span>
+                                    <span class="text-xl font-bold text-zinc-900">₹ <%= bill %></span>
+                                </div>
+                                <button
+                                    class="w-full py-3.5 bg-zinc-900 text-white font-bold rounded-full hover:bg-black transition shadow-lg shadow-zinc-500/20">
+                                    Place Order
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% } else { %>
+                <!-- Empty State -->
+                <div
+                    class="w-full flex flex-col items-center justify-center py-20 bg-white rounded-xl border border-dashed border-zinc-300">
+                    <div class="w-20 h-20 bg-zinc-50 rounded-full flex items-center justify-center mb-6 text-zinc-400">
+                        <i class="ri-shopping-cart-line text-4xl"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-zinc-800 mb-2">Your cart is empty</h2>
+                    <p class="text-zinc-500 mb-8 max-w-sm text-center">Looks like you haven't added anything to your
+                        cart yet. Go ahead and explore top categories.</p>
+                    <a href="/shop"
+                        class="px-8 py-3 bg-blue-600 text-white font-medium rounded-full hover:bg-blue-700 transition shadow-lg shadow-blue-500/30">
+                        Start Shopping
+                    </a>
+                </div>
+                <% } %>
+    </div>
+
+    <%- include('./partials/footer') %>

@@ -1,0 +1,295 @@
+<%- include('./partials/header') %>
+
+    <% if(success.length>0){ %>
+        <div class="absolute top-24 left-1/2 -translate-x-1/2 p-3 rounded-md bg-blue-500 z-50 animate-fade-in-down">
+            <span class="inline-block text-white font-medium">
+                <%= success %>
+            </span>
+        </div>
+        <% } %>
+
+            <div
+                class="w-full min-h-screen flex flex-col md:flex-row items-start px-5 md:px-10 py-10 gap-10 bg-zinc-50">
+                <!-- Admin Sidebar (Reused for consistency) -->
+                <div class="w-full md:w-[20%] sticky top-24 transition-all duration-300">
+                    <div class="bg-white p-6 rounded-xl border border-zinc-200 shadow-sm">
+                        <h3 class="text-xs font-bold text-zinc-400 uppercase tracking-widest mb-6">Admin Panel</h3>
+                        <div class="flex flex-col gap-3 text-sm font-medium text-zinc-600">
+                            <a class="flex items-center gap-3 px-4 py-3 hover:bg-zinc-50 hover:text-black rounded-lg transition-colors"
+                                href="/owners/admin">
+                                <i class="ri-dashboard-line"></i> Dashboard
+                            </a>
+                            <a class="flex items-center gap-3 px-4 py-3 bg-zinc-100 text-black rounded-lg transition-colors"
+                                href="/owners/create">
+                                <i class="ri-add-circle-line"></i> Create Product
+                            </a>
+                        </div>
+                        <div class="mt-8 pt-6 border-t border-zinc-100">
+                            <a class="flex items-center gap-3 px-4 py-3 text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                                href="">
+                                <i class="ri-delete-bin-line"></i> Delete All Products
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Content -->
+                <div class="w-full md:w-[80%]">
+                    <div class="mb-8">
+                        <h1 class="text-2xl font-bold text-zinc-800">Create New Product</h1>
+                        <p class="text-zinc-500 text-sm mt-1">Add a new item to your inventory</p>
+                    </div>
+
+                    <form autocomplete="off" action="/products/create" method="post" enctype="multipart/form-data"
+                        class="bg-white p-8 rounded-xl border border-zinc-200 shadow-sm">
+                        <!-- Product Details Section -->
+                        <div class="mb-8">
+                            <h3 class="text-lg font-semibold mb-4 pb-2 border-b border-zinc-100 text-zinc-700">Product
+                                Details</h3>
+
+                            <div class="mb-6">
+                                <label class="block text-sm font-medium text-zinc-600 mb-2">Product Image</label>
+                                <div class="flex items-center justify-center w-full">
+                                    <label for="dropzone-file"
+                                        class="flex flex-col items-center justify-center w-full h-32 border-2 border-zinc-300 border-dashed rounded-lg cursor-pointer bg-zinc-50 hover:bg-zinc-100 transition-colors">
+                                        <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                            <i class="ri-upload-cloud-2-line text-2xl text-zinc-400 mb-2"></i>
+                                            <p class="text-sm text-zinc-500"><span class="font-semibold">Click to
+                                                    upload</span> or drag and drop</p>
+                                            <p id="file-name" class="text-xs text-blue-600 mt-2 font-medium"></p>
+                                        </div>
+                                        <input id="dropzone-file" name="image" type="file" class="hidden"
+                                            onchange="document.getElementById('file-name').textContent = this.files[0]?.name || ''" />
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-zinc-600 mb-2">Product Name</label>
+                                    <input name="name" type="text" placeholder="e.g. Scatch Logo Tee"
+                                        class="w-full px-4 py-2 rounded-lg border border-zinc-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition-all placeholder:text-zinc-400">
+                                </div>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-zinc-600 mb-2">Price (₹)</label>
+                                        <input name="price" type="number" placeholder="1200"
+                                            class="w-full px-4 py-2 rounded-lg border border-zinc-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition-all placeholder:text-zinc-400">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-zinc-600 mb-2">Discount (₹)</label>
+                                        <input name="discount" type="number" placeholder="0"
+                                            class="w-full px-4 py-2 rounded-lg border border-zinc-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition-all placeholder:text-zinc-400">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Brand Selection -->
+                            <div class="mt-6">
+                                <label class="block text-sm font-medium text-zinc-600 mb-2">Brand <span
+                                        class="text-red-500">*</span></label>
+                                <select id="brand-select" name="brand" required
+                                    class="w-full px-4 py-2 rounded-lg border border-zinc-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition-all bg-white">
+                                    <option value="">Select Brand</option>
+                                    <option value="Nike">Nike</option>
+                                    <option value="Adidas">Adidas</option>
+                                    <option value="Puma">Puma</option>
+                                    <option value="Zara">Zara</option>
+                                    <option value="H&M">H&M</option>
+                                    <option value="Gucci">Gucci</option>
+                                    <option value="Louis Vuitton">Louis Vuitton</option>
+                                    <option value="Custom">➕ Custom Brand</option>
+                                </select>
+
+                                <!-- Custom Brand Input (Hidden by default) -->
+                                <input id="custom-brand-input" name="customBrand" type="text"
+                                    placeholder="Enter custom brand name"
+                                    class="hidden w-full px-4 py-2 rounded-lg border border-blue-500 focus:border-blue-600 focus:ring-2 focus:ring-blue-100 outline-none transition-all placeholder:text-zinc-400 mt-2">
+                            </div>
+
+                        </div>
+
+                        <!-- Horizontal Category Bar Section -->
+                        <div class="mb-8">
+                            <h3 class="text-lg font-semibold mb-4 pb-2 border-b border-zinc-100 text-zinc-700">
+                                Horizontal Category Bar
+                            </h3>
+                            <p class="text-xs text-zinc-500 mb-4">
+                                Select which category icon this product will appear under in the horizontal category bar
+                                (T-Shirt, Shirt, Women, Bags, etc.)
+                            </p>
+                            <div>
+                                <label class="block text-sm font-medium text-zinc-600 mb-2">Category <span
+                                        class="text-zinc-400 text-xs">(Optional)</span></label>
+                                <select name="category"
+                                    class="w-full px-4 py-2 rounded-lg border border-zinc-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition-all bg-white">
+                                    <option value="">❌ None - Don't add to category bar</option>
+                                    <option value="T-Shirt">👕 T-Shirt</option>
+                                    <option value="Shirt">👔 Shirt</option>
+                                    <option value="Women">👗 Women</option>
+                                    <option value="Bags">👜 Bags</option>
+                                    <option value="Shoes">👟 Shoes</option>
+                                    <option value="Watches">⌚ Watches</option>
+                                    <option value="Accessories">🎨 Accessories</option>
+                                </select>
+                                <p class="text-xs text-zinc-400 mt-2">💡 Leave as "None" if you don't want this product
+                                    in any category icon section</p>
+                            </div>
+                        </div>
+
+
+
+                        <!-- Collections Section -->
+                        <div class="mb-8">
+                            <h3 class="text-lg font-semibold mb-4 pb-2 border-b border-zinc-100 text-zinc-700">Product
+                                Collections
+                            </h3>
+                            <p class="text-xs text-zinc-500 mb-4">Select which sections this product should appear in on
+                                the shop page</p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                <label
+                                    class="flex items-center gap-3 bg-zinc-50 p-4 rounded-lg border border-zinc-100 cursor-pointer hover:bg-blue-50 hover:border-blue-200 transition-all">
+                                    <input type="checkbox" name="collections" value="flash-deals"
+                                        class="w-5 h-5 text-blue-600 bg-white border-zinc-300 rounded focus:ring-blue-500">
+                                    <div class="flex flex-col">
+                                        <span class="text-sm font-medium text-zinc-700">Flash Deals</span>
+                                        <span class="text-xs text-zinc-500">Limited time offers</span>
+                                    </div>
+                                </label>
+
+                                <label
+                                    class="flex items-center gap-3 bg-zinc-50 p-4 rounded-lg border border-zinc-100 cursor-pointer hover:bg-green-50 hover:border-green-200 transition-all">
+                                    <input type="checkbox" name="collections" value="todays-for-you"
+                                        class="w-5 h-5 text-green-600 bg-white border-zinc-300 rounded focus:ring-green-500">
+                                    <div class="flex flex-col">
+                                        <span class="text-sm font-medium text-zinc-700">Today's For You!</span>
+                                        <span class="text-xs text-zinc-500">Featured recommendations</span>
+                                    </div>
+                                </label>
+
+                                <label
+                                    class="flex items-center gap-3 bg-zinc-50 p-4 rounded-lg border border-zinc-100 cursor-pointer hover:bg-purple-50 hover:border-purple-200 transition-all">
+                                    <input type="checkbox" name="collections" value="elegant-fashion"
+                                        class="w-5 h-5 text-purple-600 bg-white border-zinc-300 rounded focus:ring-purple-500">
+                                    <div class="flex flex-col">
+                                        <span class="text-sm font-medium text-zinc-700">Elegant Fashion
+                                            Collections</span>
+                                        <span class="text-xs text-zinc-500">Premium styled products</span>
+                                    </div>
+                                </label>
+
+                                <label
+                                    class="flex items-center gap-3 bg-zinc-50 p-4 rounded-lg border border-zinc-100 cursor-pointer hover:bg-orange-50 hover:border-orange-200 transition-all">
+                                    <input type="checkbox" name="collections" value="similar-items"
+                                        class="w-5 h-5 text-orange-600 bg-white border-zinc-300 rounded focus:ring-orange-500">
+                                    <div class="flex flex-col">
+                                        <span class="text-sm font-medium text-zinc-700">Similar Items You Might
+                                            Like</span>
+                                        <span class="text-xs text-zinc-500">Related products section</span>
+                                    </div>
+                                </label>
+                            </div>
+
+                            <!-- Keep Flash Sale for backward compatibility -->
+                            <div class="mt-4 p-4 bg-red-50 border border-red-100 rounded-lg">
+                                <label class="flex items-center gap-3 cursor-pointer">
+                                    <input type="checkbox" id="flashSale" name="flashSale" value="true"
+                                        class="w-5 h-5 text-red-600 bg-white border-zinc-300 rounded focus:ring-red-500">
+                                    <div class="flex flex-col">
+                                        <span class="text-sm font-bold text-red-700">⚡ Legacy Flash Sale</span>
+                                        <span class="text-xs text-red-600">Use "Flash Deals" collection instead (kept
+                                            for compatibility)</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Panel Details Section -->
+                        <div class="mb-8">
+                            <h3 class="text-lg font-semibold mb-4 pb-2 border-b border-zinc-100 text-zinc-700">
+                                Appearance</h3>
+                            <p class="text-xs text-zinc-400 mb-4">Enter valid CSS color values (hex, rgb, or name).</p>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-zinc-600 mb-2">Background Color</label>
+                                    <input name="bgcolor" type="text" placeholder="#f4f4f5"
+                                        class="w-full px-4 py-2 rounded-lg border border-zinc-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition-all placeholder:text-zinc-400">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-zinc-600 mb-2">Panel Color</label>
+                                    <input name="panelcolor" type="text" placeholder="#ffffff"
+                                        class="w-full px-4 py-2 rounded-lg border border-zinc-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition-all placeholder:text-zinc-400">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-zinc-600 mb-2">Text Color</label>
+                                    <input name="textcolor" type="text" placeholder="#18181b"
+                                        class="w-full px-4 py-2 rounded-lg border border-zinc-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition-all placeholder:text-zinc-400">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-end">
+                            <button type="submit" id="submit-btn"
+                                class="px-8 py-3 rounded-full bg-zinc-900 text-white font-medium hover:bg-black transition cursor-pointer shadow-lg shadow-zinc-500/30 flex items-center gap-2">
+                                <span id="btn-text">Create Product</span>
+                                <i id="btn-spinner" class="ri-loader-4-line animate-spin hidden"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <script>
+                // Loading state for form submission
+                document.querySelector('form').addEventListener('submit', function (e) {
+                    const submitBtn = document.getElementById('submit-btn');
+                    const btnText = document.getElementById('btn-text');
+                    const btnSpinner = document.getElementById('btn-spinner');
+
+                    // Disable button and show loading state
+                    submitBtn.disabled = true;
+                    submitBtn.classList.add('opacity-75', 'cursor-not-allowed');
+                    btnText.textContent = 'Uploading...';
+                    btnSpinner.classList.remove('hidden');
+
+                    // Create and show loading overlay
+                    const loadingOverlay = document.createElement('div');
+                    loadingOverlay.id = 'loading-overlay';
+                    loadingOverlay.className = 'fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50';
+                    loadingOverlay.innerHTML = `
+                        <div class="bg-white p-8 rounded-2xl shadow-2xl flex flex-col items-center gap-4 max-w-sm mx-4">
+                            <div class="w-16 h-16 border-4 border-zinc-200 border-t-blue-600 rounded-full animate-spin"></div>
+                            <div class="text-center">
+                                <h3 class="text-lg font-bold text-zinc-800 mb-1">Creating Product</h3>
+                                <p class="text-sm text-zinc-500">Please wait while we upload your product...</p>
+                            </div>
+                        </div>
+                    `;
+                    document.body.appendChild(loadingOverlay);
+                });
+
+                // Custom brand input toggle
+                const brandSelect = document.getElementById('brand-select');
+                const customBrandInput = document.getElementById('custom-brand-input');
+
+                brandSelect.addEventListener('change', function () {
+                    if (this.value === 'Custom') {
+                        customBrandInput.classList.remove('hidden');
+                        customBrandInput.required = true;
+                        customBrandInput.focus();
+                    } else {
+                        customBrandInput.classList.add('hidden');
+                        customBrandInput.required = false;
+                        customBrandInput.value = '';
+                    }
+                });
+
+                // Handle custom brand on form submit
+                document.querySelector('form').addEventListener('submit', function (e) {
+                    // If custom brand is selected, use the custom input value
+                    if (brandSelect.value === 'Custom' && customBrandInput.value.trim()) {
+                        brandSelect.value = customBrandInput.value.trim();
+                    }
+                }, true); // Use capture phase to run before the loading overlay
+            </script>
+            <%- include('./partials/footer') %>

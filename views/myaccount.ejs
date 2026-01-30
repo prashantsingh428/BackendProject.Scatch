@@ -1,0 +1,1700 @@
+<%- include('./partials/header') %>
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Leaflet Map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F9FD;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+
+    <div class="w-full min-h-screen bg-[#F8F9FD] pt-24 pb-20 px-4 md:px-8">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row gap-8">
+
+            <!-- Sidebar -->
+            <aside class="w-full md:w-64 flex-shrink-0 hidden md:block">
+                <div
+                    class="bg-white rounded-2xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-zinc-100 overflow-hidden sticky top-28 py-6 px-4">
+                    <!-- Brand/Spacer -->
+                    <div class="px-4 mb-2">
+                        <div class="text-xs font-bold text-zinc-400 uppercase tracking-widest pl-1">Menu</div>
+                    </div>
+
+                    <nav class="space-y-1">
+                        <!-- Main Menu -->
+                        <a href="javascript:void(0)" onclick="switchTab('dashboard')" id="nav-dashboard"
+                            class="flex items-center gap-3 px-4 py-3 text-zinc-900 bg-zinc-100 rounded-xl transition-all duration-200 font-semibold text-sm border-l-4 border-zinc-900 shadow-sm">
+                            <i class="ri-dashboard-fill text-lg"></i> <span>Dashboard</span>
+                        </a>
+                        <a href="javascript:void(0)" onclick="switchTab('orders')" id="nav-orders"
+                            class="flex items-center gap-3 px-4 py-3 text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50 hover:pl-5 rounded-xl transition-all duration-200 font-medium text-sm border-l-4 border-transparent">
+                            <i class="ri-shopping-bag-3-line text-lg"></i> <span>Orders</span>
+                        </a>
+                        <a href="javascript:void(0)" onclick="switchTab('wishlist')" id="nav-wishlist"
+                            class="flex items-center gap-3 px-4 py-3 text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50 hover:pl-5 rounded-xl transition-all duration-200 font-medium text-sm border-l-4 border-transparent">
+                            <i class="ri-heart-3-line text-lg"></i> <span>Wishlist</span>
+                        </a>
+
+
+
+                        <!-- Settings Section -->
+                        <div class="pt-6 pb-2">
+                            <div class="px-4 mb-2">
+                                <div class="text-xs font-bold text-zinc-400 uppercase tracking-widest pl-1">
+                                    Settings</div>
+                            </div>
+
+                            <!-- Settings Menu Items -->
+                            <div class="space-y-0.5">
+                                <!-- Profile Information -->
+                                <a href="javascript:void(0)" onclick="switchTab('personalization')"
+                                    id="nav-personalization"
+                                    class="flex items-center justify-between gap-3 px-4 py-3 text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50 hover:pl-5 rounded-xl transition-all duration-200 font-medium text-sm border-l-4 border-transparent group">
+                                    <div class="flex items-center gap-3">
+                                        <i class="ri-user-line text-lg"></i>
+                                        <span>Profile Information</span>
+                                    </div>
+                                    <i
+                                        class="ri-arrow-right-s-line text-zinc-400 group-hover:text-zinc-600 transition-colors"></i>
+                                </a>
+
+                                <!-- Privacy & Security -->
+                                <a href="javascript:void(0)" onclick="switchTab('security')" id="nav-security"
+                                    class="flex items-center justify-between gap-3 px-4 py-3 text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50 hover:pl-5 rounded-xl transition-all duration-200 font-medium text-sm border-l-4 border-transparent group">
+                                    <div class="flex items-center gap-3">
+                                        <i class="ri-shield-keyhole-line text-lg"></i>
+                                        <span>Privacy & Security</span>
+                                    </div>
+                                    <i
+                                        class="ri-arrow-right-s-line text-zinc-400 group-hover:text-zinc-600 transition-colors"></i>
+                                </a>
+
+
+
+
+
+                                <!-- Notifications Toggle -->
+                                <div class="flex items-center justify-between gap-3 px-4 py-3 text-zinc-500 rounded-xl">
+                                    <div class="flex items-center gap-3">
+                                        <i class="ri-notification-3-line text-lg"></i>
+                                        <span class="font-medium text-sm">Notifications</span>
+                                    </div>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" class="sr-only peer" id="notificationsToggle">
+                                        <div
+                                            class="w-11 h-6 bg-zinc-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-zinc-800">
+                                        </div>
+                                    </label>
+                                </div>
+
+
+
+                                <!-- Language -->
+                                <a href="#"
+                                    class="flex items-center justify-between gap-3 px-4 py-3 text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50 hover:pl-5 rounded-xl transition-all duration-200 font-medium text-sm border-l-4 border-transparent group">
+                                    <div class="flex items-center gap-3">
+                                        <i class="ri-global-line text-lg"></i>
+                                        <span>Language</span>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <span class="text-xs text-zinc-400">English</span>
+                                        <i
+                                            class="ri-arrow-right-s-line text-zinc-400 group-hover:text-zinc-600 transition-colors"></i>
+                                    </div>
+                                </a>
+
+                                <!-- Help Center -->
+                                <a href="javascript:void(0)" onclick="switchTab('help')" id="nav-help"
+                                    class="flex items-center justify-between gap-3 px-4 py-3 text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50 hover:pl-5 rounded-xl transition-all duration-200 font-medium text-sm border-l-4 border-transparent group">
+                                    <div class="flex items-center gap-3">
+                                        <i class="ri-question-line text-lg"></i>
+                                        <span>Help Center</span>
+                                    </div>
+                                    <i
+                                        class="ri-arrow-right-s-line text-zinc-400 group-hover:text-zinc-600 transition-colors"></i>
+                                </a>
+
+                                <!-- About -->
+                                <a href="javascript:void(0)" onclick="switchTab('about')" id="nav-about"
+                                    class="flex items-center justify-between gap-3 px-4 py-3 text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50 hover:pl-5 rounded-xl transition-all duration-200 font-medium text-sm border-l-4 border-transparent group">
+                                    <div class="flex items-center gap-3">
+                                        <i class="ri-information-line text-lg"></i>
+                                        <span>About</span>
+                                    </div>
+                                    <i
+                                        class="ri-arrow-right-s-line text-zinc-400 group-hover:text-zinc-600 transition-colors"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Footer Links -->
+                        <div class="pt-8 space-y-2 border-t border-zinc-100 mt-4">
+                            <a href="/logout"
+                                class="flex items-center gap-3 px-4 py-2.5 text-zinc-400 hover:text-red-600 hover:bg-red-50 rounded-xl transition-colors font-medium text-sm group">
+                                <i
+                                    class="ri-logout-box-line text-lg group-hover:translate-x-1 transition-transform"></i>
+                                <span>Log out</span>
+                            </a>
+                        </div>
+                    </nav>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="flex-1">
+
+                <!-- Dashboard Tab (Default) -->
+                <div id="tab-dashboard" class="tab-content active">
+                    <div class="mb-8">
+                        <h1 class="text-3xl font-bold text-zinc-900 tracking-tight">Dashboard</h1>
+                        <p class="text-zinc-500 text-sm mt-1">Status overview for <span
+                                class="font-semibold text-zinc-900">
+                                <%= user.fullname %>
+                            </span></p>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                        <!-- Left Column: Stats & Actions -->
+                        <div class="lg:col-span-2 space-y-8">
+                            <!-- Stats Grid -->
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+                                <!-- Orders -->
+                                <a href="javascript:void(0)" onclick="switchTab('orders')" class="block group">
+                                    <div
+                                        class="bg-white p-5 rounded-2xl border border-zinc-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-1 transition-all duration-300 relative overflow-hidden">
+                                        <div
+                                            class="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                                            <i class="ri-arrow-right-up-line text-zinc-300"></i>
+                                        </div>
+                                        <div class="flex items-center gap-4">
+                                            <div
+                                                class="w-14 h-14 rounded-2xl bg-amber-50 flex items-center justify-center text-amber-600 border border-amber-100 group-hover:scale-110 transition-transform duration-300 shadow-inner">
+                                                <i class="ri-shopping-bag-3-fill text-xl drop-shadow-sm"></i>
+                                            </div>
+                                            <div>
+                                                <div
+                                                    class="text-3xl font-bold text-zinc-900 leading-none tracking-tight">
+                                                    <%= user.orders ? user.orders.length : 0 %>
+                                                </div>
+                                                <div
+                                                    class="text-zinc-500 text-xs font-semibold uppercase tracking-wider mt-1.5 ">
+                                                    Total Orders</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+
+                                <!-- Wishlist -->
+                                <a href="javascript:void(0)" onclick="switchTab('wishlist')" class="block group">
+                                    <div
+                                        class="bg-white p-5 rounded-2xl border border-zinc-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-1 transition-all duration-300 relative overflow-hidden">
+                                        <div
+                                            class="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                                            <i class="ri-arrow-right-up-line text-zinc-300"></i>
+                                        </div>
+                                        <div class="flex items-center gap-4">
+                                            <div
+                                                class="w-14 h-14 rounded-2xl bg-amber-50 flex items-center justify-center text-amber-600 border border-amber-100 group-hover:scale-110 transition-transform duration-300 shadow-inner">
+                                                <i class="ri-heart-3-fill text-xl drop-shadow-sm"></i>
+                                            </div>
+                                            <div>
+                                                <div
+                                                    class="text-3xl font-bold text-zinc-900 leading-none tracking-tight">
+                                                    <%= user.wishlist ? user.wishlist.length : 0 %>
+                                                </div>
+                                                <div
+                                                    class="text-zinc-500 text-xs font-semibold uppercase tracking-wider mt-1.5">
+                                                    Wishlist</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+
+                                <!-- Cart -->
+                                <a href="/cart" class="block group">
+                                    <div
+                                        class="bg-white p-5 rounded-2xl border border-zinc-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-1 transition-all duration-300 relative overflow-hidden">
+                                        <div
+                                            class="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                                            <i class="ri-arrow-right-up-line text-zinc-300"></i>
+                                        </div>
+                                        <div class="flex items-center gap-4">
+                                            <div
+                                                class="w-14 h-14 rounded-2xl bg-amber-50 flex items-center justify-center text-amber-600 border border-amber-100 group-hover:scale-110 transition-transform duration-300 shadow-inner">
+                                                <i class="ri-shopping-cart-fill text-xl drop-shadow-sm"></i>
+                                            </div>
+                                            <div>
+                                                <div
+                                                    class="text-3xl font-bold text-zinc-900 leading-none tracking-tight">
+                                                    <%= user.cart ? user.cart.length : 0 %>
+                                                </div>
+                                                <div
+                                                    class="text-zinc-500 text-xs font-semibold uppercase tracking-wider mt-1.5">
+                                                    In Cart</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div
+                                class="bg-white rounded-2xl border border-zinc-100 shadow-md shadow-zinc-200/50 overflow-hidden">
+                                <div
+                                    class="px-6 py-5 border-b border-zinc-100 flex justify-between items-center bg-white">
+                                    <h3 class="font-bold text-zinc-900 flex items-center gap-2">
+                                        <div class="w-1 h-5 bg-amber-600 rounded-full mr-1"></div> Profile Overview
+                                    </h3>
+                                    <button onclick="switchTab('personalization')"
+                                        class="text-xs font-semibold text-zinc-600 hover:text-amber-600 bg-zinc-50 hover:bg-amber-50 px-4 py-2 rounded-lg border border-zinc-200 hover:border-amber-100 transition-all shadow-sm">
+                                        <i class="ri-edit-line mr-1"></i> Edit Profile
+                                    </button>
+                                </div>
+                                <div class="p-6">
+                                    <div class="flex flex-col sm:flex-row gap-8 items-start">
+                                        <!-- Photo -->
+                                        <div class="flex-shrink-0 relative group">
+                                            <div
+                                                class="w-28 h-28 rounded-[2rem] bg-zinc-50 overflow-hidden border-4 border-white shadow-lg shadow-zinc-200/50">
+                                                <% if (user.picture) { %>
+                                                    <img src="/images/uploads/<%= user.picture %>"
+                                                        class="w-full h-full object-cover">
+                                                    <% } else { %>
+                                                        <div
+                                                            class="w-full h-full flex items-center justify-center text-zinc-300 text-4xl bg-zinc-100">
+                                                            <i class="ri-user-smile-line"></i>
+                                                        </div>
+                                                        <% } %>
+                                            </div>
+                                            <!-- Verified Badge if needed -->
+                                            <div class="absolute -bottom-1 -right-1 w-8 h-8 bg-amber-600 rounded-full border-4 border-white flex items-center justify-center text-white shadow-sm"
+                                                title="Verified Member">
+                                                <i class="ri-check-line font-bold"></i>
+                                            </div>
+                                        </div>
+                                        <!-- Details Grid -->
+                                        <div class="flex-grow w-full">
+                                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-6">
+                                                <div class="border-b border-zinc-50 pb-2">
+                                                    <div
+                                                        class="text-[10px] text-zinc-400 font-bold uppercase tracking-widest mb-1.5 flex items-center gap-1">
+                                                        <i class="ri-user-3-line text-zinc-300"></i> Full Name
+                                                    </div>
+                                                    <div class="text-zinc-900 font-semibold text-lg">
+                                                        <%= user.fullname %>
+                                                    </div>
+                                                </div>
+                                                <div class="border-b border-zinc-50 pb-2">
+                                                    <div
+                                                        class="text-[10px] text-zinc-400 font-bold uppercase tracking-widest mb-1.5 flex items-center gap-1">
+                                                        <i class="ri-at-line text-zinc-300"></i> Username
+                                                    </div>
+                                                    <div class="text-zinc-900 font-medium">
+                                                        <% if(user.username) { %>
+                                                            @<%= user.username %>
+                                                                <% } else { %>
+                                                                    <span
+                                                                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-zinc-100 text-zinc-500">Not
+                                                                        added</span>
+                                                                    <% } %>
+                                                    </div>
+                                                </div>
+                                                <div class="border-b border-zinc-50 pb-2">
+                                                    <div
+                                                        class="text-[10px] text-zinc-400 font-bold uppercase tracking-widest mb-1.5 flex items-center gap-1">
+                                                        <i class="ri-mail-line text-zinc-300"></i> Email
+                                                    </div>
+                                                    <div class="text-zinc-900 font-medium truncate"
+                                                        title="<%= user.email %>">
+                                                        <%= user.email %>
+                                                    </div>
+                                                </div>
+                                                <div class="border-b border-zinc-50 pb-2">
+                                                    <div
+                                                        class="text-[10px] text-zinc-400 font-bold uppercase tracking-widest mb-1.5 flex items-center gap-1">
+                                                        <i class="ri-smartphone-line text-zinc-300"></i> Phone
+                                                    </div>
+                                                    <div class="text-zinc-900 font-medium">
+                                                        <% if(user.contact) { %>
+                                                            <%= user.contact %>
+                                                                <% } else { %>
+                                                                    <span
+                                                                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-zinc-100 text-zinc-500 border border-zinc-200">Add
+                                                                        Phone</span>
+                                                                    <% } %>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Full Width Address -->
+                                                <div class="sm:col-span-2 pt-2">
+                                                    <div
+                                                        class="text-[10px] text-zinc-400 font-bold uppercase tracking-widest mb-2 flex items-center gap-1">
+                                                        <i class="ri-map-pin-line text-zinc-300"></i> Address & Location
+                                                    </div>
+                                                    <div
+                                                        class="bg-zinc-50/50 rounded-xl p-4 border border-zinc-100 flex items-start gap-3">
+                                                        <div class="mt-0.5 text-zinc-400"><i class="ri-map-2-line"></i>
+                                                        </div>
+                                                        <div class="text-sm text-zinc-600 leading-relaxed">
+                                                            <% if(user.address || user.city || user.state) { %>
+                                                                <span class="text-zinc-900 font-medium">
+                                                                    <%= user.address || 'No street address' %>
+                                                                </span><br>
+                                                                <%= user.city ? user.city + ',' : '' %>
+                                                                    <%= user.state ? user.state : '' %>
+                                                                        <%= user.country ? '- ' + user.country : '' %>
+                                                                            <% } else { %>
+                                                                                <span class="text-zinc-400 italic">No
+                                                                                    address details available. <a
+                                                                                        href="#"
+                                                                                        onclick="switchTab('personalization')"
+                                                                                        class="text-amber-600 hover:underline not-italic ml-1">Add
+                                                                                        now</a></span>
+                                                                                <% } %>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Column: Quick Promo/Status -->
+                        <div class="lg:col-span-1">
+                            <div
+                                class="bg-zinc-900 rounded-3xl p-8 text-white shadow-xl shadow-zinc-200 relative overflow-hidden group h-full">
+                                <!-- Abstract Shapes/Texture -->
+                                <div
+                                    class="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl">
+                                </div>
+                                <div
+                                    class="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2 blur-xl">
+                                </div>
+                                <div
+                                    class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5">
+                                </div>
+
+                                <i
+                                    class="ri-vip-crown-fill absolute -bottom-6 -right-6 text-[10rem] text-white/5 rotate-12 group-hover:rotate-[15deg] transition-transform duration-700"></i>
+
+                                <div class="relative z-10 flex flex-col h-full justify-between">
+                                    <div>
+                                        <div
+                                            class="inline-flex items-center gap-2 px-3 py-1.5 bg-white/10 rounded-full text-xs font-bold mb-6 backdrop-blur-md border border-white/10 shadow-sm">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span> Basic Member
+                                        </div>
+                                        <h3 class="text-2xl font-bold mb-3 leading-tight">Unlock Pro Benefits</h3>
+                                        <ul class="space-y-3 mb-8">
+                                            <li class="flex items-center gap-3 text-zinc-300 text-sm">
+                                                <div
+                                                    class="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center text-xs text-amber-400">
+                                                    <i class="ri-check-line"></i>
+                                                </div>
+                                                Free Express Shipping
+                                            </li>
+                                            <li class="flex items-center gap-3 text-zinc-300 text-sm">
+                                                <div
+                                                    class="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center text-xs text-amber-400">
+                                                    <i class="ri-check-line"></i>
+                                                </div>
+                                                Exclusive Early Access
+                                            </li>
+                                            <li class="flex items-center gap-3 text-zinc-300 text-sm">
+                                                <div
+                                                    class="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center text-xs text-amber-400">
+                                                    <i class="ri-check-line"></i>
+                                                </div>
+                                                Premium Support
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <button
+                                        class="w-full py-3.5 bg-white text-zinc-900 font-bold rounded-xl text-sm hover:bg-zinc-200 hover:scale-[1.02] transition-all shadow-lg shadow-black/20 flex items-center justify-center gap-2">
+                                        View Membership Plans
+                                        <i class="ri-arrow-right-line"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Personalization Tab (Edit Profile) -->
+                <div id="tab-personalization" class="tab-content">
+                    <div class="mb-6">
+                        <h1 class="text-2xl font-bold text-zinc-900">Personalization</h1>
+                        <p class="text-zinc-500 text-sm">Update your profile details and settings.</p>
+                    </div>
+
+                    <div class="bg-white rounded-2xl shadow-sm border border-zinc-200 p-6 md:p-8">
+
+                        <!-- Profile Picture Upload Section -->
+                        <div class="mb-10 flex flex-col items-center md:items-start">
+                            <div class="relative group">
+                                <!-- Hidden Upload Form -->
+                                <form id="profile-upload-form" action="/update-profile-picture" method="post"
+                                    enctype="multipart/form-data" class="hidden">
+                                    <input type="file" name="image" id="profile-upload-input"
+                                        onchange="document.getElementById('profile-upload-form').submit()">
+                                </form>
+
+                                <!-- Clickable Image -->
+                                <div class="w-24 h-24 rounded-full overflow-hidden border-4 border-zinc-50 cursor-pointer shadow-sm relative"
+                                    onclick="document.getElementById('profile-upload-input').click()">
+                                    <% if (user.picture) { %>
+                                        <img src="/images/uploads/<%= user.picture %>"
+                                            class="w-full h-full object-cover">
+                                        <% } else { %>
+                                            <div
+                                                class="w-full h-full bg-zinc-100 flex items-center justify-center text-zinc-400 text-3xl">
+                                                <i class="ri-user-fill"></i>
+                                            </div>
+                                            <% } %>
+                                                <!-- Hover Overlay -->
+                                                <div
+                                                    class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                                    <i class="ri-camera-line text-white text-2xl"></i>
+                                                </div>
+                                </div>
+                                <div class="absolute bottom-0 right-0 w-8 h-8 bg-blue-500 rounded-full border-2 border-white flex items-center justify-center text-white cursor-pointer hover:bg-blue-600 transition-colors shadow-sm"
+                                    onclick="document.getElementById('profile-upload-input').click()">
+                                    <i class="ri-pencil-fill text-sm"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Form -->
+                        <form action="/update-profile" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                            <!-- Full Name -->
+                            <div class="space-y-1.5">
+                                <label class="text-sm font-semibold text-zinc-700">Full Name</label>
+                                <div class="relative">
+                                    <input type="text" name="fullname" value="<%= user.fullname %>"
+                                        class="w-full px-4 py-2.5 rounded-lg border border-zinc-200 text-zinc-900 focus:ring-2 focus:ring-blue-100 focus:border-blue-500 outline-none transition-all">
+                                    <i class="ri-user-line absolute right-3.5 top-3 text-zinc-400"></i>
+                                </div>
+                            </div>
+
+                            <!-- Username -->
+                            <div class="space-y-1.5">
+                                <label class="text-sm font-semibold text-zinc-700">Username</label>
+                                <div class="relative">
+                                    <input type="text" name="username" value="<%= user.username || '' %>"
+                                        placeholder="Username"
+                                        class="w-full px-4 py-2.5 rounded-lg border border-zinc-200 text-zinc-900 focus:ring-2 focus:ring-blue-100 focus:border-blue-500 outline-none transition-all">
+                                    <i class="ri-at-line absolute right-3.5 top-3 text-zinc-400"></i>
+                                </div>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="space-y-1.5">
+                                <div class="flex justify-between items-center">
+                                    <label class="text-sm font-semibold text-zinc-700">Email Address</label>
+                                    <span class="text-xs text-green-600 font-medium flex items-center"><i
+                                            class="ri-checkbox-circle-fill mr-1"></i>Verified</span>
+                                </div>
+                                <div class="relative">
+                                    <input type="email" name="email" value="<%= user.email %>"
+                                        class="w-full px-4 py-2.5 rounded-lg border border-zinc-200 text-zinc-900 focus:ring-2 focus:ring-blue-100 focus:border-blue-500 outline-none transition-all">
+                                    <i class="ri-mail-line absolute right-3.5 top-3 text-zinc-400"></i>
+                                </div>
+                            </div>
+
+                            <!-- Phone -->
+                            <div class="space-y-1.5">
+                                <label class="text-sm font-semibold text-zinc-700">Phone Number</label>
+                                <div class="relative">
+                                    <input type="tel" name="contact" value="<%= user.contact || '' %>"
+                                        placeholder="Enter phone number"
+                                        class="w-full px-4 py-2.5 rounded-lg border border-zinc-200 text-zinc-900 focus:ring-2 focus:ring-blue-100 focus:border-blue-500 outline-none transition-all">
+                                    <i class="ri-phone-line absolute right-3.5 top-3 text-zinc-400"></i>
+                                </div>
+                            </div>
+
+                            <!-- Date of Birth -->
+                            <div class="space-y-1.5">
+                                <label class="text-sm font-semibold text-zinc-700">Date of Birth</label>
+                                <div class="relative">
+                                    <input type="date" name="dob" value="<%= user.dob || '' %>"
+                                        class="w-full px-4 py-2.5 rounded-lg border border-zinc-200 text-zinc-900 focus:ring-2 focus:ring-blue-100 focus:border-blue-500 outline-none transition-all">
+                                </div>
+                            </div>
+
+                            <!-- Country (Fixed to India) -->
+                            <div class="space-y-1.5">
+                                <label class="text-sm font-semibold text-zinc-700">Country</label>
+                                <div class="relative">
+                                    <input type="text" value="India" readonly
+                                        class="w-full px-4 py-2.5 rounded-lg border border-zinc-200 bg-zinc-50 text-zinc-500 font-medium outline-none cursor-not-allowed">
+                                    <i class="ri-flag-line absolute right-3.5 top-3 text-zinc-400"></i>
+                                </div>
+                            </div>
+
+                            <!-- State -->
+                            <div class="space-y-1.5">
+                                <label class="text-sm font-semibold text-zinc-700">State</label>
+                                <div class="relative">
+                                    <input type="text" name="state" value="<%= user.state || '' %>" placeholder="State"
+                                        class="w-full px-4 py-2.5 rounded-lg border border-zinc-200 text-zinc-900 focus:ring-2 focus:ring-blue-100 focus:border-blue-500 outline-none transition-all">
+                                    <i class="ri-map-pin-2-line absolute right-3.5 top-3 text-zinc-400"></i>
+                                </div>
+                            </div>
+
+                            <!-- City -->
+                            <div class="space-y-1.5">
+                                <label class="text-sm font-semibold text-zinc-700">City</label>
+                                <div class="relative">
+                                    <input type="text" name="city" value="<%= user.city || '' %>" placeholder="City"
+                                        class="w-full px-4 py-2.5 rounded-lg border border-zinc-200 text-zinc-900 focus:ring-2 focus:ring-blue-100 focus:border-blue-500 outline-none transition-all">
+                                    <i class="ri-building-line absolute right-3.5 top-3 text-zinc-400"></i>
+                                </div>
+                            </div>
+
+                            <!-- Address -->
+                            <div class="col-span-1 md:col-span-2 space-y-1.5">
+                                <label class="text-sm font-semibold text-zinc-700">Address</label>
+                                <div class="relative">
+                                    <input type="text" name="address" value="<%= user.address || '' %>"
+                                        placeholder="Enter your full address"
+                                        class="w-full px-4 py-2.5 rounded-lg border border-zinc-200 text-zinc-900 focus:ring-2 focus:ring-blue-100 focus:border-blue-500 outline-none transition-all">
+                                    <i class="ri-map-pin-line absolute right-3.5 top-3 text-zinc-400"></i>
+                                </div>
+                            </div>
+
+                            <!-- Save Button -->
+                            <div class="col-span-1 md:col-span-2 pt-4">
+                                <button type="submit"
+                                    class="w-full md:w-auto px-8 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold rounded-xl transition-all shadow-lg shadow-blue-200 hover:shadow-blue-300 hover:-translate-y-0.5 flex items-center justify-center gap-2">
+                                    <i class="ri-save-3-line"></i> Save Changes
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Security & Privacy Tab -->
+                <div id="tab-security" class="tab-content">
+                    <div class="mb-6">
+                        <h1 class="text-2xl font-bold text-zinc-900">Security & Privacy</h1>
+                        <p class="text-zinc-500 text-sm">Manage Security & Privacy settings to protect your account</p>
+                    </div>
+
+                    <div class="space-y-6">
+                        <!-- Account Details Section -->
+                        <div class="bg-white rounded-2xl shadow-sm border border-zinc-200 p-6 md:p-8">
+                            <h3 class="font-bold text-zinc-900 mb-6">Account Details</h3>
+
+                            <!-- Verify Email Address -->
+                            <div class="flex items-center justify-between py-4 border-b border-zinc-100">
+                                <div class="flex-1">
+                                    <h4 class="font-semibold text-zinc-900 mb-1">Verify Email Address</h4>
+                                    <p class="text-xs text-zinc-500">Verify Your email address to confirm the
+                                        credentials</p>
+                                </div>
+                                <span
+                                    class="px-4 py-1.5 bg-emerald-50 text-emerald-600 text-xs font-bold rounded-lg border border-emerald-100">Verified</span>
+                            </div>
+
+                            <!-- Update Password -->
+                            <div class="flex items-center justify-between py-4">
+                                <div class="flex-1">
+                                    <h4 class="font-semibold text-zinc-900 mb-1">Update Password</h4>
+                                    <p class="text-xs text-zinc-500">Change your password to update & protect your
+                                        Account</p>
+                                </div>
+                                <button
+                                    class="px-4 py-2 bg-white border border-zinc-300 text-zinc-700 text-sm font-medium rounded-lg hover:bg-zinc-50 transition-colors">
+                                    Change Password
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Recovery Settings Section -->
+                        <div class="bg-white rounded-2xl shadow-sm border border-zinc-200 p-6 md:p-8">
+                            <h3 class="font-bold text-zinc-900 mb-6">Recovery Settings</h3>
+
+                            <!-- Recovery Email Address -->
+                            <div class="mb-6">
+                                <h4 class="font-semibold text-zinc-900 mb-1">Recovery Email Address</h4>
+                                <p class="text-xs text-zinc-500 mb-3">Setup Recovery Email to Secure your Account</p>
+                                <div class="flex gap-3">
+                                    <input type="email" placeholder="Another Email Address" value="info@exeptions.com"
+                                        class="flex-1 px-4 py-2.5 rounded-lg bg-zinc-50 border border-zinc-200 text-zinc-900 text-sm focus:ring-2 focus:ring-zinc-900 focus:border-zinc-900 outline-none transition-all">
+                                    <button
+                                        class="px-6 py-2.5 bg-zinc-900 text-white text-sm font-medium rounded-lg hover:bg-zinc-800 transition-colors">
+                                        Save
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Recovery Phone Number -->
+                            <div class="pt-6 border-t border-zinc-100">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex-1">
+                                        <h4 class="font-semibold text-zinc-900 mb-1">Recovery Phone Number</h4>
+                                        <p class="text-xs text-zinc-500">Add Phone number to Setup SMS Recovery for your
+                                            account</p>
+                                    </div>
+                                    <button
+                                        class="px-4 py-2 bg-white border border-zinc-300 text-zinc-700 text-sm font-medium rounded-lg hover:bg-zinc-50 transition-colors">
+                                        Setup
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Deactivate Account Section -->
+                        <div class="bg-white rounded-2xl shadow-sm border border-zinc-200 p-6 md:p-8">
+                            <div class="flex items-center justify-between">
+                                <div class="flex-1">
+                                    <h4 class="font-bold text-zinc-900 mb-1">Deactivate Account</h4>
+                                    <p class="text-xs text-zinc-500">This will shut down your account, And it will
+                                        reactive with logging in</p>
+                                </div>
+                                <button
+                                    class="px-4 py-2 bg-white border border-zinc-300 text-zinc-700 text-sm font-medium rounded-lg hover:bg-red-50 hover:text-red-600 hover:border-red-300 transition-colors">
+                                    Deactivate
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NEW TABS -->
+
+                <!-- Orders Tab ("Track Your Order" Redesign) -->
+                <div id="tab-orders" class="tab-content">
+                    <div class="mb-8 text-center pt-2">
+                        <h1 class="text-3xl font-bold text-zinc-900 mb-2">Track Your Order</h1>
+                        <p class="text-zinc-500 text-sm">Enter your order details to check the current status</p>
+                    </div>
+
+                    <div class="space-y-6">
+                        <!-- Find Your Order Section -->
+                        <div class="bg-white rounded-2xl shadow-sm border border-zinc-200 p-6 md:p-8">
+                            <h3 class="font-bold text-zinc-900 mb-4">Find Your Order</h3>
+                            <p class="text-xs text-zinc-400 mb-4">Enter your order ID and email address to track your
+                                order</p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <label
+                                        class="text-xs font-bold text-zinc-500 uppercase tracking-wide mb-1.5 block">Order
+                                        ID</label>
+                                    <input type="text" value="AG-2024-7890"
+                                        class="w-full px-4 py-3 rounded-xl bg-zinc-50 border border-zinc-200 text-zinc-900 font-medium focus:ring-2 focus:ring-black focus:border-black outline-none transition-all">
+                                </div>
+                                <div>
+                                    <label
+                                        class="text-xs font-bold text-zinc-500 uppercase tracking-wide mb-1.5 block">Email
+                                        Address</label>
+                                    <input type="email" value="john.doe@example.com"
+                                        class="w-full px-4 py-3 rounded-xl bg-zinc-50 border border-zinc-200 text-zinc-900 font-medium focus:ring-2 focus:ring-black focus:border-black outline-none transition-all">
+                                </div>
+                            </div>
+                            <button
+                                class="w-full bg-zinc-900 text-white font-bold py-3.5 rounded-xl hover:bg-zinc-800 transition-all flex items-center justify-center gap-2 shadow-lg shadow-zinc-200">
+                                <i class="ri-search-line"></i> Track Order
+                            </button>
+                        </div>
+
+                        <!-- Order Header Panel -->
+                        <div
+                            class="bg-white rounded-2xl shadow-sm border border-zinc-200 p-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                            <div>
+                                <h2 class="text-xl font-bold text-zinc-900 flex items-center gap-3">
+                                    Order AG-2024-7890
+                                    <span
+                                        class="px-3 py-1 rounded-full bg-orange-100 text-orange-600 text-xs font-bold border border-orange-200">Shipped</span>
+                                </h2>
+                                <p class="text-zinc-500 text-sm mt-1">Placed on January 15, 2024</p>
+                            </div>
+                            <div class="flex gap-3">
+                                <button
+                                    class="px-4 py-2 border border-zinc-200 rounded-lg text-zinc-600 font-medium text-sm hover:bg-zinc-50 transition-colors flex items-center gap-2">
+                                    <i class="ri-file-download-line"></i> Invoice
+                                </button>
+                                <button
+                                    class="px-4 py-2 border border-zinc-200 rounded-lg text-zinc-600 font-medium text-sm hover:bg-zinc-50 transition-colors flex items-center gap-2">
+                                    <i class="ri-printer-line"></i> Print
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Delivery Progress Bar -->
+                        <div class="bg-white rounded-2xl shadow-sm border border-zinc-200 p-8">
+                            <h3 class="font-bold text-zinc-900 mb-6">Delivery Progress</h3>
+                            <div class="relative px-4">
+                                <!-- Progress Line Background -->
+                                <div class="absolute top-5 left-0 w-full h-1.5 bg-zinc-100 rounded-full"></div>
+                                <!-- Active Progress Line (75%) -->
+                                <div class="absolute top-5 left-0 w-3/4 h-1.5 bg-zinc-900 rounded-full"></div>
+
+                                <div class="relative flex justify-between">
+                                    <!-- Ordered -->
+                                    <div class="flex flex-col items-center">
+                                        <div
+                                            class="w-10 h-10 rounded-full bg-green-500 text-white flex items-center justify-center z-10 border-4 border-white shadow-sm">
+                                            <i class="ri-check-line font-bold"></i>
+                                        </div>
+                                        <div class="text-xs font-bold text-zinc-900 mt-2">Ordered</div>
+                                        <div class="text-[10px] text-zinc-500">Jan 15</div>
+                                    </div>
+                                    <!-- Confirmed -->
+                                    <div class="flex flex-col items-center">
+                                        <div
+                                            class="w-10 h-10 rounded-full bg-green-500 text-white flex items-center justify-center z-10 border-4 border-white shadow-sm">
+                                            <i class="ri-check-line font-bold"></i>
+                                        </div>
+                                        <div class="text-xs font-bold text-zinc-900 mt-2">Confirmed</div>
+                                        <div class="text-[10px] text-zinc-500">Jan 15</div>
+                                    </div>
+                                    <!-- Shipped -->
+                                    <div class="flex flex-col items-center">
+                                        <div
+                                            class="w-10 h-10 rounded-full bg-green-500 text-white flex items-center justify-center z-10 border-4 border-white shadow-sm">
+                                            <i class="ri-truck-line font-bold"></i>
+                                        </div>
+                                        <div class="text-xs font-bold text-zinc-900 mt-2">Shipped</div>
+                                        <div class="text-[10px] text-zinc-500">Jan 17</div>
+                                    </div>
+                                    <!-- Delivered -->
+                                    <div class="flex flex-col items-center opacity-50">
+                                        <div
+                                            class="w-10 h-10 rounded-full bg-zinc-200 text-zinc-400 flex items-center justify-center z-10 border-4 border-white">
+                                            <i class="ri-home-line font-bold"></i>
+                                        </div>
+                                        <div class="text-xs font-bold text-zinc-900 mt-2">Delivered</div>
+                                        <div class="text-[10px] text-zinc-500">Jan 20</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Track Location Section -->
+                        <div class="bg-white rounded-2xl shadow-sm border border-zinc-200 p-8 my-6">
+                            <div
+                                class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+                                <div>
+                                    <h3 class="font-bold text-zinc-900 text-lg flex items-center gap-2">
+                                        <i class="ri-map-pin-2-line"></i> Live Tracking
+                                    </h3>
+                                    <p class="text-sm text-zinc-500 mt-1">Real-time location of your shipment</p>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <span
+                                        class="px-3 py-1 bg-blue-50 text-blue-600 text-xs font-bold rounded-lg border border-blue-100 flex items-center gap-1">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span>
+                                        In Transit
+                                    </span>
+                                    <span
+                                        class="px-3 py-1 bg-zinc-50 text-zinc-600 text-xs font-medium rounded-lg border border-zinc-200">
+                                        Est. Arrival: Jan 20
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Map Container -->
+                            <div class="relative w-full h-[400px] rounded-xl overflow-hidden border border-zinc-200">
+                                <div id="tracking-map" class="w-full h-full z-0"></div>
+
+                                <!-- Overlay Info (Optional) -->
+                                <div
+                                    class="absolute bottom-4 left-4 right-4 md:right-auto md:w-72 bg-white/90 backdrop-blur-sm p-4 rounded-xl border border-zinc-200 shadow-lg z-[1000]">
+                                    <div class="flex items-start gap-3">
+                                        <div
+                                            class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 shrink-0">
+                                            <i class="ri-truck-line text-lg"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold text-zinc-900 text-sm">Package on the way</h4>
+                                            <p class="text-xs text-zinc-500 mt-1">Currently at New Delhi Distribution
+                                                Center</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <script>
+                                document.addEventListener('DOMContentLoaded', function () {
+                                    // Initialize map
+                                    var mapContainer = document.getElementById('tracking-map');
+                                    if (mapContainer) {
+                                        // Locations
+                                        var warehouseLoc = [28.6139, 77.2090]; // New Delhi (Start)
+                                        var homeLoc = [28.6304, 77.2177]; // Connaught Place (End - Example)
+                                        var currentVanLoc = [28.6220, 77.2135]; // Intermediate point
+
+                                        var map = L.map('tracking-map').setView(currentVanLoc, 14);
+
+                                        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                                            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                                        }).addTo(map);
+
+                                        // warehouse Icon
+                                        var warehouseIcon = L.divIcon({
+                                            html: '<div class="w-8 h-8 bg-zinc-200 rounded-full border-4 border-white shadow-lg flex items-center justify-center text-zinc-600"><i class="ri-store-2-fill"></i></div>',
+                                            className: 'custom-div-icon',
+                                            iconSize: [32, 32],
+                                            iconAnchor: [16, 16]
+                                        });
+
+                                        // Home Icon
+                                        var homeIcon = L.divIcon({
+                                            html: '<div class="w-8 h-8 bg-green-500 rounded-full border-4 border-white shadow-lg flex items-center justify-center text-white"><i class="ri-home-fill"></i></div>',
+                                            className: 'custom-div-icon',
+                                            iconSize: [32, 32],
+                                            iconAnchor: [16, 16]
+                                        });
+
+                                        // Van Icon
+                                        var vanIcon = L.divIcon({
+                                            html: '<div class="w-10 h-10 bg-blue-600 rounded-full border-4 border-white shadow-xl flex items-center justify-center text-white z-50"><i class="ri-truck-fill text-lg"></i></div>',
+                                            className: 'custom-div-icon',
+                                            iconSize: [40, 40],
+                                            iconAnchor: [20, 20]
+                                        });
+
+                                        // Add Markers
+                                        L.marker(warehouseLoc, { icon: warehouseIcon }).addTo(map).bindPopup('<b>Warehouse</b><br>Dispatched');
+                                        L.marker(homeLoc, { icon: homeIcon }).addTo(map).bindPopup('<b>Delivery Address</b><br>Connaught Place, New Delhi');
+
+                                        var vanMarker = L.marker(currentVanLoc, { icon: vanIcon }).addTo(map)
+                                            .bindPopup('<b>Your Package</b><br>In Transit')
+                                            .openPopup();
+
+                                        // Add Route Line
+                                        var routeLine = L.polyline([warehouseLoc, currentVanLoc, homeLoc], {
+                                            color: '#3b82f6', // blue-500
+                                            weight: 4,
+                                            opacity: 0.7,
+                                            dashArray: '10, 10',
+                                            lineCap: 'round'
+                                        }).addTo(map);
+
+                                        // Fit bounds to show whole route
+                                        map.fitBounds(routeLine.getBounds(), { padding: [50, 50] });
+
+                                        // Handle Tab Switching
+                                        function resizeMap() {
+                                            setTimeout(function () {
+                                                map.invalidateSize();
+                                                map.fitBounds(routeLine.getBounds(), { padding: [50, 50] });
+                                            }, 200);
+                                        }
+
+                                        var ordersTabBtn = document.getElementById('nav-orders');
+                                        if (ordersTabBtn) ordersTabBtn.addEventListener('click', resizeMap);
+
+                                        var dbOrdersLink = document.querySelector('a[onclick="switchTab(\'orders\')"]');
+                                        if (dbOrdersLink) dbOrdersLink.addEventListener('click', resizeMap);
+                                    }
+                                });
+                            </script>
+                        </div>
+
+                        <!-- Timeline & Tracking Info Grid -->
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                            <!-- Order Timeline -->
+                            <div class="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-zinc-200 p-6 md:p-8">
+                                <h3 class="font-bold text-zinc-900 mb-6">Order Timeline</h3>
+                                <div class="relative pl-4 border-l-2 border-zinc-100 space-y-8">
+                                    <!-- Item 1 -->
+                                    <div class="relative pl-6">
+                                        <div
+                                            class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-green-500 border-2 border-white shadow-sm">
+                                        </div>
+                                        <h4 class="font-bold text-zinc-900 text-sm">Order Placed</h4>
+                                        <p class="text-xs text-zinc-500 mt-0.5">Your order has been received</p>
+                                        <span class="text-[10px] text-zinc-400 mt-1 block">2024-01-15 10:30 AM</span>
+                                    </div>
+                                    <!-- Item 2 -->
+                                    <div class="relative pl-6">
+                                        <div
+                                            class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-green-500 border-2 border-white shadow-sm">
+                                        </div>
+                                        <h4 class="font-bold text-zinc-900 text-sm">Order Confirmed</h4>
+                                        <p class="text-xs text-zinc-500 mt-0.5">We've confirmed your order</p>
+                                        <span class="text-[10px] text-zinc-400 mt-1 block">2024-01-15 11:45 AM</span>
+                                    </div>
+                                    <!-- Item 3 -->
+                                    <div class="relative pl-6">
+                                        <div
+                                            class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-green-500 border-2 border-white shadow-sm">
+                                        </div>
+                                        <h4 class="font-bold text-zinc-900 text-sm">Order Processed</h4>
+                                        <p class="text-xs text-zinc-500 mt-0.5">Your items are being prepared for
+                                            shipment</p>
+                                        <span class="text-[10px] text-zinc-400 mt-1 block">2024-01-16 09:15 AM</span>
+                                    </div>
+                                    <!-- Item 4 (Active) -->
+                                    <div class="relative pl-6">
+                                        <div
+                                            class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-orange-500 border-2 border-white shadow-sm ring-4 ring-orange-50 animate-pulse">
+                                        </div>
+                                        <div class="flex items-center gap-2">
+                                            <h4 class="font-bold text-zinc-900 text-sm">Shipped</h4>
+                                            <span
+                                                class="px-2 py-0.5 bg-orange-100 text-orange-600 text-[10px] font-bold rounded-full border border-orange-200">Current</span>
+                                        </div>
+                                        <p class="text-xs text-zinc-500 mt-0.5">Your order is on the way</p>
+                                        <span class="text-[10px] text-zinc-400 mt-1 block">2024-01-17 02:30 PM</span>
+                                    </div>
+                                    <!-- Item 5 (Pending) -->
+                                    <div class="relative pl-6 opacity-40">
+                                        <div
+                                            class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-zinc-200 border-2 border-white">
+                                        </div>
+                                        <h4 class="font-bold text-zinc-900 text-sm">Delivered</h4>
+                                        <p class="text-xs text-zinc-500 mt-0.5">Expected delivery</p>
+                                        <span class="text-[10px] text-zinc-400 mt-1 block">2024-01-20</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Tracking Info -->
+                            <div
+                                class="bg-white rounded-2xl shadow-sm border border-zinc-200 p-6 md:p-8 flex flex-col justify-between">
+                                <div>
+                                    <h3 class="font-bold text-zinc-900 mb-6">Tracking Information</h3>
+                                    <div class="flex items-start gap-4 mb-6">
+                                        <div
+                                            class="w-10 h-10 bg-zinc-50 rounded-lg flex items-center justify-center text-zinc-400">
+                                            <i class="ri-truck-line text-xl"></i>
+                                        </div>
+                                        <div>
+                                            <div class="font-bold text-zinc-900">FedEx</div>
+                                            <div class="text-xs text-zinc-500">Tracking #: 789012345678</div>
+                                        </div>
+                                    </div>
+                                    <div class="space-y-4">
+                                        <div>
+                                            <div
+                                                class="text-[10px] uppercase font-bold text-zinc-400 tracking-wider mb-1">
+                                                Status</div>
+                                            <span
+                                                class="px-2.5 py-1 bg-blue-50 text-blue-600 text-xs font-bold rounded-md border border-blue-100">In
+                                                Transit</span>
+                                        </div>
+                                        <div>
+                                            <div
+                                                class="text-[10px] uppercase font-bold text-zinc-400 tracking-wider mb-1">
+                                                Last Update</div>
+                                            <p class="text-sm font-medium text-zinc-900">Package departed from facility
+                                                in NEW YORK, NY</p>
+                                            <p class="text-[10px] text-zinc-400">1/17/2024, 2:30:00 PM</p>
+                                        </div>
+                                        <div>
+                                            <div
+                                                class="text-[10px] uppercase font-bold text-zinc-400 tracking-wider mb-1">
+                                                Estimated Delivery</div>
+                                            <p class="text-sm font-bold text-zinc-900">January 20, 2024</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <!-- Order Items -->
+                        <div class="bg-white rounded-2xl shadow-sm border border-zinc-200 overflow-hidden">
+                            <div class="p-6 md:p-8 border-b border-zinc-100">
+                                <h3 class="font-bold text-zinc-900">Order Items</h3>
+                            </div>
+                            <div class="p-6 md:p-8 space-y-6">
+                                <!-- Item 1 -->
+                                <div class="flex flex-col sm:flex-row items-center sm:justify-between gap-4">
+                                    <div class="flex items-center gap-4 w-full sm:w-auto">
+                                        <div
+                                            class="w-16 h-16 bg-zinc-100 rounded-xl overflow-hidden border border-zinc-200 flex-shrink-0">
+                                            <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=200&auto=format&fit=crop"
+                                                class="w-full h-full object-cover">
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold text-zinc-900">iPhone 15 Pro Max</h4>
+                                            <p class="text-xs text-zinc-500 mt-1">Color: Natural Titanium <span
+                                                    class="mx-2">|</span> Storage: 256GB <span class="mx-2">|</span>
+                                                Qty: 1</p>
+                                        </div>
+                                    </div>
+                                    <div class="text-right w-full sm:w-auto">
+                                        <div class="font-bold text-zinc-900">$1199.00</div>
+                                        <div class="text-xs text-zinc-400">$1199.00 total</div>
+                                    </div>
+                                </div>
+
+                                <!-- Item 2 -->
+                                <div class="flex flex-col sm:flex-row items-center sm:justify-between gap-4">
+                                    <div class="flex items-center gap-4 w-full sm:w-auto">
+                                        <div
+                                            class="w-16 h-16 bg-zinc-100 rounded-xl overflow-hidden border border-zinc-200 flex-shrink-0">
+                                            <img src="https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?q=80&w=200&auto=format&fit=crop"
+                                                class="w-full h-full object-cover">
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold text-zinc-900">AirPods Pro 3</h4>
+                                            <p class="text-xs text-zinc-500 mt-1">Color: White <span
+                                                    class="mx-2">|</span> Qty: 2</p>
+                                        </div>
+                                    </div>
+                                    <div class="text-right w-full sm:w-auto">
+                                        <div class="font-bold text-zinc-900">$249.00</div>
+                                        <div class="text-xs text-zinc-400">$498.00 total</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-zinc-50 p-6 flex justify-between items-center border-t border-zinc-200">
+                                <span class="text-sm font-medium text-zinc-500">2 Items</span>
+                                <span class="font-bold text-lg text-zinc-900">Total: $1647.00</span>
+                            </div>
+                        </div>
+
+                        <!-- Footer Info Grid -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Shipping Address -->
+                            <div class="bg-white rounded-2xl shadow-sm border border-zinc-200 p-6 md:p-8">
+                                <div class="flex items-center gap-2 mb-4 text-zinc-900 font-bold">
+                                    <i class="ri-map-pin-line"></i> Shipping Address
+                                </div>
+                                <div class="text-sm text-zinc-600 leading-relaxed">
+                                    <div class="font-bold text-zinc-900 mb-1">John Doe</div>
+                                    123 Main Street<br>
+                                    New York, NY 10001<br>
+                                    United States<br>
+                                    +1 (555) 123-4567
+                                </div>
+                            </div>
+                            <!-- Payment Method -->
+                            <div class="bg-white rounded-2xl shadow-sm border border-zinc-200 p-6 md:p-8">
+                                <div class="flex items-center gap-2 mb-4 text-zinc-900 font-bold">
+                                    <i class="ri-bank-card-line"></i> Payment Method
+                                </div>
+                                <div class="flex items-center gap-4 mb-2">
+                                    <div
+                                        class="w-10 h-6 bg-zinc-100 rounded border border-zinc-200 flex items-center justify-center">
+                                        <i class="ri-visa-line text-lg text-blue-800"></i>
+                                    </div>
+                                    <div class="text-sm text-zinc-900 font-medium">Credit Card</div>
+                                </div>
+                                <div class="text-sm text-zinc-500">Ending in •••• 4242</div>
+                                <div class="text-sm text-zinc-500 mt-1">Total: $1647.00</div>
+                            </div>
+                        </div>
+
+                        <!-- Support Actions -->
+                        <div class="bg-zinc-50 rounded-2xl border border-zinc-200/60 p-6 text-center">
+                            <h4 class="font-bold text-zinc-900 text-sm mb-1">Need Help with Your Order?</h4>
+                            <p class="text-xs text-zinc-500 mb-4">Our support team is here to help you with any
+                                questions</p>
+                            <div class="flex justify-center gap-3">
+                                <button
+                                    class="px-5 py-2 bg-white border border-zinc-200 rounded-lg text-xs font-bold text-zinc-700 hover:bg-zinc-50 transition-colors shadow-sm">Contact
+                                    Support</button>
+                                <button
+                                    class="px-5 py-2 bg-white border border-zinc-200 rounded-lg text-xs font-bold text-zinc-700 hover:bg-zinc-50 transition-colors shadow-sm">View
+                                    Order Details</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wishlist Tab -->
+                <div id="tab-wishlist" class="tab-content">
+
+                    <!-- Header Section from Reference -->
+                    <div class="mb-8 text-center pt-4">
+                        <h1 class="text-3xl font-bold text-zinc-900 mb-2">Wishlist</h1>
+                        <p class="text-zinc-500 text-sm">Home / Wishlist</p>
+                    </div>
+
+                    <% if (user.wishlist && user.wishlist.length> 0) { %>
+                        <div class="bg-white rounded-none shadow-sm overflow-hidden">
+                            <!-- Table Header -->
+                            <div
+                                class="hidden md:grid grid-cols-12 gap-4 bg-[#FACC15]/40 py-4 px-6 font-bold text-zinc-700 text-sm uppercase tracking-wide">
+                                <div class="col-span-1"></div> <!-- Remove Icon -->
+                                <div class="col-span-4">Product</div>
+                                <div class="col-span-2">Price</div>
+                                <div class="col-span-2">Date Added</div>
+                                <div class="col-span-1">Stock Status</div>
+                                <div class="col-span-2"></div> <!-- Add to Cart -->
+                            </div>
+
+                            <!-- Table Body -->
+                            <div class="divide-y divide-zinc-100">
+                                <% user.wishlist.forEach(function(product) { %>
+                                    <div
+                                        class="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-4 items-center p-6 md:py-4 md:px-6 hover:bg-zinc-50 transition-colors group relative">
+
+                                        <!-- Remove Button -->
+                                        <div class="col-span-1 flex justify-center md:justify-start">
+                                            <button onclick="removeFromWishlist(event, '<%= product._id %>')"
+                                                class="text-zinc-400 hover:text-red-500 transition-colors">
+                                                <i class="ri-close-line text-xl"></i>
+                                            </button>
+                                        </div>
+
+                                        <!-- Product Info -->
+                                        <div
+                                            class="col-span-1 md:col-span-4 flex flex-col md:flex-row items-center md:items-center gap-4 text-center md:text-left">
+                                            <div class="w-20 h-24 bg-zinc-100 flex-shrink-0 overflow-hidden rounded-md">
+                                                <img src="/images/uploads/<%= product.image.toString() %>"
+                                                    class="w-full h-full object-cover" alt="<%= product.name %>">
+                                            </div>
+                                            <div>
+                                                <h3 class="font-bold text-zinc-900">
+                                                    <%= product.name %>
+                                                </h3>
+                                                <p class="text-zinc-500 text-xs mt-1">Color: <span
+                                                        class="text-zinc-400">Default</span> | Size: <span
+                                                        class="text-zinc-400">Regular</span></p>
+                                            </div>
+                                        </div>
+
+                                        <!-- Price -->
+                                        <div class="col-span-1 md:col-span-2 text-center md:text-left">
+                                            <span class="font-bold text-zinc-800">₹<%= product.price %></span>
+                                        </div>
+
+                                        <!-- Date Added (Mock) -->
+                                        <div
+                                            class="col-span-1 md:col-span-2 text-center md:text-left text-sm text-zinc-500">
+                                            25 January 2026
+                                        </div>
+
+                                        <!-- Stock Status -->
+                                        <div class="col-span-1 md:col-span-1 text-center md:text-left">
+                                            <span class="text-emerald-500 text-sm font-medium">Instock</span>
+                                        </div>
+
+                                        <!-- Add to Cart -->
+                                        <div class="col-span-1 md:col-span-2 flex justify-center md:justify-end">
+                                            <button onclick="addToCart(event, '<%= product._id %>')"
+                                                class="bg-[#3E2723] text-white px-6 py-2.5 text-sm font-medium hover:bg-[#2D1B18] transition-colors shadow-sm w-full md:w-auto">
+                                                Add to Cart
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <% }); %>
+                            </div>
+                        </div>
+
+                        <!-- Footer Actions -->
+                        <div
+                            class="mt-10 flex flex-col md:flex-row gap-6 justify-end items-center border-t border-zinc-100 pt-8">
+                            <div class="flex gap-4">
+                                <button
+                                    class="text-zinc-600 hover:text-zinc-900 text-sm font-bold underline transition-colors">Clear
+                                    Wishlist</button>
+                            </div>
+                        </div>
+
+                        <!-- Info Icons Footer -->
+                        <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 pb-12">
+                            <div class="flex items-start gap-4">
+                                <div
+                                    class="w-12 h-12 rounded-full border-2 border-[#FACC15] flex items-center justify-center text-[#FACC15] flex-shrink-0">
+                                    <i class="ri-box-3-line text-2xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-zinc-900">Free Shipping</h4>
+                                    <p class="text-xs text-zinc-500 mt-1">Free shipping for order above $180</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div
+                                    class="w-12 h-12 rounded-full border-2 border-[#FACC15] flex items-center justify-center text-[#FACC15] flex-shrink-0">
+                                    <i class="ri-wallet-3-line text-2xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-zinc-900">Flexible Payment</h4>
+                                    <p class="text-xs text-zinc-500 mt-1">Multiple secure payment options</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div
+                                    class="w-12 h-12 rounded-full border-2 border-[#FACC15] flex items-center justify-center text-[#FACC15] flex-shrink-0">
+                                    <i class="ri-customer-service-2-line text-2xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-zinc-900">24x7 Support</h4>
+                                    <p class="text-xs text-zinc-500 mt-1">We support online all days.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <% } else { %>
+                            <div class="bg-white rounded-2xl shadow-sm border border-zinc-200 p-16 text-center">
+                                <h3 class="text-xl font-bold text-zinc-900 mb-2">My Wishlist</h3>
+                                <p class="text-zinc-500 mb-8">Your wishlist is currently empty.</p>
+                                <a href="/shop"
+                                    class="inline-flex items-center justify-center bg-[#3E2723] text-white px-8 py-3 font-bold hover:bg-[#2D1B18] transition-colors shadow-sm">
+                                    Return to Shop
+                                </a>
+                            </div>
+                            <% } %>
+                </div>
+
+                <!-- Products Tab -->
+
+
+
+                <!-- Help Center Tab -->
+                <div id="tab-help" class="tab-content">
+                    <!-- Hero Section -->
+                    <div class="rounded-3xl overflow-hidden relative mb-12 shadow-xl shadow-[#1B3C29]/20">
+                        <div class="absolute inset-0 bg-[#1B3C29]"></div>
+                        <div
+                            class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10">
+                        </div>
+
+                        <!-- Decorative Circles -->
+                        <div
+                            class="absolute top-0 left-0 w-64 h-64 bg-white/5 rounded-full -translate-x-1/2 -translate-y-1/2 blur-3xl">
+                        </div>
+                        <div
+                            class="absolute bottom-0 right-0 w-64 h-64 bg-purple-500/20 rounded-full translate-x-1/2 translate-y-1/2 blur-3xl">
+                        </div>
+
+                        <div class="relative z-10 py-16 px-6 text-center">
+                            <h2 class="text-3xl md:text-4xl font-bold text-white mb-8 tracking-tight">How can we help
+                                you?</h2>
+
+                            <!-- Search Bar -->
+                            <div class="max-w-2xl mx-auto relative group">
+                                <div class="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
+                                    <i
+                                        class="ri-search-line text-zinc-400 text-xl group-focus-within:text-white transition-colors"></i>
+                                </div>
+                                <input type="text"
+                                    class="w-full pl-14 pr-6 py-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl text-white placeholder-zinc-400 focus:outline-none focus:bg-white/20 focus:border-white/40 transition-all shadow-lg text-lg"
+                                    placeholder="Search for answers...">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Category Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+                        <!-- Getting Started -->
+                        <div
+                            class="bg-white p-6 rounded-2xl border border-zinc-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-1 transition-all cursor-pointer group flex items-start gap-5">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                                <i class="ri-settings-4-line text-2xl"></i>
+                            </div>
+                            <div>
+                                <h3
+                                    class="font-bold text-zinc-900 text-lg mb-1 group-hover:text-purple-600 transition-colors">
+                                    Getting Started</h3>
+                                <p class="text-sm text-zinc-500 leading-relaxed">Get started fast with installation and
+                                    theme setup instructions.</p>
+                            </div>
+                        </div>
+
+                        <!-- User Account -->
+                        <div
+                            class="bg-white p-6 rounded-2xl border border-zinc-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-1 transition-all cursor-pointer group flex items-start gap-5">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                                <i class="ri-user-3-line text-2xl"></i>
+                            </div>
+                            <div>
+                                <h3
+                                    class="font-bold text-zinc-900 text-lg mb-1 group-hover:text-blue-600 transition-colors">
+                                    User Account</h3>
+                                <p class="text-sm text-zinc-500 leading-relaxed">Manage your account settings, profile
+                                    details, and security.</p>
+                            </div>
+                        </div>
+
+                        <!-- Product Features -->
+                        <div
+                            class="bg-white p-6 rounded-2xl border border-zinc-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-1 transition-all cursor-pointer group flex items-start gap-5">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                                <i class="ri-equalizer-line text-2xl"></i>
+                            </div>
+                            <div>
+                                <h3
+                                    class="font-bold text-zinc-900 text-lg mb-1 group-hover:text-orange-600 transition-colors">
+                                    Product Features</h3>
+                                <p class="text-sm text-zinc-500 leading-relaxed">Deep dive into detailed features and
+                                    capabilities.</p>
+                            </div>
+                        </div>
+
+                        <!-- Customization Options -->
+                        <div
+                            class="bg-white p-6 rounded-2xl border border-zinc-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-1 transition-all cursor-pointer group flex items-start gap-5">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-pink-50 text-pink-600 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                                <i class="ri-code-s-slash-line text-2xl"></i>
+                            </div>
+                            <div>
+                                <h3
+                                    class="font-bold text-zinc-900 text-lg mb-1 group-hover:text-pink-600 transition-colors">
+                                    Customization Options</h3>
+                                <p class="text-sm text-zinc-500 leading-relaxed">Tailor the experience to match your
+                                    specific needs.</p>
+                            </div>
+                        </div>
+
+                        <!-- Payment Gateways -->
+                        <div
+                            class="bg-white p-6 rounded-2xl border border-zinc-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-1 transition-all cursor-pointer group flex items-start gap-5">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                                <i class="ri-bank-card-line text-2xl"></i>
+                            </div>
+                            <div>
+                                <h3
+                                    class="font-bold text-zinc-900 text-lg mb-1 group-hover:text-indigo-600 transition-colors">
+                                    Payment Gateways</h3>
+                                <p class="text-sm text-zinc-500 leading-relaxed">Setup and manage payment methods and
+                                    billing information.</p>
+                            </div>
+                        </div>
+
+                        <!-- Security Options -->
+                        <div
+                            class="bg-white p-6 rounded-2xl border border-zinc-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-1 transition-all cursor-pointer group flex items-start gap-5">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                                <i class="ri-lock-2-line text-2xl"></i>
+                            </div>
+                            <div>
+                                <h3
+                                    class="font-bold text-zinc-900 text-lg mb-1 group-hover:text-emerald-600 transition-colors">
+                                    Security Options</h3>
+                                <p class="text-sm text-zinc-500 leading-relaxed">Ensure your data is safe with our
+                                    advanced security protocols.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Section -->
+                    <div class="max-w-3xl mx-auto mb-20">
+                        <h3 class="text-2xl font-bold text-zinc-900 text-center mb-10">Frequently asked questions</h3>
+
+                        <div class="space-y-4">
+                            <!-- Question 1 -->
+                            <details
+                                class="group bg-white rounded-xl border border-zinc-200 overflow-hidden [&_summary::-webkit-details-marker]:hidden">
+                                <summary
+                                    class="flex cursor-pointer items-center justify-between gap-1.5 p-6 text-zinc-900">
+                                    <h4 class="font-bold text-sm md:text-base">Do you provide customer support?</h4>
+                                    <div
+                                        class="white-space-nowrap text-zinc-900 group-open:-rotate-180 transition-transform duration-300">
+                                        <i class="ri-arrow-down-s-line text-xl"></i>
+                                    </div>
+                                </summary>
+                                <div class="px-6 pb-6 text-sm text-zinc-600 leading-relaxed">
+                                    Yes, we provide 24/7 customer support via email and live chat. Our team is dedicated
+                                    to helping you resolve any issues you may encounter.
+                                </div>
+                            </details>
+
+                            <!-- Question 2 -->
+                            <details
+                                class="group bg-white rounded-xl border border-zinc-200 overflow-hidden [&_summary::-webkit-details-marker]:hidden">
+                                <summary
+                                    class="flex cursor-pointer items-center justify-between gap-1.5 p-6 text-zinc-900">
+                                    <h4 class="font-bold text-sm md:text-base">Are updates and bug fixes included in the
+                                        cost?</h4>
+                                    <div
+                                        class="white-space-nowrap text-zinc-900 group-open:-rotate-180 transition-transform duration-300">
+                                        <i class="ri-arrow-down-s-line text-xl"></i>
+                                    </div>
+                                </summary>
+                                <div class="px-6 pb-6 text-sm text-zinc-600 leading-relaxed">
+                                    Absolutely! All updates and critical bug fixes are included with your active
+                                    subscription at no additional cost.
+                                </div>
+                            </details>
+
+                            <!-- Question 3 -->
+                            <details
+                                class="group bg-white rounded-xl border border-zinc-200 overflow-hidden [&_summary::-webkit-details-marker]:hidden">
+                                <summary
+                                    class="flex cursor-pointer items-center justify-between gap-1.5 p-6 text-zinc-900">
+                                    <h4 class="font-bold text-sm md:text-base">Can I extend or renew my item support?
+                                    </h4>
+                                    <div
+                                        class="white-space-nowrap text-zinc-900 group-open:-rotate-180 transition-transform duration-300">
+                                        <i class="ri-arrow-down-s-line text-xl"></i>
+                                    </div>
+                                </summary>
+                                <div class="px-6 pb-6 text-sm text-zinc-600 leading-relaxed">
+                                    Yes, you can renew your support plan at any time from your account settings. We
+                                    offer flexible plans to suit your needs.
+                                </div>
+                            </details>
+
+                            <!-- Question 4 -->
+                            <details
+                                class="group bg-white rounded-xl border border-zinc-200 overflow-hidden [&_summary::-webkit-details-marker]:hidden">
+                                <summary
+                                    class="flex cursor-pointer items-center justify-between gap-1.5 p-6 text-zinc-900">
+                                    <h4 class="font-bold text-sm md:text-base">Do you provide customization services?
+                                    </h4>
+                                    <div
+                                        class="white-space-nowrap text-zinc-900 group-open:-rotate-180 transition-transform duration-300">
+                                        <i class="ri-arrow-down-s-line text-xl"></i>
+                                    </div>
+                                </summary>
+                                <div class="px-6 pb-6 text-sm text-zinc-600 leading-relaxed">
+                                    While we focus on our core product, we can recommend trusted partners for extensive
+                                    customization requirements.
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+
+                    <!-- Footer / Support Team -->
+                    <div class="text-center mb-10">
+                        <h3 class="text-xl font-bold text-zinc-900 mb-2">Didn't find an answer?</h3>
+                        <p class="text-zinc-500 text-sm mb-8">Our team is just an email away and ready to answer your
+                            questions.</p>
+
+                        <!-- Avatars -->
+                        <div class="flex justify-center items-center gap-4 mb-8 flex-wrap">
+                            <div class="flex flex-col items-center gap-2">
+                                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=100&auto=format&fit=crop"
+                                    class="w-12 h-12 rounded-full border-2 border-white shadow-md object-cover">
+                                <span class="text-[10px] font-bold text-zinc-700">Sarah</span>
+                            </div>
+                            <div class="flex flex-col items-center gap-2">
+                                <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=100&auto=format&fit=crop"
+                                    class="w-12 h-12 rounded-full border-2 border-white shadow-md object-cover">
+                                <span class="text-[10px] font-bold text-zinc-700">John</span>
+                            </div>
+                            <div class="flex flex-col items-center gap-2">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=100&auto=format&fit=crop"
+                                    class="w-12 h-12 rounded-full border-2 border-white shadow-md object-cover">
+                                <span class="text-[10px] font-bold text-zinc-700">Mike</span>
+                            </div>
+                            <div class="flex flex-col items-center gap-2">
+                                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=100&auto=format&fit=crop"
+                                    class="w-12 h-12 rounded-full border-2 border-white shadow-md object-cover">
+                            </div>
+
+                            <button
+                                class="px-8 py-3 bg-[#1B3C29] text-white font-bold rounded-xl shadow-lg shadow-[#1B3C29]/20 hover:bg-[#142e1f] hover:scale-105 transition-all">
+                                Contact Us
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- About Tab -->
+                    <div id="tab-about" class="tab-content">
+                        <div class="mb-6">
+                            <h1 class="text-2xl font-bold text-zinc-900">About Us</h1>
+                            <p class="text-zinc-500 text-sm">Learn more about our story.</p>
+                        </div>
+                        <div class="bg-white rounded-2xl shadow-sm border border-zinc-200 overflow-hidden">
+                            <div class="h-48 bg-zinc-100 relative">
+                                <!-- Placeholder for a banner image -->
+                                <div class="absolute inset-0 flex items-center justify-center text-zinc-300">
+                                    <i class="ri-image-line text-4xl"></i>
+                                </div>
+                            </div>
+                            <div class="p-6 md:p-8 space-y-6">
+                                <div>
+                                    <h3 class="font-bold text-zinc-900 text-xl mb-2">Our Story</h3>
+                                    <p class="text-zinc-600 leading-relaxed">
+                                        Scatch was founded with a simple mission: to provide high-quality products that
+                                        enhance your lifestyle.
+                                        We believe in craftsmanship, sustainability, and exceptional customer service.
+                                        Our journey began in a small studio and has grown into a global community of
+                                        like-minded individuals.
+                                    </p>
+                                </div>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
+                                    <div class="p-4 bg-zinc-50 rounded-xl">
+                                        <div
+                                            class="w-10 h-10 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mb-3">
+                                            <i class="ri-flag-fill"></i>
+                                        </div>
+                                        <h4 class="font-bold text-zinc-900">Our Mission</h4>
+                                        <p class="text-sm text-zinc-500 mt-1">To inspire and innovate through design.
+                                        </p>
+                                    </div>
+                                    <div class="p-4 bg-zinc-50 rounded-xl">
+                                        <div
+                                            class="w-10 h-10 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-3">
+                                            <i class="ri-earth-fill"></i>
+                                        </div>
+                                        <h4 class="font-bold text-zinc-900">Sustainability</h4>
+                                        <p class="text-sm text-zinc-500 mt-1">Committed to eco-friendly practices.</p>
+                                    </div>
+                                    <div class="p-4 bg-zinc-50 rounded-xl">
+                                        <div
+                                            class="w-10 h-10 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center mb-3">
+                                            <i class="ri-heart-fill"></i>
+                                        </div>
+                                        <h4 class="font-bold text-zinc-900">Community</h4>
+                                        <p class="text-sm text-zinc-500 mt-1">Building connections that last.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+            </main>
+        </div>
+    </div>
+
+    <div id="toast-container"
+        class="fixed top-6 left-1/2 -translate-x-1/2 z-[100] flex flex-col items-center gap-3 pointer-events-none">
+    </div>
+    <script>
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+
+            // Design matching screenshot: White rounded-[2rem] pill shape, subtle soft shadow
+            const baseClass = "pointer-events-auto flex items-center justify-between gap-4 pl-3 pr-4 py-3 bg-white rounded-[2rem] shadow-2xl shadow-zinc-200/50 border border-zinc-100 transform transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] -translate-y-24 opacity-0 min-w-[340px] max-w-sm";
+
+            toast.className = baseClass;
+
+            // Icon logic - Circular green background with white check
+            const icon = type === 'success'
+                ? `<div class="w-10 h-10 rounded-full bg-emerald-500 flex items-center justify-center text-white flex-shrink-0 shadow-sm"><i class="ri-check-line text-xl font-bold"></i></div>`
+                : `<div class="w-10 h-10 rounded-full bg-red-500 flex items-center justify-center text-white flex-shrink-0 shadow-sm"><i class="ri-error-warning-line text-xl font-bold"></i></div>`;
+
+            // Text Colors matching "Summer Dresses" card (zinc-900 / zinc-500)
+            const titleText = type === 'success' ? 'Success' : 'Error';
+
+            toast.innerHTML = `
+                <div class="flex items-center gap-3.5">
+                    ${icon}
+                    <div class="flex flex-col">
+                        <span class="font-bold text-zinc-900 text-[15px] leading-tight tracking-tight">${titleText}</span>
+                        <span class="font-medium text-zinc-500 text-[13px] leading-tight">${message}</span>
+                    </div>
+                </div>
+                <button onclick="this.parentElement.remove()" class="text-zinc-400 hover:text-zinc-600 transition-colors p-1">
+                    <i class="ri-close-line text-lg"></i>
+                </button>
+            `;
+
+            container.appendChild(toast);
+
+            // Animate in (Smooth drop down)
+            requestAnimationFrame(() => {
+                toast.classList.remove('-translate-y-24', 'opacity-0');
+                toast.classList.add('translate-y-0', 'opacity-100');
+            });
+
+            // Remove after 4 seconds
+            setTimeout(() => {
+                if (toast.parentElement) {
+                    toast.classList.remove('translate-y-0', 'opacity-100');
+                    toast.classList.add('-translate-y-24', 'opacity-0');
+                    setTimeout(() => toast.remove(), 500);
+                }
+            }, 4000);
+        }
+
+        async function addToCart(event, id) {
+            event.preventDefault();
+            event.stopPropagation();
+            try {
+                const response = await fetch(`/addtocart/${id}`, {
+                    method: 'GET',
+                    headers: { 'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest' }
+                });
+                const data = await response.json();
+                if (data.success) {
+                    showToast(data.message);
+                } else {
+                    showToast('Failed to add to cart', 'error');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        async function removeFromWishlist(event, id) {
+            event.preventDefault();
+            event.stopPropagation();
+            try {
+                const button = event.currentTarget;
+                const card = button.closest('.group'); // The product card container
+
+                const response = await fetch(`/removefromwishlist/${id}`, {
+                    method: 'GET',
+                    headers: { 'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest' }
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    showToast(data.message);
+                    // Remove the card from UI with animation
+                    if (card) {
+                        card.style.transition = 'all 0.5s ease';
+                        card.style.opacity = '0';
+                        card.style.transform = 'scale(0.9)';
+                        setTimeout(() => {
+                            card.remove();
+                            // Optional: Reload if empty to show empty state, or handle empty state via JS
+                            // For simplicity, we just remove it.
+                        }, 500);
+                    }
+                } else {
+                    showToast('Failed to remove from wishlist', 'error');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        function switchTab(tabId) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Show target tab
+            const target = document.getElementById('tab-' + tabId);
+            if (target) target.classList.add('active');
+
+            // Reset nav styles
+            const navLinks = document.querySelectorAll('aside nav a');
+            navLinks.forEach(link => {
+                // Remove active styling from all
+                link.classList.remove('text-amber-600', 'bg-amber-50', 'border-amber-600', 'shadow-sm', 'font-semibold');
+
+                // Add default styling
+                link.classList.add('text-zinc-500', 'border-transparent', 'font-medium');
+
+                // If this is the active link
+                if (link.id === 'nav-' + tabId) {
+                    // Remove default styling
+                    link.classList.remove('text-zinc-500', 'border-transparent', 'font-medium');
+
+                    // Add active styling
+                    link.classList.add('text-amber-600', 'bg-amber-50', 'border-amber-600', 'shadow-sm', 'font-semibold');
+                }
+            });
+        }
+
+
+    </script>
+    <%- include('./partials/footer') %>

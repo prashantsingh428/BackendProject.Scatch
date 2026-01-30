@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scatch</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom Font Import if needed, using backup for now since local file assumption is risky without font file check */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
+        /* Dark Mode CSS Variables */
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #F8F9FD;
+            --bg-tertiary: #f8f9fa;
+            --bg-card: #ffffff;
+            --bg-input: #f3f4f6;
+            --bg-hover: #f9fafb;
+            --text-primary: #18181b;
+            --text-secondary: #71717a;
+            --text-tertiary: #a1a1aa;
+            --border-color: #e4e4e7;
+            --border-light: #f4f4f5;
+            --shadow-sm: rgba(0, 0, 0, 0.04);
+            --shadow-md: rgba(0, 0, 0, 0.07);
+            --shadow-lg: rgba(0, 0, 0, 0.1);
+            --navbar-bg: rgba(255, 255, 255, 0.8);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #09090b;
+            --bg-secondary: #18181b;
+            --bg-tertiary: #27272a;
+            --bg-card: #18181b;
+            --bg-input: #27272a;
+            --bg-hover: #3f3f46;
+            --text-primary: #fafafa;
+            --text-secondary: #a1a1aa;
+            --text-tertiary: #71717a;
+            --border-color: #3f3f46;
+            --border-light: #27272a;
+            --shadow-sm: rgba(0, 0, 0, 0.3);
+            --shadow-md: rgba(0, 0, 0, 0.5);
+            --shadow-lg: rgba(0, 0, 0, 0.7);
+            --navbar-bg: rgba(24, 24, 27, 0.8);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Override Tailwind classes for dark mode */
+        [data-theme="dark"] .bg-white {
+            background-color: var(--bg-card) !important;
+        }
+
+        [data-theme="dark"] .bg-zinc-50,
+        [data-theme="dark"] .bg-zinc-100 {
+            background-color: var(--bg-input) !important;
+        }
+
+        [data-theme="dark"] .bg-zinc-900 {
+            background-color: #fafafa !important;
+        }
+
+        [data-theme="dark"] .text-zinc-900 {
+            color: var(--text-primary) !important;
+        }
+
+        [data-theme="dark"] .text-zinc-800 {
+            color: var(--text-primary) !important;
+        }
+
+        [data-theme="dark"] .text-zinc-600,
+        [data-theme="dark"] .text-zinc-500 {
+            color: var(--text-secondary) !important;
+        }
+
+        [data-theme="dark"] .text-zinc-400 {
+            color: var(--text-tertiary) !important;
+        }
+
+        [data-theme="dark"] .border-zinc-200,
+        [data-theme="dark"] .border-zinc-100 {
+            border-color: var(--border-color) !important;
+        }
+
+        [data-theme="dark"] .text-white {
+            color: #09090b !important;
+        }
+
+        [data-theme="dark"] .shadow-sm,
+        [data-theme="dark"] .shadow-md,
+        [data-theme="dark"] .shadow-lg {
+            box-shadow: 0 1px 3px 0 var(--shadow-sm), 0 1px 2px -1px var(--shadow-md) !important;
+        }
+
+        /* Navbar specific dark mode */
+        [data-theme="dark"] nav {
+            background-color: var(--navbar-bg) !important;
+            border-color: var(--border-color) !important;
+        }
+    </style>
+    <script>
+        // Dark Mode Toggle Script - Load immediately to prevent flash
+        (function () {
+            const theme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
+</head>
+
+<body class="flex flex-col min-h-screen font-['helvetica_now_display']">
+    <nav
+        class="w-full fixed top-0 left-0 px-10 py-6 flex justify-between items-center z-50 bg-white/80 backdrop-blur-md border-b border-zinc-200">
+        <h3 class="text-xl font-semibold text-zinc-800 tracking-tight">Scatch</h3>
+
+        <% if(typeof loggedin !=='undefined' && loggedin){ %>
+            <!-- Centered Search Bar (Only for logged in users) -->
+            <div class="hidden md:block flex-grow max-w-xl mx-8">
+                <form action="/shop" method="GET" class="relative w-full">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                        <i class="ri-search-line text-zinc-400"></i>
+                    </div>
+                    <input type="text" name="search"
+                        class="w-full py-2.5 pl-10 pr-4 bg-zinc-100 border border-zinc-200 text-zinc-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block outline-none transition-all placeholder:text-zinc-400"
+                        placeholder="Search product or brand here...">
+                </form>
+            </div>
+
+            <div class="flex items-center gap-5 font-medium text-sm text-zinc-600">
+                <a class="hover:text-black transition-colors" href="/shop">Shop</a>
+                <a class="hover:text-black transition-colors" href="/cart">Cart</a>
+                <a class="hover:text-black transition-colors" href="/about">About Us</a>
+                <a class="hover:text-black transition-colors" href="/account">My Account</a>
+                <a href="/account" class="w-10 h-10 rounded-full overflow-hidden shrink-0 ml-2 border border-zinc-200">
+                    <% if(typeof user !=='undefined' && user.picture){ %>
+                        <img class="w-full h-full object-cover" src="/images/uploads/<%= user.picture %>" alt="">
+                        <% } else { %>
+                            <div class="w-full h-full bg-zinc-200 flex items-center justify-center text-zinc-500">
+                                <i class="ri-user-line"></i>
+                            </div>
+                            <% } %>
+                </a>
+            </div>
+            <% } else { %>
+                <!-- Login/Register Links (For logged out users) -->
+                <div class="flex items-center gap-5 font-medium text-sm text-zinc-600">
+                    <a class="hover:text-black transition-colors" href="/about">About Us</a>
+                    <a class="hover:text-black transition-colors" href="/login">Login</a>
+                    <a class="hover:text-black transition-colors" href="/register">Register</a>
+                </div>
+                <% } %>
+    </nav>
+    <main class="flex-grow w-full relative pt-20">

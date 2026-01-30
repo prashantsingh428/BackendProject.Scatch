@@ -1,0 +1,57 @@
+<%- include('./partials/header') %>
+
+    <% if(error.length>0){ %>
+        <div class="absolute top-24 left-1/2 -translate-x-1/2 p-3 rounded-md bg-red-500 z-50 animate-bounce">
+            <span class="inline-block text-white font-medium">
+                <%= error %>
+            </span>
+        </div>
+        <% } %>
+
+            <div class="flex w-full min-h-[calc(100vh-5rem)] bg-white">
+                <!-- Decorative Left Panel -->
+                <div
+                    class="hidden md:flex w-1/2 bg-zinc-900 flex-col justify-center px-16 text-white relative overflow-hidden">
+                    <div class="relative z-10">
+                        <h1 class="text-6xl font-bold tracking-tighter mb-4 leading-none">Join<br>Scatch.</h1>
+                        <p class="text-zinc-400 text-lg">Create an account to explore our exclusive collection.</p>
+                    </div>
+                    <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-tr from-blue-900/20 to-zinc-900 z-0">
+                    </div>
+                </div>
+
+                <!-- Register Form Section -->
+                <div class="w-full md:w-1/2 flex items-center justify-center p-8">
+                    <div class="w-full max-w-md">
+                        <h2 class="text-3xl font-bold mb-2 text-zinc-800">Create Account</h2>
+                        <p class="text-zinc-500 mb-8">Sign up to get started.</p>
+
+                        <form autocomplete="off" action="/users/register" method="post" class="space-y-4">
+                            <div>
+                                <input
+                                    class="w-full px-4 py-3 rounded-lg border border-zinc-200 bg-zinc-50 focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition-all placeholder:text-zinc-400"
+                                    type="text" placeholder="Full Name" name="fullname">
+                            </div>
+                            <div>
+                                <input
+                                    class="w-full px-4 py-3 rounded-lg border border-zinc-200 bg-zinc-50 focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition-all placeholder:text-zinc-400"
+                                    type="email" placeholder="Email Address" name="email">
+                            </div>
+                            <div>
+                                <input
+                                    class="w-full px-4 py-3 rounded-lg border border-zinc-200 bg-zinc-50 focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition-all placeholder:text-zinc-400"
+                                    type="password" placeholder="Password" name="password">
+                            </div>
+                            <input
+                                class="w-full py-3 rounded-full bg-zinc-900 text-white font-medium hover:bg-black transition cursor-pointer shadow-lg shadow-zinc-500/30"
+                                type="submit" value="Create Account">
+                        </form>
+
+                        <div class="mt-8 text-center text-zinc-500 text-sm">
+                            Already have an account? <a href="/login"
+                                class="text-blue-600 font-medium hover:underline">Log in</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <%- include('./partials/footer') %>

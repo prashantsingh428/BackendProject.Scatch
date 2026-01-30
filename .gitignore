@@ -1,0 +1,27 @@
+# dependencies
+node_modules/
+
+# environment variables
+.env
+
+# logs
+logs
+*.log
+
+# OS files
+.DS_Store
+
+# build output
+dist/
+build/
+
+# IDE settings
+.vscode/
+.idea/
+
+# coverage
+coverage/
+
+node_modules
+.env
+public/images/uploads
