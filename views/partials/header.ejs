@@ -118,8 +118,12 @@
 
 <body class="flex flex-col min-h-screen font-['helvetica_now_display']">
     <nav
-        class="w-full fixed top-0 left-0 px-10 py-6 flex justify-between items-center z-50 bg-white/80 backdrop-blur-md border-b border-zinc-200">
-        <h3 class="text-xl font-semibold text-zinc-800 tracking-tight">Scatch</h3>
+        class="w-full fixed top-0 left-0 px-10 md:px-16 py-6 flex justify-between items-center z-50 bg-white/95 backdrop-blur-lg border-b border-zinc-200 shadow-sm">
+        <!-- Logo -->
+        <a href="<%= typeof loggedin !== 'undefined' && loggedin ? '/shop' : '/' %>"
+            class="flex items-center gap-2 hover:brightness-75 transition-all active:scale-95 active:brightness-50">
+            <img src="/images/scatch-logo.png" alt="Scatch" class="h-16 w-auto">
+        </a>
 
         <% if(typeof loggedin !=='undefined' && loggedin){ %>
             <!-- Centered Search Bar (Only for logged in users) -->
@@ -134,20 +138,52 @@
                 </form>
             </div>
 
-            <div class="flex items-center gap-5 font-medium text-sm text-zinc-600">
-                <a class="hover:text-black transition-colors" href="/shop">Shop</a>
-                <a class="hover:text-black transition-colors" href="/cart">Cart</a>
-                <a class="hover:text-black transition-colors" href="/about">About Us</a>
-                <a class="hover:text-black transition-colors" href="/account">My Account</a>
-                <a href="/account" class="w-10 h-10 rounded-full overflow-hidden shrink-0 ml-2 border border-zinc-200">
-                    <% if(typeof user !=='undefined' && user.picture){ %>
-                        <img class="w-full h-full object-cover" src="/images/uploads/<%= user.picture %>" alt="">
-                        <% } else { %>
-                            <div class="w-full h-full bg-zinc-200 flex items-center justify-center text-zinc-500">
-                                <i class="ri-user-line"></i>
-                            </div>
+            <!-- Right Side Actions (Links + Icons) -->
+            <div class="flex items-center gap-8">
+                <!-- Navigation Links -->
+                <div class="hidden md:flex items-center gap-5 font-medium text-sm text-zinc-700">
+                    <a class="relative hover:text-zinc-900 transition-colors group" href="/shop">
+                        Shop
+                        <span
+                            class="absolute -bottom-1 left-0 w-0 h-0.5 bg-zinc-900 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a class="relative hover:text-zinc-900 transition-colors group" href="/shop#new-arrivals">
+                        New Arrivals
+                        <span
+                            class="absolute -bottom-1 left-0 w-0 h-0.5 bg-zinc-900 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                    <a class="relative hover:text-zinc-900 transition-colors group" href="/about">
+                        About Us
+                        <span
+                            class="absolute -bottom-1 left-0 w-0 h-0.5 bg-zinc-900 transition-all duration-300 group-hover:w-full"></span>
+                    </a>
+                </div>
+
+                <!-- Right Section: Icons & Profile -->
+                <div class="flex items-center gap-4">
+                    <!-- Cart Icon with Badge -->
+                    <a href="/cart" class="relative hover:opacity-70 transition-all hover:scale-110 active:scale-95">
+                        <i class="ri-shopping-cart-line text-2xl text-zinc-700"></i>
+                        <% if(typeof user !=='undefined' && user.cart && user.cart.length> 0) { %>
+                            <span
+                                class="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs font-bold rounded-full flex items-center justify-center">
+                                <%= user.cart.length %>
+                            </span>
                             <% } %>
-                </a>
+                    </a>
+
+                    <!-- Profile Picture -->
+                    <a href="/account"
+                        class="w-10 h-10 rounded-full overflow-hidden shrink-0 ml-2 border border-zinc-200 hover:border-zinc-400 transition-colors">
+                        <% if(typeof user !=='undefined' && user.picture){ %>
+                            <img class="w-full h-full object-cover" src="/images/uploads/<%= user.picture %>" alt="">
+                            <% } else { %>
+                                <div class="w-full h-full bg-zinc-200 flex items-center justify-center text-zinc-500">
+                                    <i class="ri-user-line"></i>
+                                </div>
+                                <% } %>
+                    </a>
+                </div>
             </div>
             <% } else { %>
                 <!-- Login/Register Links (For logged out users) -->
