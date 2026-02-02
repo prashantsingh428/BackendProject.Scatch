@@ -1,8 +1,8 @@
 <%- include('./partials/header') %>
 
-    <% if(success.length>0){ %>
+    <% if (typeof success !=='undefined' && success && success.length> 0) { %>
         <div id="flash-message"
-            class="absolute top-24 left-1/2 -translate-x-1/2 p-3 rounded-md bg-zinc-800 z-50 animate-fade-in-down shadow-xl">
+            class="absolute top-24 left-1/2 -translate-x-1/2 p-3 rounded-md bg-darkText z-50 animate-fade-in-down shadow-xl">
             <span class="inline-block text-white font-medium text-sm tracking-wide">
                 <%= success %>
             </span>
@@ -22,13 +22,13 @@
                             <!-- Left: Typography -->
                             <div
                                 class="w-full md:w-1/2 flex flex-col items-start justify-center text-left space-y-6 pt-10 md:pt-0">
-                                <div class="flex items-center gap-2 text-xs font-bold tracking-widest text-[#1B3C29]/60 uppercase animate-fade-in-up"
+                                <div class="flex items-center gap-2 text-xs font-bold tracking-widest text-[#18181B]/60 uppercase animate-fade-in-up"
                                     style="animation-delay: 100ms;">
                                     <span>Premium Collection 2024</span>
                                     <i class="ri-arrow-right-line"></i>
                                 </div>
 
-                                <h1 class="text-4xl md:text-6xl font-serif text-[#1B3C29] leading-[1.1] animate-fade-in-up"
+                                <h1 class="text-4xl md:text-6xl font-serif text-[#18181B] leading-[1.1] animate-fade-in-up"
                                     style="animation-delay: 300ms;">
                                     Elevate Your <span class="italic text-[#B88E2F]">Style</span> & <br>
                                     Personal <span class="italic text-[#B88E2F]">Wardrobe</span> in <br>
@@ -44,11 +44,11 @@
                                 <div class="flex items-center gap-4 mt-4 animate-fade-in-up"
                                     style="animation-delay: 700ms;">
                                     <a href="#product-list"
-                                        class="bg-[#1B3C29] text-white px-8 py-4 rounded-lg font-bold text-sm hover:bg-[#142e1f] transition-all shadow-lg hover:shadow-xl hover:-translate-y-1">
+                                        class="bg-[#18181B] text-white px-8 py-4 rounded-lg font-bold text-sm hover:bg-zinc-800 transition-all shadow-lg hover:shadow-xl hover:-translate-y-1">
                                         Shop Collection
                                     </a>
                                     <a href="/about"
-                                        class="flex items-center gap-2 text-[#1B3C29] font-bold text-sm group">
+                                        class="flex items-center gap-2 text-[#18181B] font-bold text-sm group">
                                         Join Elite Early <i
                                             class="ri-arrow-right-line group-hover:translate-x-1 transition-transform"></i>
                                     </a>
@@ -76,7 +76,7 @@
 
                                 <!-- Card 2 (Front) -->
                                 <div
-                                    class="absolute right-12 top-1/2 -translate-y-1/2 w-80 h-48 bg-[#1B3C29] rounded-2xl shadow-2xl transform -rotate-6 transition-transform duration-700 hover:rotate-0 hover:scale-105 border border-white/10 flex flex-col justify-between p-6 z-20 overflow-hidden group">
+                                    class="absolute right-12 top-1/2 -translate-y-1/2 w-80 h-48 bg-[#18181B] rounded-2xl shadow-2xl transform -rotate-6 transition-transform duration-700 hover:rotate-0 hover:scale-105 border border-white/10 flex flex-col justify-between p-6 z-20 overflow-hidden group">
                                     <div
                                         class="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent pointer-events-none">
                                     </div>
@@ -94,8 +94,9 @@
                                     </div>
 
                                     <div class="flex justify-between items-end relative z-10">
-                                        <div class="text-white/90 font-mono tracking-widest text-sm">Welcome to Country<br>
-                                             of Elite.
+                                        <div class="text-white/90 font-mono tracking-widest text-sm">Welcome to
+                                            Country<br>
+                                            of Elite.
                                         </div>
                                         <div
                                             class="bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-[10px] text-white font-bold border border-white/10">
@@ -108,12 +109,12 @@
                                     class="absolute top-20 right-40 bg-white/60 backdrop-blur-md border border-white/50 p-3 rounded-xl shadow-lg transform -rotate-3 z-30 animate-float">
                                     <div class="flex items-center gap-3">
                                         <div
-                                            class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-700">
+                                            class="w-8 h-8 rounded-full bg-zinc-100 flex items-center justify-center text-darkText">
                                             <i class="ri-t-shirt-line"></i>
                                         </div>
                                         <div>
                                             <p class="text-[10px] text-zinc-500 font-bold uppercase">New Arrival</p>
-                                            <p class="text-xs font-bold text-zinc-800">Summer Kit</p>
+                                            <p class="text-xs font-bold text-darkText">Summer Kit</p>
                                         </div>
                                     </div>
                                 </div>
@@ -128,7 +129,7 @@
                                         </div>
                                         <div>
                                             <p class="text-[10px] text-zinc-500 font-bold uppercase">Rating</p>
-                                            <p class="text-xs font-bold text-zinc-800">4.9/5.0</p>
+                                            <p class="text-xs font-bold text-darkText">4.9/5.0</p>
                                         </div>
                                     </div>
                                 </div>
@@ -209,10 +210,31 @@
                                             <span class="text-xs font-bold text-slate-400">02/05</span>
                                         </div>
                                         <div class="space-y-2">
-                                            <div
-                                                class="h-24 w-full bg-slate-100 rounded-xl flex items-center justify-center text-slate-300">
-                                                <i class="ri-image-line text-4xl"></i>
+                                            <div id="winter-shuffle-container"
+                                                class="h-24 w-full bg-slate-100 rounded-xl relative overflow-hidden">
+                                                <img src="/images/uploads/winter_jacket.png"
+                                                    class="shuffle-image absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-100"
+                                                    alt="Winter Jacket">
+                                                <img src="/images/uploads/1bag.png"
+                                                    class="shuffle-image absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0"
+                                                    alt="Bag 1">
+                                                <img src="/images/uploads/2bag.png"
+                                                    class="shuffle-image absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0"
+                                                    alt="Bag 2">
                                             </div>
+                                            <script>
+                                                document.addEventListener('DOMContentLoaded', () => {
+                                                    const images = document.querySelectorAll('#winter-shuffle-container .shuffle-image');
+                                                    let idx = 0;
+                                                    if (images.length > 0) {
+                                                        setInterval(() => {
+                                                            images[idx].classList.replace('opacity-100', 'opacity-0');
+                                                            idx = (idx + 1) % images.length;
+                                                            images[idx].classList.replace('opacity-0', 'opacity-100');
+                                                        }, 2000);
+                                                    }
+                                                });
+                                            </script>
                                             <h3 class="font-bold text-slate-800">Wool Blend Jacket</h3>
                                             <p class="text-xs text-slate-500">Premium warmth.</p>
                                         </div>
@@ -350,11 +372,11 @@
                 <!-- Navigation Buttons -->
                 <button id="prevBtn"
                     class="absolute top-1/2 left-5 -translate-y-1/2 w-12 h-12 rounded-full bg-white/50 backdrop-blur-sm border border-white/60 flex items-center justify-center hover:bg-white hover:scale-110 transition-all z-20 cursor-pointer shadow-sm group-hover:opacity-100 opacity-0 duration-300">
-                    <i class="ri-arrow-left-s-line text-xl text-zinc-800"></i>
+                    <i class="ri-arrow-left-s-line text-xl text-darkText"></i>
                 </button>
                 <button id="nextBtn"
                     class="absolute top-1/2 right-5 -translate-y-1/2 w-12 h-12 rounded-full bg-white/50 backdrop-blur-sm border border-white/60 flex items-center justify-center hover:bg-white hover:scale-110 transition-all z-20 cursor-pointer shadow-sm group-hover:opacity-100 opacity-0 duration-300">
-                    <i class="ri-arrow-right-s-line text-xl text-zinc-800"></i>
+                    <i class="ri-arrow-right-s-line text-xl text-darkText"></i>
                 </button>
             </div>
 
@@ -365,52 +387,52 @@
                     class="w-full flex justify-start md:justify-center items-center gap-8 md:gap-16 overflow-x-auto px-12 py-4 scrollbar-hide scroll-smooth">
                     <a href="/category/T-Shirt" class="flex flex-col items-center gap-2 group min-w-[60px]">
                         <div
-                            class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-zinc-100 flex items-center justify-center text-zinc-600 group-hover:bg-zinc-800 group-hover:text-white transition-all shadow-sm">
+                            class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-zinc-100 flex items-center justify-center text-zinc-600 group-hover:bg-darkText group-hover:text-white transition-all shadow-sm">
                             <i class="ri-t-shirt-line text-lg md:text-xl"></i>
                         </div>
-                        <span class="text-xs font-medium text-zinc-600 group-hover:text-black">T-Shirt</span>
+                        <span class="text-xs font-medium text-zinc-600 group-hover:text-darkText">T-Shirt</span>
                     </a>
                     <a href="/category/Shirt" class="flex flex-col items-center gap-2 group min-w-[60px]">
                         <div
-                            class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-zinc-100 flex items-center justify-center text-zinc-600 group-hover:bg-zinc-800 group-hover:text-white transition-all shadow-sm">
+                            class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-zinc-100 flex items-center justify-center text-zinc-600 group-hover:bg-darkText group-hover:text-white transition-all shadow-sm">
                             <i class="ri-shirt-line text-lg md:text-xl"></i>
                         </div>
-                        <span class="text-xs font-medium text-zinc-600 group-hover:text-black">Shirt</span>
+                        <span class="text-xs font-medium text-zinc-600 group-hover:text-darkText">Shirt</span>
                     </a>
                     <a href="/category/Women" class="flex flex-col items-center gap-2 group min-w-[60px]">
                         <div
-                            class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-zinc-100 flex items-center justify-center text-zinc-600 group-hover:bg-zinc-800 group-hover:text-white transition-all shadow-sm">
+                            class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-zinc-100 flex items-center justify-center text-zinc-600 group-hover:bg-darkText group-hover:text-white transition-all shadow-sm">
                             <i class="ri-women-line text-lg md:text-xl"></i>
                         </div>
-                        <span class="text-xs font-medium text-zinc-600 group-hover:text-black">Women</span>
+                        <span class="text-xs font-medium text-zinc-600 group-hover:text-darkText">Women</span>
                     </a>
                     <a href="/category/Bags" class="flex flex-col items-center gap-2 group min-w-[60px]">
                         <div
-                            class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-zinc-100 flex items-center justify-center text-zinc-600 group-hover:bg-zinc-800 group-hover:text-white transition-all shadow-sm">
+                            class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-zinc-100 flex items-center justify-center text-zinc-600 group-hover:bg-darkText group-hover:text-white transition-all shadow-sm">
                             <i class="ri-handbag-line text-lg md:text-xl"></i>
                         </div>
-                        <span class="text-xs font-medium text-zinc-600 group-hover:text-black">Bags</span>
+                        <span class="text-xs font-medium text-zinc-600 group-hover:text-darkText">Bags</span>
                     </a>
                     <a href="/category/Shoes" class="flex flex-col items-center gap-2 group min-w-[60px]">
                         <div
-                            class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-zinc-100 flex items-center justify-center text-zinc-600 group-hover:bg-zinc-800 group-hover:text-white transition-all shadow-sm">
+                            class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-zinc-100 flex items-center justify-center text-zinc-600 group-hover:bg-darkText group-hover:text-white transition-all shadow-sm">
                             <i class="ri-footprint-line text-lg md:text-xl"></i>
                         </div>
-                        <span class="text-xs font-medium text-zinc-600 group-hover:text-black">Shoes</span>
+                        <span class="text-xs font-medium text-zinc-600 group-hover:text-darkText">Shoes</span>
                     </a>
                     <a href="/category/Watches" class="flex flex-col items-center gap-2 group min-w-[60px]">
                         <div
-                            class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-zinc-100 flex items-center justify-center text-zinc-600 group-hover:bg-zinc-800 group-hover:text-white transition-all shadow-sm">
+                            class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-zinc-100 flex items-center justify-center text-zinc-600 group-hover:bg-darkText group-hover:text-white transition-all shadow-sm">
                             <i class="ri-time-line text-lg md:text-xl"></i>
                         </div>
-                        <span class="text-xs font-medium text-zinc-600 group-hover:text-black">Watches</span>
+                        <span class="text-xs font-medium text-zinc-600 group-hover:text-darkText">Watches</span>
                     </a>
                     <a href="/shop" class="flex flex-col items-center gap-2 group min-w-[60px]">
                         <div
-                            class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-zinc-100 flex items-center justify-center text-zinc-600 group-hover:bg-zinc-800 group-hover:text-white transition-all shadow-sm">
+                            class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-zinc-100 flex items-center justify-center text-zinc-600 group-hover:bg-darkText group-hover:text-white transition-all shadow-sm">
                             <i class="ri-apps-line text-lg md:text-xl"></i>
                         </div>
-                        <span class="text-xs font-medium text-zinc-600 group-hover:text-black">All</span>
+                        <span class="text-xs font-medium text-zinc-600 group-hover:text-darkText">All</span>
                     </a>
                 </div>
             </div>
@@ -530,13 +552,13 @@
             <div class="w-full px-2 md:px-4 mb-6 flex items-center justify-between">
                 <!-- Mobile Toggle -->
                 <button onclick="toggleFilter()"
-                    class="md:hidden flex items-center gap-2 px-4 py-2 bg-zinc-100 rounded-full text-sm font-medium text-zinc-900 shadow-sm border border-zinc-200">
+                    class="md:hidden flex items-center gap-2 px-4 py-2 bg-zinc-100 rounded-full text-sm font-medium text-darkText shadow-sm border border-zinc-200">
                     <i class="ri-equalizer-line"></i> Filter
                 </button>
 
                 <!-- Desktop Toggle (New) -->
                 <button onclick="toggleFilter()"
-                    class="hidden md:flex items-center gap-2 px-5 py-2.5 bg-zinc-900 text-white rounded-lg text-sm font-bold shadow-md hover:bg-black transition-all">
+                    class="hidden md:flex items-center gap-2 px-5 py-2.5 bg-[#18181B] text-white rounded-lg text-sm font-bold shadow-md hover:bg-[#18181B]/90 transition-all">
                     <i class="ri-equalizer-line"></i> Show Filters & Sort
                 </button>
             </div>
@@ -549,10 +571,10 @@
                     <form action="/shop" method="GET">
                         <!-- Sort By -->
                         <div class="mb-8">
-                            <h3 class="text-xs font-bold text-black uppercase tracking-widest mb-4">Sort By</h3>
+                            <h3 class="text-xs font-bold text-darkText uppercase tracking-widest mb-4">Sort By</h3>
                             <div class="relative">
                                 <select name="sortby" onchange="this.form.submit()"
-                                    class="w-full appearance-none bg-white border border-zinc-200 text-zinc-700 text-sm py-3 px-4 rounded-lg focus:outline-none focus:border-black cursor-pointer">
+                                    class="w-full appearance-none bg-white border border-zinc-200 text-zinc-700 text-sm py-3 px-4 rounded-lg focus:outline-none focus:border-darkText cursor-pointer">
                                     <option value="popular">Popular</option>
                                     <option value="newest">Newest</option>
                                     <option value="price_low">Price: Low to High</option>
@@ -568,42 +590,42 @@
                         <!-- Price Range -->
                         <div class="mb-8">
                             <h3
-                                class="text-xs font-bold text-black uppercase tracking-widest mb-4 border-b border-zinc-100 pb-2">
+                                class="text-xs font-bold text-darkText uppercase tracking-widest mb-4 border-b border-zinc-100 pb-2">
                                 Price</h3>
                             <div class="flex items-center gap-2">
                                 <input type="number" name="min_price" placeholder="Min"
-                                    class="w-full bg-zinc-50 border border-zinc-200 rounded-lg py-2 px-3 text-sm focus:outline-none focus:border-black">
+                                    class="w-full bg-zinc-50 border border-zinc-200 rounded-lg py-2 px-3 text-sm focus:outline-none focus:border-darkText">
                                 <span class="text-zinc-400">-</span>
                                 <input type="number" name="max_price" placeholder="Max"
-                                    class="w-full bg-zinc-50 border border-zinc-200 rounded-lg py-2 px-3 text-sm focus:outline-none focus:border-black">
+                                    class="w-full bg-zinc-50 border border-zinc-200 rounded-lg py-2 px-3 text-sm focus:outline-none focus:border-darkText">
                             </div>
                         </div>
 
                         <!-- Brand -->
                         <div class="mb-8">
                             <h3
-                                class="text-xs font-bold text-black uppercase tracking-widest mb-4 border-b border-zinc-100 pb-2">
+                                class="text-xs font-bold text-darkText uppercase tracking-widest mb-4 border-b border-zinc-100 pb-2">
                                 Brand</h3>
                             <div class="space-y-2">
                                 <label class="flex items-center gap-2 cursor-pointer group">
                                     <input type="checkbox" name="brand" value="Nike"
-                                        class="w-4 h-4 rounded border-zinc-300 text-black focus:ring-black">
-                                    <span class="text-sm text-zinc-600 group-hover:text-black">Nike</span>
+                                        class="w-4 h-4 rounded border-zinc-300 text-darkText focus:ring-darkText">
+                                    <span class="text-sm text-zinc-600 group-hover:text-darkText">Nike</span>
                                 </label>
                                 <label class="flex items-center gap-2 cursor-pointer group">
                                     <input type="checkbox" name="brand" value="Adidas"
-                                        class="w-4 h-4 rounded border-zinc-300 text-black focus:ring-black">
-                                    <span class="text-sm text-zinc-600 group-hover:text-black">Adidas</span>
+                                        class="w-4 h-4 rounded border-zinc-300 text-darkText focus:ring-darkText">
+                                    <span class="text-sm text-zinc-600 group-hover:text-darkText">Adidas</span>
                                 </label>
                                 <label class="flex items-center gap-2 cursor-pointer group">
                                     <input type="checkbox" name="brand" value="Puma"
-                                        class="w-4 h-4 rounded border-zinc-300 text-black focus:ring-black">
-                                    <span class="text-sm text-zinc-600 group-hover:text-black">Puma</span>
+                                        class="w-4 h-4 rounded border-zinc-300 text-darkText focus:ring-darkText">
+                                    <span class="text-sm text-zinc-600 group-hover:text-darkText">Puma</span>
                                 </label>
                                 <label class="flex items-center gap-2 cursor-pointer group">
                                     <input type="checkbox" name="brand" value="Zara"
-                                        class="w-4 h-4 rounded border-zinc-300 text-black focus:ring-black">
-                                    <span class="text-sm text-zinc-600 group-hover:text-black">Zara</span>
+                                        class="w-4 h-4 rounded border-zinc-300 text-darkText focus:ring-darkText">
+                                    <span class="text-sm text-zinc-600 group-hover:text-darkText">Zara</span>
                                 </label>
                             </div>
                         </div>
@@ -611,31 +633,31 @@
                         <!-- Size -->
                         <div class="mb-8">
                             <h3
-                                class="text-xs font-bold text-black uppercase tracking-widest mb-4 border-b border-zinc-100 pb-2">
+                                class="text-xs font-bold text-darkText uppercase tracking-widest mb-4 border-b border-zinc-100 pb-2">
                                 Size</h3>
                             <div class="flex flex-wrap gap-2">
                                 <label class="cursor-pointer">
                                     <input type="checkbox" name="size" value="S" class="peer sr-only">
                                     <div
-                                        class="w-10 h-10 flex items-center justify-center border border-zinc-200 rounded-lg text-sm text-zinc-600 peer-checked:bg-black peer-checked:text-white peer-checked:border-black hover:border-black transition-all">
+                                        class="w-10 h-10 flex items-center justify-center border border-zinc-200 rounded-lg text-sm text-zinc-600 peer-checked:bg-darkText peer-checked:text-white peer-checked:border-darkText hover:border-darkText transition-all">
                                         S</div>
                                 </label>
                                 <label class="cursor-pointer">
                                     <input type="checkbox" name="size" value="M" class="peer sr-only">
                                     <div
-                                        class="w-10 h-10 flex items-center justify-center border border-zinc-200 rounded-lg text-sm text-zinc-600 peer-checked:bg-black peer-checked:text-white peer-checked:border-black hover:border-black transition-all">
+                                        class="w-10 h-10 flex items-center justify-center border border-zinc-200 rounded-lg text-sm text-zinc-600 peer-checked:bg-darkText peer-checked:text-white peer-checked:border-darkText hover:border-darkText transition-all">
                                         M</div>
                                 </label>
                                 <label class="cursor-pointer">
                                     <input type="checkbox" name="size" value="L" class="peer sr-only">
                                     <div
-                                        class="w-10 h-10 flex items-center justify-center border border-zinc-200 rounded-lg text-sm text-zinc-600 peer-checked:bg-black peer-checked:text-white peer-checked:border-black hover:border-black transition-all">
+                                        class="w-10 h-10 flex items-center justify-center border border-zinc-200 rounded-lg text-sm text-zinc-600 peer-checked:bg-darkText peer-checked:text-white peer-checked:border-darkText hover:border-darkText transition-all">
                                         L</div>
                                 </label>
                                 <label class="cursor-pointer">
                                     <input type="checkbox" name="size" value="XL" class="peer sr-only">
                                     <div
-                                        class="w-10 h-10 flex items-center justify-center border border-zinc-200 rounded-lg text-sm text-zinc-600 peer-checked:bg-black peer-checked:text-white peer-checked:border-black hover:border-black transition-all">
+                                        class="w-10 h-10 flex items-center justify-center border border-zinc-200 rounded-lg text-sm text-zinc-600 peer-checked:bg-darkText peer-checked:text-white peer-checked:border-darkText hover:border-darkText transition-all">
                                         XL</div>
                                 </label>
                             </div>
@@ -644,26 +666,26 @@
                         <!-- Category -->
                         <div class="mb-8">
                             <h3
-                                class="text-xs font-bold text-black uppercase tracking-widest mb-4 border-b border-zinc-100 pb-2">
+                                class="text-xs font-bold text-darkText uppercase tracking-widest mb-4 border-b border-zinc-100 pb-2">
                                 Category</h3>
                             <div class="space-y-1">
                                 <a href="/shop"
-                                    class="flex items-center justify-between text-sm py-1 text-black font-medium">
+                                    class="flex items-center justify-between text-sm py-1 text-darkText font-medium">
                                     <span>All Products</span>
                                     <span class="text-xs text-zinc-400">120</span>
                                 </a>
                                 <a href="/shop?category=Clothing"
-                                    class="flex items-center justify-between text-sm py-1 text-zinc-500 hover:text-black">
+                                    class="flex items-center justify-between text-sm py-1 text-zinc-500 hover:text-darkText">
                                     <span>Clothing</span>
                                     <span class="text-xs text-zinc-400">85</span>
                                 </a>
                                 <a href="/shop?category=Accessories"
-                                    class="flex items-center justify-between text-sm py-1 text-zinc-500 hover:text-black">
+                                    class="flex items-center justify-between text-sm py-1 text-zinc-500 hover:text-darkText">
                                     <span>Accessories</span>
                                     <span class="text-xs text-zinc-400">35</span>
                                 </a>
                                 <a href="/shop?sortby=newest"
-                                    class="flex items-center justify-between text-sm py-1 text-zinc-500 hover:text-black">
+                                    class="flex items-center justify-between text-sm py-1 text-zinc-500 hover:text-darkText">
                                     <span>New Arrivals</span>
                                     <span class="text-xs text-zinc-400">12</span>
                                 </a>
@@ -672,7 +694,7 @@
 
                         <!-- Apply Filter Button (Mobile mainly, but good for Desktop too) -->
                         <button type="submit"
-                            class="w-full py-3 bg-black text-white text-sm font-bold rounded-xl hover:bg-zinc-800 transition-colors">
+                            class="w-full py-3 bg-darkText text-white text-sm font-bold rounded-xl hover:bg-darkText transition-colors">
                             Apply Filters
                         </button>
                     </form>
@@ -681,20 +703,26 @@
                 <!-- Product Grid (Flexible Width) -->
                 <div class="flex-1 w-full min-w-0">
 
-                    <%
-                        // Use new collection-based Flash Deals, fallback to legacy Flash Sale
-                        let flashProducts = (typeof flashDealsProducts !== 'undefined' && flashDealsProducts && flashDealsProducts.length > 0) ? flashDealsProducts :  flashSaleProducts;
-                    %>
+                    <% /* Safely define flashProducts with multiple fallbacks */ var safeFlashDeals=(typeof
+                        flashDealsProducts !=='undefined' && flashDealsProducts && flashDealsProducts.length> 0) ?
+                        flashDealsProducts : [];
 
+                        var safeFlashSale = (typeof flashSaleProducts !== 'undefined' && flashSaleProducts &&
+                        flashSaleProducts.length > 0) ? flashSaleProducts : [];
 
+                        var flashProducts = safeFlashDeals.length > 0 ? safeFlashDeals : safeFlashSale;
 
+                        /* Safely define products array */
+                        var safeProducts = (typeof products !== 'undefined' && products && products.length > 0) ?
+                        products : [];
+                        %>
 
-                        <% if (typeof flashProducts !=='undefined' && flashProducts && flashProducts.length> 0) { %>
+                        <% if (flashProducts && flashProducts.length> 0) { %>
                             <!-- Flash Sale Section (Ultra-Modern Refined) -->
                             <div class="w-full mb-8 relative">
                                 <!-- Background Decoration (Subtle Fade) -->
                                 <div
-                                    class="absolute inset-0 bg-gradient-to-r from-red-50/50 to-transparent -z-10 rounded-3xl blur-3xl opacity-50">
+                                    class="absolute inset-0 bg-gradient-to-r from-orange-50/50 to-transparent -z-10 rounded-3xl blur-3xl opacity-50">
                                 </div>
 
                                 <div class="w-full">
@@ -702,43 +730,84 @@
                                     <div class="flex flex-col md:flex-row items-end justify-between mb-8 px-12">
                                         <div class="flex flex-col gap-2">
                                             <div class="flex items-center gap-3 mb-2">
-                                                <div class="w-2 h-2 bg-[#DB4444] rounded-full animate-ping"></div>
+                                                <div class="w-2 h-2 bg-red-600 rounded-full animate-ping"></div>
                                                 <span
-                                                    class="text-[#DB4444] font-bold text-xs uppercase tracking-[0.25em]">Live
+                                                    class="text-red-600 font-bold text-xs uppercase tracking-[0.25em] drop-shadow-[0_0_8px_rgba(220,38,38,0.3)]">Live
                                                     Event</span>
                                             </div>
                                             <h2
-                                                class="text-4xl md:text-5xl font-serif font-medium text-zinc-900 leading-none">
-                                                Flash <span class="italic text-[#DB4444]">Deals</span>
+                                                class="text-4xl md:text-5xl font-serif font-medium text-[#18181B] leading-none">
+                                                Flash <span class="italic text-[#B88E2F]">Deals</span>
                                             </h2>
                                         </div>
 
                                         <!-- Center: Glassy Timer Pill -->
-                                        <div
-                                            class="mt-6 md:mt-0 bg-zinc-900 text-white rounded-full px-8 py-3 flex items-center gap-6 shadow-2xl shadow-zinc-200">
-                                            <span
-                                                class="text-xs font-medium text-zinc-400 uppercase tracking-wider hidden md:block">Ending
-                                                In</span>
-                                            <div
-                                                class="flex items-center gap-1 font-mono text-xl md:text-2xl font-bold tracking-widest text-[#F5F5F7]">
-                                                <span>08</span><span class="text-zinc-500">:</span><span>17</span><span
-                                                    class="text-zinc-500">:</span><span class="text-[#DB4444]">56</span>
+                                        <!-- Center: Glassy Timer Pill -->
+                                        <% /* Safely get end time */ var flashEndTime=(typeof owner !=='undefined' &&
+                                            owner && owner.flashSale && owner.flashSale.endTime) ?
+                                            owner.flashSale.endTime : '' ; %>
+                                            <div id="flash-timer-container" data-endtime="<%= flashEndTime %>"
+                                                class="mt-6 md:mt-0 bg-[#18181B] text-white rounded-full px-8 py-3 flex items-center gap-6 shadow-2xl shadow-zinc-200">
+                                                <span
+                                                    class="text-xs font-medium text-zinc-400 uppercase tracking-wider hidden md:block">Ending
+                                                    In</span>
+                                                <div
+                                                    class="flex items-center gap-1 font-mono text-xl md:text-2xl font-bold tracking-widest text-[#F5F5F7]">
+                                                    <span id="timer-hours">00</span><span
+                                                        class="text-zinc-500">:</span><span
+                                                        id="timer-minutes">00</span><span
+                                                        class="text-zinc-500">:</span><span id="timer-seconds"
+                                                        class="text-[#B88E2F]">00</span>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <!-- Right: Modern Rectangular Controls -->
-                                        <div class="hidden md:flex items-center gap-1">
-                                            <button id="flash-prev"
-                                                class="w-12 h-10 border border-zinc-200 hover:border-zinc-900 hover:bg-zinc-900 hover:text-white transition-all duration-300 flex items-center justify-center rounded-l-lg group">
-                                                <i
-                                                    class="ri-arrow-left-line text-lg group-hover:-translate-x-1 transition-transform"></i>
-                                            </button>
-                                            <button id="flash-next"
-                                                class="w-12 h-10 border border-l-0 border-zinc-200 hover:border-zinc-900 hover:bg-zinc-900 hover:text-white transition-all duration-300 flex items-center justify-center rounded-r-lg group">
-                                                <i
-                                                    class="ri-arrow-right-line text-lg group-hover:translate-x-1 transition-transform"></i>
-                                            </button>
-                                        </div>
+                                            <script>
+                                                (function () {
+                                                    const container = document.getElementById('flash-timer-container');
+                                                    if (!container || !container.dataset.endtime) return;
+
+                                                    const endTime = new Date(container.dataset.endtime).getTime();
+                                                    if (isNaN(endTime)) return;
+
+                                                    function updateTimer() {
+                                                        const now = new Date().getTime();
+                                                        let distance = endTime - now;
+
+                                                        if (distance < 0) {
+                                                            distance = 0;
+                                                        }
+
+                                                        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                                                        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                                                        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                                                        const hoursEl = document.getElementById('timer-hours');
+                                                        const minutesEl = document.getElementById('timer-minutes');
+                                                        const secondsEl = document.getElementById('timer-seconds');
+
+                                                        if (hoursEl) hoursEl.textContent = hours.toString().padStart(2, '0');
+                                                        if (minutesEl) minutesEl.textContent = minutes.toString().padStart(2, '0');
+                                                        if (secondsEl) secondsEl.textContent = seconds.toString().padStart(2, '0');
+                                                    }
+
+                                                    setInterval(updateTimer, 1000);
+                                                    updateTimer();
+                                                })();
+                                            </script>
+
+                                            <!-- Right: Modern Rectangular Controls -->
+                                            <div class="hidden md:flex items-center gap-1">
+                                                <button id="flash-prev"
+                                                    class="w-12 h-10 border border-zinc-200 hover:border-darkText hover:bg-darkText hover:text-white transition-all duration-300 flex items-center justify-center rounded-l-lg group">
+                                                    <i
+                                                        class="ri-arrow-left-line text-lg group-hover:-translate-x-1 transition-transform"></i>
+                                                </button>
+                                                <button id="flash-next"
+                                                    class="w-12 h-10 border border-l-0 border-zinc-200 hover:border-darkText hover:bg-darkText hover:text-white transition-all duration-300 flex items-center justify-center rounded-r-lg group">
+                                                    <i
+                                                        class="ri-arrow-right-line text-lg group-hover:translate-x-1 transition-transform"></i>
+                                                </button>
+                                            </div>
                                     </div>
 
                                     <!-- Modern Card Grid -->
@@ -762,7 +831,7 @@
                                                     <div class="p-4">
                                                         <div class="flex justify-between items-start mb-1">
                                                             <h3
-                                                                class="font-serif text-base text-zinc-900 leading-snug truncate pr-4 group-hover:text-[#DB4444] transition-colors">
+                                                                class="font-serif text-base text-darkText leading-snug truncate pr-4 group-hover:text-[#DB4444] transition-colors">
                                                                 <%= item.name %>
                                                             </h3>
                                                             <p
@@ -771,10 +840,10 @@
                                                             </p>
                                                             <div class="flex flex-col items-end">
                                                                 <% if(item.discount> 0) { %>
-                                                                    <span class="text-sm font-bold text-zinc-900">₹<%=
+                                                                    <span class="text-sm font-bold text-darkText">₹<%=
                                                                             item.price - item.discount %></span>
                                                                     <% } else { %>
-                                                                        <span class="text-sm font-bold text-zinc-900">₹
+                                                                        <span class="text-sm font-bold text-darkText">₹
                                                                             <%= item.price %>
                                                                         </span>
                                                                         <% } %>
@@ -795,13 +864,14 @@
                                                             class="flex items-center gap-2 pt-3 border-t border-zinc-50">
                                                             <a href="javascript:void(0)"
                                                                 onclick="addToCart(event, '<%= item._id %>')"
-                                                                class="flex-1 bg-zinc-900 text-white py-2 rounded-lg text-xs font-bold hover:bg-black transition-colors flex items-center justify-center gap-2 group/btn uppercase tracking-wider">
+                                                                class="flex-1 bg-darkText text-white py-2 rounded-lg text-xs font-bold hover:bg-darkText transition-colors flex items-center justify-center gap-2 group/btn uppercase tracking-wider">
                                                                 <span>Add to Cart</span>
                                                                 <i
                                                                     class="ri-shopping-bag-line group-hover/btn:-translate-y-0.5 transition-transform text-sm"></i>
                                                             </a>
-                                                            <% let isWishlisted=user.wishlist.indexOf(item._id) !==-1;
-                                                                %>
+                                                            <% let isWishlisted=(typeof user !=='undefined' && user &&
+                                                                user.wishlist) ? user.wishlist.indexOf(item._id) !==-1 :
+                                                                false; %>
                                                                 <a href="javascript:void(0)"
                                                                     onclick="addToWishlist(event, '<%= item._id %>')"
                                                                     class="w-9 h-9 flex items-center justify-center rounded-lg border border-zinc-200 text-zinc-400 hover:text-[#DB4444] hover:border-[#DB4444] hover:bg-red-50 transition-all <%= isWishlisted ? 'text-[#DB4444] border-[#DB4444]' : '' %>">
@@ -813,6 +883,22 @@
                                                 </div>
                                             </div>
                                             <% }) %>
+
+                                                <!-- 'View More' Indicator Card (Slim) -->
+                                                <div
+                                                    class="group relative min-w-[140px] md:min-w-[160px] snap-start flex items-center justify-center">
+                                                    <a href="/shop"
+                                                        class="w-full h-full bg-white rounded-2xl border border-zinc-200 hover:border-[#DB4444] hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-center gap-3 group/more p-4">
+                                                        <div
+                                                            class="w-12 h-12 rounded-full bg-zinc-100 flex items-center justify-center text-darkText group-hover/more:bg-[#DB4444] group-hover/more:text-white transition-colors duration-300">
+                                                            <i
+                                                                class="ri-arrow-right-line text-xl group-hover/more:translate-x-1 transition-transform"></i>
+                                                        </div>
+                                                        <span
+                                                            class="text-sm font-bold text-darkText group-hover/more:text-[#DB4444] transition-colors text-center leading-tight">View
+                                                            All<br>Deals</span>
+                                                    </a>
+                                                </div>
                                     </div>
                                 </div>
                             </div>
@@ -831,7 +917,7 @@
                                                 class="absolute -top-6 text-[#DB4444]/10 text-6xl font-serif italic -z-10 select-none transform -rotate-2">
                                                 Collections</div>
                                             <h3
-                                                class="font-serif text-3xl md:text-4xl text-zinc-900 text-center flex items-center gap-3 relative z-10">
+                                                class="font-serif text-3xl md:text-4xl text-darkText text-center flex items-center gap-3 relative z-10">
                                                 <span class="italic text-zinc-500 font-light">Curated</span>
                                                 <span class="font-bold tracking-tight">Collections</span>
                                             </h3>
@@ -890,7 +976,7 @@
                                         class="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none">
                                     </div>
 
-                                    <div id="promo-slider"
+                                    <div id="promo-card-slider"
                                         class="focus-hover-container flex gap-8 overflow-x-auto no-scrollbar px-12 py-10"
                                         onmouseenter="stopPromoScroll()" onmouseleave="startPromoScroll()">
 
@@ -901,7 +987,8 @@
                                                 <span
                                                     class="text-[#B88E2F] text-xs font-bold tracking-widest mb-3 block">30%
                                                     OFF</span>
-                                                <h3 class="text-4xl font-black text-zinc-900 mb-3 leading-tight">Modern
+                                                <h3 class="text-4xl font-black text-darkText mb-3 leading-tight">
+                                                    Modern
                                                     <br>Jackets
                                                 </h3>
                                                 <ul class="mb-6 space-y-1">
@@ -916,7 +1003,7 @@
                                                     </li>
                                                 </ul>
                                                 <button
-                                                    class="px-6 py-3 bg-[#B88E2F] text-white text-xs font-bold uppercase tracking-wider hover:bg-zinc-900 transition-colors rounded-full shadow-lg shadow-[#B88E2F]/20 w-fit">Buy
+                                                    class="px-6 py-3 bg-[#B88E2F] text-white text-xs font-bold uppercase tracking-wider hover:bg-darkText transition-colors rounded-full shadow-lg shadow-[#B88E2F]/20 w-fit">Buy
                                                     Now</button>
                                             </div>
                                             <div class="absolute right-0 bottom-0 flex justify-end">
@@ -934,7 +1021,8 @@
                                                 <span
                                                     class="text-[#B88E2F] text-xs font-bold tracking-widest mb-3 block">15%
                                                     OFF</span>
-                                                <h3 class="text-4xl font-black text-zinc-900 mb-3 leading-tight">Summer
+                                                <h3 class="text-4xl font-black text-darkText mb-3 leading-tight">
+                                                    Summer
                                                     <br>Dresses
                                                 </h3>
                                                 <ul class="mb-6 space-y-1">
@@ -949,7 +1037,7 @@
                                                     </li>
                                                 </ul>
                                                 <button
-                                                    class="px-6 py-3 bg-[#B88E2F] text-white text-xs font-bold uppercase tracking-wider hover:bg-zinc-900 transition-colors rounded-full shadow-lg shadow-[#B88E2F]/20 w-fit">Buy
+                                                    class="px-6 py-3 bg-[#B88E2F] text-white text-xs font-bold uppercase tracking-wider hover:bg-darkText transition-colors rounded-full shadow-lg shadow-[#B88E2F]/20 w-fit">Buy
                                                     Now</button>
                                             </div>
                                             <div class="absolute right-0 bottom-0 flex justify-end">
@@ -967,7 +1055,8 @@
                                                 <span
                                                     class="text-[#B88E2F] text-xs font-bold tracking-widest mb-3 block">NEW
                                                     IN</span>
-                                                <h3 class="text-4xl font-black text-zinc-900 mb-3 leading-tight">Urban
+                                                <h3 class="text-4xl font-black text-darkText mb-3 leading-tight">
+                                                    Urban
                                                     <br>Sneakers
                                                 </h3>
                                                 <ul class="mb-6 space-y-1">
@@ -981,7 +1070,7 @@
                                                     </li>
                                                 </ul>
                                                 <button
-                                                    class="px-6 py-3 bg-[#B88E2F] text-white text-xs font-bold uppercase tracking-wider hover:bg-zinc-900 transition-colors rounded-full shadow-lg shadow-[#B88E2F]/20 w-fit">Buy
+                                                    class="px-6 py-3 bg-[#B88E2F] text-white text-xs font-bold uppercase tracking-wider hover:bg-darkText transition-colors rounded-full shadow-lg shadow-[#B88E2F]/20 w-fit">Buy
                                                     Now</button>
                                             </div>
                                             <div class="absolute right-0 bottom-0 flex justify-end">
@@ -998,7 +1087,8 @@
                                             <div class="z-10 relative">
                                                 <span
                                                     class="text-[#B88E2F] text-xs font-bold tracking-widest mb-3 block">EXCLUSIVE</span>
-                                                <h3 class="text-4xl font-black text-zinc-900 mb-3 leading-tight">Luxury
+                                                <h3 class="text-4xl font-black text-darkText mb-3 leading-tight">
+                                                    Luxury
                                                     <br>Watches
                                                 </h3>
                                                 <ul class="mb-6 space-y-1">
@@ -1013,7 +1103,7 @@
                                                     </li>
                                                 </ul>
                                                 <button
-                                                    class="px-6 py-3 bg-[#B88E2F] text-white text-xs font-bold uppercase tracking-wider hover:bg-zinc-900 transition-colors rounded-full shadow-lg shadow-[#B88E2F]/20 w-fit">Buy
+                                                    class="px-6 py-3 bg-[#B88E2F] text-white text-xs font-bold uppercase tracking-wider hover:bg-darkText transition-colors rounded-full shadow-lg shadow-[#B88E2F]/20 w-fit">Buy
                                                     Now</button>
                                             </div>
                                             <div class="absolute right-0 bottom-0 flex justify-end">
@@ -1033,7 +1123,8 @@
                                             <div class="z-10 relative">
                                                 <span
                                                     class="text-[#B88E2F] text-xs font-bold tracking-widest mb-3 block">TRAVEL</span>
-                                                <h3 class="text-4xl font-black text-zinc-900 mb-3 leading-tight">Leather
+                                                <h3 class="text-4xl font-black text-darkText mb-3 leading-tight">
+                                                    Leather
                                                     <br>Bags
                                                 </h3>
                                                 <ul class="mb-6 space-y-1">
@@ -1048,7 +1139,7 @@
                                                     </li>
                                                 </ul>
                                                 <button
-                                                    class="px-6 py-3 bg-[#B88E2F] text-white text-xs font-bold uppercase tracking-wider hover:bg-zinc-900 transition-colors rounded-full shadow-lg shadow-[#B88E2F]/20 w-fit">Buy
+                                                    class="px-6 py-3 bg-[#B88E2F] text-white text-xs font-bold uppercase tracking-wider hover:bg-darkText transition-colors rounded-full shadow-lg shadow-[#B88E2F]/20 w-fit">Buy
                                                     Now</button>
                                             </div>
                                             <div class="absolute right-0 bottom-0 flex justify-end">
@@ -1068,7 +1159,7 @@
                                             <div class="z-10 relative">
                                                 <span
                                                     class="text-[#B88E2F] text-xs font-bold tracking-widest mb-3 block">SUMMER</span>
-                                                <h3 class="text-4xl font-black text-zinc-900 mb-3 leading-tight">
+                                                <h3 class="text-4xl font-black text-darkText mb-3 leading-tight">
                                                     Designer
                                                     <br>Eyewear
                                                 </h3>
@@ -1083,7 +1174,7 @@
                                                     </li>
                                                 </ul>
                                                 <button
-                                                    class="px-6 py-3 bg-[#B88E2F] text-white text-xs font-bold uppercase tracking-wider hover:bg-zinc-900 transition-colors rounded-full shadow-lg shadow-[#B88E2F]/20 w-fit">Buy
+                                                    class="px-6 py-3 bg-[#B88E2F] text-white text-xs font-bold uppercase tracking-wider hover:bg-darkText transition-colors rounded-full shadow-lg shadow-[#B88E2F]/20 w-fit">Buy
                                                     Now</button>
                                             </div>
                                             <div class="absolute right-0 bottom-0 flex justify-end">
@@ -1124,10 +1215,10 @@
                                 <!-- Todays For You Section -->
                                 <div class="w-full mb-6">
                                     <div class="flex flex-col items-center justify-center mb-8 gap-6">
-                                        <h2 class="text-3xl font-bold text-zinc-900 text-center">Todays For You!</h2>
+                                        <h2 class="text-3xl font-bold text-darkText text-center">Todays For You!</h2>
                                         <div class="flex flex-wrap gap-2 justify-center">
                                             <button
-                                                class="px-4 py-2 bg-zinc-900 text-white text-xs font-semibold rounded-lg shadow-md hover:bg-black transition-colors">Best
+                                                class="px-4 py-2 bg-darkText text-white text-xs font-semibold rounded-lg shadow-md hover:bg-darkText transition-colors">Best
                                                 Seller</button>
                                             <button
                                                 class="px-4 py-2 bg-white border border-zinc-200 text-zinc-600 text-xs font-semibold rounded-lg hover:bg-zinc-50 transition-colors">Keep
@@ -1144,59 +1235,80 @@
                                         </div>
                                     </div>
 
-                                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-                                        <% (todaysForYouProducts && todaysForYouProducts.length> 0 ?
-                                            todaysForYouProducts : products.filter(p=> !p.flashSale).slice(0,
-                                            4)).forEach(function(item) { %>
-                                            <div
-                                                class="bg-white rounded-xl overflow-hidden shadow-sm border border-zinc-100 group hover:shadow-lg transition-shadow duration-300">
+                                    <div class="flex overflow-x-auto gap-6 scroll-smooth snap-x scrollbar-hide pb-8">
+                                        <% var todaysItems=(typeof todaysForYouProducts !=='undefined' &&
+                                            todaysForYouProducts && todaysForYouProducts.length> 0)
+                                            ? todaysForYouProducts
+                                            : safeProducts.filter(function(p) { return !p.flashSale; }).slice(0, 4);
+                                            todaysItems.forEach(function(item) {
+                                            %>
+                                            <div class="group relative min-w-[260px] md:min-w-[280px] snap-start">
+                                                <!-- Card Container -->
                                                 <div
-                                                    class="h-48 w-full bg-zinc-50 relative flex items-center justify-center overflow-hidden">
-                                                    <img src="/images/uploads/<%= item.image %>"
-                                                        class="w-full h-full object-contain p-4 mix-blend-multiply group-hover:scale-110 transition-transform duration-500">
-                                                    <% let isWishlisted=user.wishlist.indexOf(item._id) !==-1; %>
-                                                        <a href="javascript:void(0)"
-                                                            onclick="addToWishlist(event, '<%= item._id %>')"
-                                                            class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center <%= isWishlisted ? 'text-red-500' : 'text-zinc-300 hover:text-red-500' %> shadow-sm transition-colors z-10">
-                                                            <i
-                                                                class="<%= isWishlisted ? 'ri-heart-fill' : 'ri-heart-line' %>"></i>
-                                                        </a>
-                                                </div>
-                                                <div class="p-4">
-                                                    <h3 class="font-bold text-zinc-900 text-sm mb-1 truncate">
-                                                        <%= item.name %>
-                                                    </h3>
-                                                    <p
-                                                        class="text-[10px] text-zinc-500 font-medium uppercase tracking-wide mb-1">
-                                                        <%= item.brand || 'Unknown' %>
-                                                    </p>
-                                                    <div class="flex items-center gap-1 text-yellow-500 text-xs mb-2">
-                                                        <i class="ri-star-fill"></i>
-                                                        <i class="ri-star-fill"></i>
-                                                        <i class="ri-star-fill"></i>
-                                                        <i class="ri-star-fill"></i>
-                                                        <i class="ri-star-half-fill"></i>
-                                                        <span class="text-zinc-400 text-[10px] ml-1">(4.8)</span>
+                                                    class="bg-white rounded-2xl overflow-hidden shadow-[0_2px_10px_rgba(0,0,0,0.04)] group-hover:shadow-[0_15px_30px_rgba(0,0,0,0.08)] transition-all duration-500 border border-zinc-100/50">
+
+                                                    <!-- Image -->
+                                                    <div
+                                                        class="h-64 bg-[#F8F9FA] relative flex items-center justify-center overflow-hidden">
+                                                        <img src="/images/uploads/<%= item.image %>"
+                                                            class="w-4/5 h-4/5 object-contain mix-blend-multiply group-hover:scale-110 transition-transform duration-700 ease-[cubic-bezier(0.25,0.8,0.25,1)]">
+
+                                                        <% let isWishlisted=(typeof user !=='undefined' && user &&
+                                                            user.wishlist) ? user.wishlist.indexOf(item._id) !==-1 :
+                                                            false; %>
+                                                            <a href="javascript:void(0)"
+                                                                onclick="addToWishlist(event, '<%= item._id %>')"
+                                                                class="absolute top-3 right-3 w-9 h-9 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center <%= isWishlisted ? 'text-[#DB4444]' : 'text-zinc-400 hover:text-[#DB4444]' %> shadow-sm transition-all z-10 hover:scale-110">
+                                                                <i
+                                                                    class="<%= isWishlisted ? 'ri-heart-fill' : 'ri-heart-line' %> text-lg"></i>
+                                                            </a>
                                                     </div>
-                                                    <div class="flex items-center justify-between">
-                                                        <div class="flex flex-col">
-                                                            <% if(item.discount> 0) { %>
-                                                                <span class="text-[10px] text-zinc-400 line-through">₹
-                                                                    <%= item.price %>
-                                                                </span>
-                                                                <span class="font-bold text-zinc-900">₹<%= item.price -
-                                                                        item.discount %></span>
-                                                                <% } else { %>
-                                                                    <span class="font-bold text-zinc-900">₹<%=
-                                                                            item.price %>
-                                                                    </span>
-                                                                    <% } %>
+
+                                                    <!-- Content -->
+                                                    <div class="p-4">
+                                                        <div class="flex justify-between items-start mb-1">
+                                                            <h3
+                                                                class="font-serif text-base text-darkText leading-snug truncate pr-4 group-hover:text-[#DB4444] transition-colors">
+                                                                <%= item.name %>
+                                                            </h3>
+                                                            <p
+                                                                class="text-[10px] text-zinc-500 font-medium uppercase tracking-wide">
+                                                                <%= item.brand || 'Unknown' %>
+                                                            </p>
                                                         </div>
-                                                        <a href="javascript:void(0)"
-                                                            onclick="addToCart(event, '<%= item._id %>')"
-                                                            class="w-8 h-8 rounded-full border border-zinc-200 flex items-center justify-center hover:bg-zinc-900 hover:text-white hover:border-zinc-900 transition-colors">
-                                                            <i class="ri-add-line"></i>
-                                                        </a>
+
+                                                        <!-- Rating -->
+                                                        <div
+                                                            class="flex items-center gap-1 text-yellow-500 text-[10px] mb-3">
+                                                            <i class="ri-star-fill"></i><i class="ri-star-fill"></i><i
+                                                                class="ri-star-fill"></i><i class="ri-star-fill"></i><i
+                                                                class="ri-star-fill"></i>
+                                                            <span class="text-zinc-400 font-medium ml-1">(4.8)</span>
+                                                        </div>
+
+                                                        <!-- Price and Action -->
+                                                        <div
+                                                            class="flex items-center justify-between pt-3 border-t border-zinc-50">
+                                                            <div class="flex flex-col">
+                                                                <% if(item.discount> 0) { %>
+                                                                    <span
+                                                                        class="text-[10px] text-zinc-400 line-through">₹
+                                                                        <%= item.price %>
+                                                                    </span>
+                                                                    <span class="text-sm font-bold text-darkText">₹<%=
+                                                                            item.price - item.discount %></span>
+                                                                    <% } else { %>
+                                                                        <span class="text-sm font-bold text-darkText">₹
+                                                                            <%= item.price %>
+                                                                        </span>
+                                                                        <% } %>
+                                                            </div>
+                                                            <a href="javascript:void(0)"
+                                                                onclick="addToCart(event, '<%= item._id %>')"
+                                                                class="w-9 h-9 rounded-lg border border-zinc-200 flex items-center justify-center hover:bg-darkText hover:text-white hover:border-darkText transition-all">
+                                                                <i class="ri-add-line text-lg"></i>
+                                                            </a>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1206,14 +1318,14 @@
 
                                 <!-- Scrolling Gallery Section (Dynamic) -->
                                 <% if (typeof owner !=='undefined' ) { %>
-                                    <div
+                                    <div id="new-arrivals"
                                         class="w-full mb-6 py-6 bg-[#FFFBF7] rounded-2xl -mx-4 px-4 sm:mx-0 sm:px-8 border border-[#FBEAD2]/20 shadow-sm relative overflow-hidden">
                                         <!-- Background Decoration -->
                                         <div
                                             class="absolute top-0 right-0 w-64 h-64 bg-[#FBEAD2] rounded-full blur-[100px] opacity-40 -z-10">
                                         </div>
                                         <div
-                                            class="absolute bottom-0 left-0 w-64 h-64 bg-green-100 rounded-full blur-[100px] opacity-30 -z-10">
+                                            class="absolute bottom-0 left-0 w-64 h-64 bg-zinc-100 rounded-full blur-[100px] opacity-30 -z-10">
                                         </div>
 
                                         <div
@@ -1223,15 +1335,15 @@
                                             <div
                                                 class="hidden md:flex flex-1 items-center justify-end gap-3 opacity-40">
                                                 <div
-                                                    class="h-[1px] w-full bg-gradient-to-r from-transparent to-[#1B3C29]">
+                                                    class="h-[1px] w-full bg-gradient-to-r from-transparent to-[#18181B]">
                                                 </div>
-                                                <i class="ri-vip-diamond-line text-[#1B3C29] text-xl"></i>
+                                                <i class="ri-vip-diamond-line text-[#18181B] text-xl"></i>
                                             </div>
 
                                             <div
                                                 class="flex flex-col items-center justify-center text-center shrink-0 max-w-lg">
                                                 <h2
-                                                    class="text-3xl md:text-4xl font-serif text-[#1B3C29] tracking-tight mb-4">
+                                                    class="text-3xl md:text-4xl font-serif text-[#18181B] tracking-tight mb-4">
                                                     Dive
                                                     Into Elegant <br /> <span class="italic">Fashion Collections</span>
                                                 </h2>
@@ -1239,15 +1351,15 @@
                                                     Explore our curated wardrobe essentials, designed to elevate your
                                                     personal style with elegance and comfort.
                                                 </p>
-                                                <div class="w-16 h-1 bg-[#1B3C29] rounded-full opacity-20"></div>
+                                                <div class="w-16 h-1 bg-[#18181B] rounded-full opacity-20"></div>
                                             </div>
 
                                             <!-- Right Decorative Element -->
                                             <div
                                                 class="hidden md:flex flex-1 items-center justify-start gap-3 opacity-40">
-                                                <i class="ri-vip-diamond-line text-[#1B3C29] text-xl"></i>
+                                                <i class="ri-vip-diamond-line text-[#18181B] text-xl"></i>
                                                 <div
-                                                    class="h-[1px] w-full bg-gradient-to-l from-transparent to-[#1B3C29]">
+                                                    class="h-[1px] w-full bg-gradient-to-l from-transparent to-[#18181B]">
                                                 </div>
                                             </div>
 
@@ -1265,25 +1377,29 @@
                                             <!-- Scrolling Track -->
                                             <div class="flex gap-6 animate-scroll w-max hover:pause-scroll">
                                                 <!-- Logic: Normalized Gallery Objects -->
-                                                <% let galleryItems=[]; if (typeof owner !=='undefined' && owner &&
+                                                <% var galleryItems=[]; if (typeof owner !=='undefined' && owner &&
                                                     owner.galleryImages && owner.galleryImages.length> 0) {
-                                                    // Transform Owner Images into Objects with Mock Data (until DB update)
-                                                    // Transform Owner Images into Objects with Mock Data (until DB update)
-                                                    galleryItems = owner.galleryImages.map(img => ({
+                                                    // Transform Owner Images into Objects with Mock Data
+                                                    galleryItems = owner.galleryImages.map(function(img) {
+                                                    return {
                                                     image: img,
                                                     name: "Specialty Dish",
                                                     rating: 5,
                                                     feature: "Chef's Choice"
-                                                    }));
-                                                    } else if (typeof products !== 'undefined' && products &&
-                                                    products.length > 0) {
+                                                    };
+                                                    });
+                                                    } else if (safeProducts.length > 0) {
                                                     // Transform Product Placeholders
-                                                    galleryItems = products.slice(0, 5).map(p => ({
+                                                    galleryItems = safeProducts.slice(0, 5).map(function(p) {
+                                                    return {
+                                                    _id: p._id,
                                                     image: p.image,
                                                     name: p.name,
+                                                    brand: p.brand,
                                                     rating: 4.8,
                                                     feature: "Best Seller"
-                                                    }));
+                                                    };
+                                                    });
                                                     }
                                                     %>
 
@@ -1318,7 +1434,7 @@
                                                                                 </span>
                                                                     </div>
                                                                     <h3
-                                                                        class="font-serif font-bold text-zinc-800 text-sm leading-tight mb-2 truncate group-hover:text-[#1B3C29] transition-colors">
+                                                                        class="font-serif font-bold text-darkText text-sm leading-tight mb-2 truncate group-hover:text-[#1B3C29] transition-colors">
                                                                         <%= item.name %>
                                                                     </h3>
                                                                     <p
@@ -1330,10 +1446,11 @@
                                                                             class="text-[10px] font-bold tracking-wider uppercase text-green-700 bg-green-50 inline-block px-2 py-1 rounded-md">
                                                                             <%= item.feature %>
                                                                         </p>
-                                                                        <div
-                                                                            class="w-6 h-6 rounded-full bg-zinc-100 flex items-center justify-center text-zinc-400 group-hover:bg-[#1B3C29] group-hover:text-white transition-all">
+                                                                        <a href="javascript:void(0)"
+                                                                            onclick="addToCart(event, '<%= item._id %>')"
+                                                                            class="w-6 h-6 rounded-full bg-zinc-100 flex items-center justify-center text-zinc-400 group-hover:bg-[#1B3C29] group-hover:text-white transition-all z-30 cursor-pointer">
                                                                             <i class="ri-add-line"></i>
-                                                                        </div>
+                                                                        </a>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -1373,7 +1490,7 @@
                                                     class="promo-slide absolute inset-0 w-full h-full flex flex-col md:flex-row items-center justify-center p-8 md:p-20 opacity-100 transition-opacity duration-700 pointer-events-auto">
                                                     <div class="md:w-1/2 space-y-6 z-10 text-center md:text-left">
                                                         <h2
-                                                            class="text-4xl md:text-6xl font-black text-zinc-900 tracking-tight leading-[1.1]">
+                                                            class="text-4xl md:text-6xl font-black text-darkText tracking-tight leading-[1.1]">
                                                             FASHION <br> FOR MEN
                                                         </h2>
                                                         <p
@@ -1385,7 +1502,7 @@
                                                             were expecting you.
                                                         </p>
                                                         <button
-                                                            class="px-8 py-3 bg-transparent border-2 border-zinc-900 text-zinc-900 text-sm font-bold tracking-widest uppercase hover:bg-zinc-900 hover:text-white transition-all duration-300">
+                                                            class="px-8 py-3 bg-transparent border-2 border-darkText text-darkText text-sm font-bold tracking-widest uppercase hover:bg-darkText hover:text-white transition-all duration-300">
                                                             Shop Now
                                                         </button>
                                                     </div>
@@ -1410,7 +1527,7 @@
                                                     class="promo-slide absolute inset-0 w-full h-full flex flex-col md:flex-row items-center justify-center p-8 md:p-20 opacity-0 transition-opacity duration-700 pointer-events-none">
                                                     <div class="md:w-1/2 space-y-6 z-10 text-center md:text-left">
                                                         <h2
-                                                            class="text-4xl md:text-6xl font-black text-zinc-900 tracking-tight leading-[1.1]">
+                                                            class="text-4xl md:text-6xl font-black text-darkText tracking-tight leading-[1.1]">
                                                             SUMMER <br> ESSENTIALS
                                                         </h2>
                                                         <p
@@ -1419,7 +1536,7 @@
                                                             comfort and style. Elevate your wardrobe today.
                                                         </p>
                                                         <button
-                                                            class="px-8 py-3 bg-transparent border-2 border-zinc-900 text-zinc-900 text-sm font-bold tracking-widest uppercase hover:bg-zinc-900 hover:text-white transition-all duration-300">
+                                                            class="px-8 py-3 bg-transparent border-2 border-darkText text-darkText text-sm font-bold tracking-widest uppercase hover:bg-darkText hover:text-white transition-all duration-300">
                                                             Explore
                                                         </button>
                                                     </div>
@@ -1441,7 +1558,7 @@
                                                     class="promo-slide absolute inset-0 w-full h-full flex flex-col md:flex-row items-center justify-center p-8 md:p-20 opacity-0 transition-opacity duration-700 pointer-events-none">
                                                     <div class="md:w-1/2 space-y-6 z-10 text-center md:text-left">
                                                         <h2
-                                                            class="text-4xl md:text-6xl font-black text-zinc-900 tracking-tight leading-[1.1]">
+                                                            class="text-4xl md:text-6xl font-black text-darkText tracking-tight leading-[1.1]">
                                                             WINTER <br> COLLECTION
                                                         </h2>
                                                         <p
@@ -1451,7 +1568,7 @@
                                                             apparel. Crafted for comfort.
                                                         </p>
                                                         <button
-                                                            class="px-8 py-3 bg-transparent border-2 border-zinc-900 text-zinc-900 text-sm font-bold tracking-widest uppercase hover:bg-zinc-900 hover:text-white transition-all duration-300">
+                                                            class="px-8 py-3 bg-transparent border-2 border-darkText text-darkText text-sm font-bold tracking-widest uppercase hover:bg-darkText hover:text-white transition-all duration-300">
                                                             Shop Winter
                                                         </button>
                                                     </div>
@@ -1472,18 +1589,18 @@
 
                                             <!-- Controls -->
                                             <button id="promo-prev"
-                                                class="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center bg-white/80 backdrop-blur-sm border border-zinc-200 text-zinc-900 hover:bg-white hover:shadow-md transition-all z-20 rounded-full">
+                                                class="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center bg-white/80 backdrop-blur-sm border border-zinc-200 text-darkText hover:bg-white hover:shadow-md transition-all z-20 rounded-full">
                                                 <i class="ri-arrow-left-line text-xl"></i>
                                             </button>
                                             <button id="promo-next"
-                                                class="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center bg-white/80 backdrop-blur-sm border border-zinc-200 text-zinc-900 hover:bg-white hover:shadow-md transition-all z-20 rounded-full">
+                                                class="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center bg-white/80 backdrop-blur-sm border border-zinc-200 text-darkText hover:bg-white hover:shadow-md transition-all z-20 rounded-full">
                                                 <i class="ri-arrow-right-line text-xl"></i>
                                             </button>
 
                                             <!-- Dots -->
                                             <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-20">
                                                 <button
-                                                    class="promo-dot w-3 h-3 bg-zinc-900 rounded-full transition-all hover:scale-110"></button>
+                                                    class="promo-dot w-3 h-3 bg-darkText rounded-full transition-all hover:scale-110"></button>
                                                 <button
                                                     class="promo-dot w-3 h-3 bg-zinc-300 rounded-full transition-all hover:scale-110"></button>
                                                 <button
@@ -1493,65 +1610,90 @@
 
                                         <!-- Similar Items You Might Like Section -->
                                         <div class="w-full mb-6 relative z-10">
-                                            <h2 class="text-xl font-bold text-zinc-900 mb-4">Similar Items You Might
+                                            <h2 class="text-xl font-bold text-darkText mb-4">Similar Items You Might
                                                 Like
                                             </h2>
-                                            <div class="flex overflow-x-auto gap-4 snap-x scrollbar-hide pb-6">
-                                                <% (similarItemsProducts && similarItemsProducts.length> 0 ?
-                                                    similarItemsProducts : products.filter(p=>
-                                                    !p.flashSale)).forEach(function(item, index) { %>
+                                            <div class="flex overflow-x-auto gap-6 snap-x scrollbar-hide pb-8">
+                                                <% var similarItems=(typeof similarItemsProducts !=='undefined' &&
+                                                    similarItemsProducts && similarItemsProducts.length> 0)
+                                                    ? similarItemsProducts
+                                                    : safeProducts.filter(function(p) { return !p.flashSale; });
+                                                    similarItems.forEach(function(item, index) {
+                                                    %>
                                                     <div
-                                                        class="bg-white rounded-xl overflow-hidden shadow-sm border border-zinc-100 group hover:shadow-lg transition-shadow duration-300 min-w-[200px] md:min-w-[240px] snap-start">
+                                                        class="group relative min-w-[260px] md:min-w-[280px] snap-start">
+                                                        <!-- Card Container -->
                                                         <div
-                                                            class="h-40 w-full bg-zinc-50 relative flex items-center justify-center overflow-hidden">
-                                                            <img src="/images/uploads/<%= item.image %>"
-                                                                class="w-full h-full object-contain p-4 mix-blend-multiply group-hover:scale-110 transition-transform duration-500">
-                                                            <% let isWishlisted=user.wishlist.indexOf(item._id) !==-1;
-                                                                %>
-                                                                <a href="javascript:void(0)"
-                                                                    onclick="addToWishlist(event, '<%= item._id %>')"
-                                                                    class="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center <%= isWishlisted ? 'text-red-500' : 'text-zinc-300 hover:text-red-500' %> shadow-sm transition-colors z-10">
-                                                                    <i
-                                                                        class="<%= isWishlisted ? 'ri-heart-fill' : 'ri-heart-line' %>"></i>
-                                                                </a>
-                                                        </div>
-                                                        <div class="p-3">
-                                                            <h3 class="font-bold text-zinc-900 text-sm mb-1 truncate">
-                                                                <%= item.name %>
-                                                            </h3>
-                                                            <p
-                                                                class="text-[10px] text-zinc-500 font-medium uppercase tracking-wide mb-1">
-                                                                <%= item.brand || 'Unknown' %>
-                                                            </p>
+                                                            class="bg-white rounded-2xl overflow-hidden shadow-[0_2px_10px_rgba(0,0,0,0.04)] group-hover:shadow-[0_15px_30px_rgba(0,0,0,0.08)] transition-all duration-500 border border-zinc-100/50">
+
+                                                            <!-- Image -->
                                                             <div
-                                                                class="flex items-center gap-1 text-yellow-500 text-xs mb-2">
-                                                                <i class="ri-star-fill"></i>
-                                                                <i class="ri-star-fill"></i>
-                                                                <i class="ri-star-fill"></i>
-                                                                <i class="ri-star-fill"></i>
-                                                                <i class="ri-star-half-fill"></i>
-                                                                <span
-                                                                    class="text-zinc-400 text-[10px] ml-1">(4.8)</span>
+                                                                class="h-64 bg-[#F8F9FA] relative flex items-center justify-center overflow-hidden">
+                                                                <img src="/images/uploads/<%= item.image %>"
+                                                                    class="w-4/5 h-4/5 object-contain mix-blend-multiply group-hover:scale-110 transition-transform duration-700 ease-[cubic-bezier(0.25,0.8,0.25,1)]">
+
+                                                                <% let isWishlisted=(typeof user !=='undefined' && user
+                                                                    && user.wishlist) ? user.wishlist.indexOf(item._id)
+                                                                    !==-1 : false; %>
+                                                                    <a href="javascript:void(0)"
+                                                                        onclick="addToWishlist(event, '<%= item._id %>')"
+                                                                        class="absolute top-3 right-3 w-9 h-9 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center <%= isWishlisted ? 'text-[#DB4444]' : 'text-zinc-400 hover:text-[#DB4444]' %> shadow-sm transition-all z-10 hover:scale-110">
+                                                                        <i
+                                                                            class="<%= isWishlisted ? 'ri-heart-fill' : 'ri-heart-line' %> text-lg"></i>
+                                                                    </a>
                                                             </div>
-                                                            <div class="flex items-center justify-between">
-                                                                <div class="flex flex-col">
-                                                                    <% if(item.discount> 0) { %>
-                                                                        <span
-                                                                            class="text-[10px] text-zinc-400 line-through">₹
-                                                                            <%= item.price %>
-                                                                        </span>
-                                                                        <span class="font-bold text-zinc-900">₹<%=
-                                                                                item.price - item.discount %></span>
-                                                                        <% } else { %>
-                                                                            <span class="font-bold text-zinc-900">₹<%=
-                                                                                    item.price %></span>
-                                                                            <% } %>
+
+                                                            <!-- Content -->
+                                                            <div class="p-4">
+                                                                <div class="flex justify-between items-start mb-1">
+                                                                    <h3
+                                                                        class="font-serif text-base text-darkText leading-snug truncate pr-4 group-hover:text-[#DB4444] transition-colors">
+                                                                        <%= item.name %>
+                                                                    </h3>
+                                                                    <p
+                                                                        class="text-[10px] text-zinc-500 font-medium uppercase tracking-wide">
+                                                                        <%= item.brand || 'Unknown' %>
+                                                                    </p>
                                                                 </div>
-                                                                <a href="javascript:void(0)"
-                                                                    onclick="addToCart(event, '<%= item._id %>')"
-                                                                    class="w-8 h-8 rounded-full border border-zinc-200 flex items-center justify-center hover:bg-zinc-900 hover:text-white hover:border-zinc-900 transition-colors">
-                                                                    <i class="ri-add-line"></i>
-                                                                </a>
+
+                                                                <!-- Rating -->
+                                                                <div
+                                                                    class="flex items-center gap-1 text-yellow-500 text-[10px] mb-3">
+                                                                    <i class="ri-star-fill"></i><i
+                                                                        class="ri-star-fill"></i><i
+                                                                        class="ri-star-fill"></i><i
+                                                                        class="ri-star-fill"></i><i
+                                                                        class="ri-star-fill"></i>
+                                                                    <span
+                                                                        class="text-zinc-400 font-medium ml-1">(4.8)</span>
+                                                                </div>
+
+                                                                <!-- Price and Action -->
+                                                                <div
+                                                                    class="flex items-center justify-between pt-3 border-t border-zinc-50">
+                                                                    <div class="flex flex-col">
+                                                                        <% if(item.discount> 0) { %>
+                                                                            <span
+                                                                                class="text-[10px] text-zinc-400 line-through">₹
+                                                                                <%= item.price %>
+                                                                            </span>
+                                                                            <span
+                                                                                class="text-sm font-bold text-darkText">₹
+                                                                                <%= item.price - item.discount %>
+                                                                            </span>
+                                                                            <% } else { %>
+                                                                                <span
+                                                                                    class="text-sm font-bold text-darkText">₹
+                                                                                    <%= item.price %>
+                                                                                </span>
+                                                                                <% } %>
+                                                                    </div>
+                                                                    <a href="javascript:void(0)"
+                                                                        onclick="addToCart(event, '<%= item._id %>')"
+                                                                        class="w-9 h-9 rounded-lg border border-zinc-200 flex items-center justify-center hover:bg-darkText hover:text-white hover:border-darkText transition-all">
+                                                                        <i class="ri-add-line text-lg"></i>
+                                                                    </a>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1612,7 +1754,7 @@
                                                             <i class="ri-truck-line"></i>
                                                         </div>
                                                         <div>
-                                                            <h4 class="font-bold text-zinc-900 text-sm">Free Delivery
+                                                            <h4 class="font-bold text-darkText text-sm">Free Delivery
                                                             </h4>
                                                             <p class="text-zinc-500 text-[10px] mt-0.5 font-medium">Free
                                                                 shipping on all order</p>
@@ -1626,7 +1768,7 @@
                                                             <i class="ri-exchange-dollar-line"></i>
                                                         </div>
                                                         <div>
-                                                            <h4 class="font-bold text-zinc-900 text-sm">Money Return
+                                                            <h4 class="font-bold text-darkText text-sm">Money Return
                                                             </h4>
                                                             <p class="text-zinc-500 text-[10px] mt-0.5 font-medium">Back
                                                                 guarantee under 7 days</p>
@@ -1640,7 +1782,7 @@
                                                             <i class="ri-customer-service-2-line"></i>
                                                         </div>
                                                         <div>
-                                                            <h4 class="font-bold text-zinc-900 text-sm">Online Support
+                                                            <h4 class="font-bold text-darkText text-sm">Online Support
                                                                 24/7
                                                             </h4>
                                                             <p class="text-zinc-500 text-[10px] mt-0.5 font-medium">
@@ -1656,7 +1798,7 @@
                                                             <i class="ri-shield-check-line"></i>
                                                         </div>
                                                         <div>
-                                                            <h4 class="font-bold text-zinc-900 text-sm">Reliable</h4>
+                                                            <h4 class="font-bold text-darkText text-sm">Reliable</h4>
                                                             <p class="text-zinc-500 text-[10px] mt-0.5 font-medium">
                                                                 Trusted
                                                                 by 1000+ brands</p>
@@ -1670,7 +1812,7 @@
                                                             <i class="ri-secure-payment-line"></i>
                                                         </div>
                                                         <div>
-                                                            <h4 class="font-bold text-zinc-900 text-sm">Secure Payment
+                                                            <h4 class="font-bold text-darkText text-sm">Secure Payment
                                                             </h4>
                                                             <p class="text-zinc-500 text-[10px] mt-0.5 font-medium">100%
                                                                 secure payment</p>
@@ -1685,7 +1827,7 @@
                                                             <i class="ri-truck-line"></i>
                                                         </div>
                                                         <div>
-                                                            <h4 class="font-bold text-zinc-900 text-sm">Free Delivery
+                                                            <h4 class="font-bold text-darkText text-sm">Free Delivery
                                                             </h4>
                                                             <p class="text-zinc-500 text-[10px] mt-0.5 font-medium">Free
                                                                 shipping on all order</p>
@@ -1699,7 +1841,7 @@
                                                             <i class="ri-exchange-dollar-line"></i>
                                                         </div>
                                                         <div>
-                                                            <h4 class="font-bold text-zinc-900 text-sm">Money Return
+                                                            <h4 class="font-bold text-darkText text-sm">Money Return
                                                             </h4>
                                                             <p class="text-zinc-500 text-[10px] mt-0.5 font-medium">Back
                                                                 guarantee under 7 days</p>
@@ -1713,7 +1855,7 @@
                                                             <i class="ri-customer-service-2-line"></i>
                                                         </div>
                                                         <div>
-                                                            <h4 class="font-bold text-zinc-900 text-sm">Online Support
+                                                            <h4 class="font-bold text-darkText text-sm">Online Support
                                                                 24/7
                                                             </h4>
                                                             <p class="text-zinc-500 text-[10px] mt-0.5 font-medium">
@@ -1729,7 +1871,7 @@
                                                             <i class="ri-shield-check-line"></i>
                                                         </div>
                                                         <div>
-                                                            <h4 class="font-bold text-zinc-900 text-sm">Reliable</h4>
+                                                            <h4 class="font-bold text-darkText text-sm">Reliable</h4>
                                                             <p class="text-zinc-500 text-[10px] mt-0.5 font-medium">
                                                                 Trusted
                                                                 by 1000+ brands</p>
@@ -1743,7 +1885,7 @@
                                                             <i class="ri-secure-payment-line"></i>
                                                         </div>
                                                         <div>
-                                                            <h4 class="font-bold text-zinc-900 text-sm">Secure Payment
+                                                            <h4 class="font-bold text-darkText text-sm">Secure Payment
                                                             </h4>
                                                             <p class="text-zinc-500 text-[10px] mt-0.5 font-medium">100%
                                                                 secure payment</p>
@@ -1760,7 +1902,7 @@
                 <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center">
                     <!-- Left: Content -->
                     <div class="w-full md:w-1/2 py-20 px-5 md:pr-16 text-left">
-                        <h2 class="text-4xl md:text-6xl font-bold text-zinc-900 mb-6 tracking-tight leading-none">
+                        <h2 class="text-4xl md:text-6xl font-bold text-darkText mb-6 tracking-tight leading-none">
                             Redefining <span class="italic font-serif font-light text-zinc-400">Fashion</span> for
                             the
                             <br> Modern Soul
@@ -1783,7 +1925,7 @@
                                     class="w-12 h-12 rounded-full border-[3px] border-white object-cover shadow-sm"
                                     alt="User">
                                 <div
-                                    class="w-12 h-12 rounded-full border-[3px] border-white bg-zinc-900 flex items-center justify-center text-xs font-bold text-white shadow-sm">
+                                    class="w-12 h-12 rounded-full border-[3px] border-white bg-darkText flex items-center justify-center text-xs font-bold text-white shadow-sm">
                                     +2k</div>
                             </div>
                             <div class="flex flex-col items-start border-l border-zinc-200 pl-6">
@@ -1799,7 +1941,7 @@
                         </div>
 
                         <a href="/about"
-                            class="group inline-flex items-center gap-2 px-8 py-4 bg-zinc-900 text-white rounded-full font-bold text-sm hover:bg-black transition-all shadow-xl shadow-zinc-200">
+                            class="group inline-flex items-center gap-2 px-8 py-4 bg-darkText text-white rounded-full font-bold text-sm hover:bg-darkText transition-all shadow-xl shadow-zinc-200">
                             Read More About Us
                             <i class="ri-arrow-right-line group-hover:translate-x-1 transition-transform"></i>
                         </a>
@@ -1901,11 +2043,11 @@
                             slide.classList.remove('opacity-0', 'pointer-events-none');
                             slide.classList.add('opacity-100', 'pointer-events-auto');
                             dots[i].classList.remove('bg-zinc-300');
-                            dots[i].classList.add('bg-zinc-900', 'scale-110');
+                            dots[i].classList.add('bg-darkText', 'scale-110');
                         } else {
                             slide.classList.remove('opacity-100', 'pointer-events-auto');
                             slide.classList.add('opacity-0', 'pointer-events-none');
-                            dots[i].classList.remove('bg-zinc-900', 'scale-110');
+                            dots[i].classList.remove('bg-darkText', 'scale-110');
                             dots[i].classList.add('bg-zinc-300');
                         }
                     });
@@ -1997,14 +2139,14 @@
                         ? `<div class="w-10 h-10 rounded-full bg-emerald-500 flex items-center justify-center text-white flex-shrink-0 shadow-sm"><i class="ri-check-line text-xl font-bold"></i></div>`
                         : `<div class="w-10 h-10 rounded-full bg-red-500 flex items-center justify-center text-white flex-shrink-0 shadow-sm"><i class="ri-error-warning-line text-xl font-bold"></i></div>`;
 
-                    // Text Colors matching "Summer Dresses" card (zinc-900 / zinc-500)
+                    // Text Colors matching "Summer Dresses" card (darkText / zinc-500)
                     const titleText = type === 'success' ? 'Success' : 'Error';
 
                     toast.innerHTML = `
                         <div class="flex items-center gap-3.5">
                             ${icon}
                             <div class="flex flex-col">
-                                <span class="font-bold text-zinc-900 text-[15px] leading-tight tracking-tight">${titleText}</span>
+                                <span class="font-bold text-darkText text-[15px] leading-tight tracking-tight">${titleText}</span>
                                 <span class="font-medium text-zinc-500 text-[13px] leading-tight">${message}</span>
                             </div>
                         </div>
@@ -2047,8 +2189,19 @@
 
                         if (data.success) {
                             showToast(data.message);
+
+                            // Update cart count in header
+                            const cartCountEl = document.getElementById('cart-count-badge');
+                            if (cartCountEl) {
+                                cartCountEl.innerText = data.cartCount;
+                                if (data.cartCount > 0) {
+                                    cartCountEl.style.display = 'flex';
+                                } else {
+                                    cartCountEl.style.display = 'none';
+                                }
+                            }
                         } else {
-                            showToast('Failed to add to cart', 'error');
+                            showToast('Failed to update cart', 'error');
                         }
                     } catch (error) {
                         console.error('Error:', error);
@@ -2074,6 +2227,17 @@
 
                         if (data.success) {
                             showToast(data.message);
+
+                            // Update wishlist count in header
+                            const wishlistCountEl = document.getElementById('wishlist-count-badge');
+                            if (wishlistCountEl) {
+                                wishlistCountEl.innerText = data.wishlistCount;
+                                if (data.wishlistCount > 0) {
+                                    wishlistCountEl.style.display = 'flex';
+                                } else {
+                                    wishlistCountEl.style.display = 'none';
+                                }
+                            }
 
                             // Toggle UI
                             if (data.action === 'added') {

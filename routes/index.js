@@ -199,15 +199,54 @@ router.get("/category/:categoryName", isLoggedIn, async function (req, res) {
 
 router.get("/addtocart/:productid", isLoggedIn, async function (req, res) {
     let user = await userModel.findOne({ email: req.user.email });
-    user.cart.push(req.params.productid)
+
+    // Migrate old cart format if needed AND consolidate duplicates
+    if (user.cart.length > 0 && !user.cart[0].product && !user.cart[0].quantity) {
+        const productMap = new Map();
+        user.cart.forEach(productId => {
+            const idString = productId.toString();
+            if (productMap.has(idString)) {
+                productMap.get(idString).quantity++;
+            } else {
+                productMap.set(idString, {
+                    product: productId,
+                    quantity: 1
+                });
+            }
+        });
+        user.cart = Array.from(productMap.values());
+    }
+
+    // Check if item already exists in cart
+    const existingItem = user.cart.find(item => {
+        // Handle both old and new format gracefully
+        const productId = item.product ? item.product.toString() : item.toString();
+        return productId === req.params.productid;
+    });
+
+    if (existingItem) {
+        // If exists, increment quantity
+        existingItem.quantity = (existingItem.quantity || 1) + 1;
+    } else {
+        // If not, add new item with quantity 1
+        user.cart.push({
+            product: req.params.productid,
+            quantity: 1
+        });
+    }
+
+    user.markModified('cart');
     await user.save();
+
+    // Calculate total quantity for response
+    const totalQuantity = user.cart.reduce((total, item) => total + (item.quantity || 1), 0);
 
     // Handle AJAX request
     if (req.xhr || req.headers.accept.indexOf('json') > -1) {
         return res.json({
             success: true,
             message: "Added to cart",
-            cartCount: user.cart.length
+            cartCount: totalQuantity
         });
     }
 
@@ -263,26 +302,21 @@ router.get("/removefromwishlist/:productid", isLoggedIn, async function (req, re
 router.get("/cart/delete/:id", isLoggedIn, async function (req, res) {
     let user = await userModel.findOne({ email: req.user.email });
 
-    // Remove the item from the cart array using filter or pull
-    // Using simple array filter for now since it's an array of ObjectIds
-    // Note: Mongoose might return objects, so we compare strings
-    // Or we can use $pull operator with findOneAndUpdate for better atomicity, but let's stick to standard JS for consistency with this codebase style
+    // Remove the item from cart array (with new schema, cart items are objects)
+    user.cart = user.cart.filter(item => {
+        // Handle potential nulls or mixed schema types safely
+        if (!item) return false;
 
-    // Removing one instance of the item or all? usually remove button removes the item line. 
-    // If multiple distinct items are listing, we remove specifically that one. 
-    // However, the cart logic seems to push IDs. 
-    // Let's use $pull to remove the ID.
+        // If the item has a product reference (new schema)
+        if (item.product) {
+            return item.product.toString() !== req.params.id;
+        }
+        // If the item itself is an ID (legacy schema, though unlikely given new structure)
+        else {
+            return item.toString() !== req.params.id;
+        }
+    });
 
-    // Better Approach: User wants to remove "this product".
-    // user.cart.pull(req.params.id); 
-
-    // Wait, let's look at how user.cart is structured. It's populated in /cart but here it is just IDs.
-    // Let's use filter to be safe in JS side if we want to remove just that one instance if duplicates exist? 
-    // Usually 'remove' means take it out.
-    // Let's allow $pull to remove it.
-
-    // Actually, simply:
-    user.cart.pull(req.params.id);
     await user.save();
 
     req.flash("success", "Item removed from cart");
@@ -292,20 +326,176 @@ router.get("/cart/delete/:id", isLoggedIn, async function (req, res) {
 router.get("/cart", isLoggedIn, async function (req, res) {
     let user = await userModel
         .findOne({ email: req.user.email })
-        .populate("cart")
+        .populate("cart.product");
+
+    // Handle migration from old cart format
+    let needsMigration = false;
+    if (user.cart.length > 0) {
+        // Check if old format (direct ObjectIds instead of {product, quantity})
+        if (!user.cart[0].product && !user.cart[0].quantity) {
+            needsMigration = true;
+
+            // Migrate old format to new format AND consolidate duplicates
+            const productMap = new Map();
+            user.cart.forEach(productId => {
+                const idString = productId.toString();
+                if (productMap.has(idString)) {
+                    productMap.get(idString).quantity++;
+                } else {
+                    productMap.set(idString, {
+                        product: productId,
+                        quantity: 1
+                    });
+                }
+            });
+
+            // Convert map to array
+            user.cart = Array.from(productMap.values());
+            await user.save();
+
+            // Reload with populated products
+            user = await userModel
+                .findOne({ email: req.user.email })
+                .populate("cart.product");
+        }
+    }
 
     let bill = 0;
     if (user.cart.length > 0) {
-        // Calculate total MRP and Discount for all items
+        // Calculate total with quantities, skip items without product data
+        user.cart = user.cart.filter(item => item.product); // Remove any null/undefined products
         user.cart.forEach(item => {
-            bill += Number(item.price) - Number(item.discount);
+            const itemTotal = (Number(item.product.price) - Number(item.product.discount)) * item.quantity;
+            bill += itemTotal;
         });
         // Add Platform Fee
         bill += 20;
     }
+
     res.render("cart", { user, bill });
 });
 
+<<<<<<< HEAD
+=======
+router.get("/checkout", isLoggedIn, async function (req, res) {
+    let user = await userModel
+        .findOne({ email: req.user.email })
+        .populate("cart.product");
+
+    let bill = 0;
+    if (user.cart.length > 0) {
+        // Filter out any items without product data
+        user.cart = user.cart.filter(item => item.product);
+        user.cart.forEach(item => {
+            const itemTotal = (Number(item.product.price) - Number(item.product.discount)) * item.quantity;
+            bill += itemTotal;
+        });
+        bill += 20;
+    }
+    res.render("checkout", { user, bill });
+});
+
+// Update cart quantity endpoint
+router.post("/cart/updatequantity", isLoggedIn, async function (req, res) {
+    try {
+        const { productId, quantity } = req.body;
+        let user = await userModel.findOne({ email: req.user.email });
+
+        // Find the cart item and update quantity
+        const cartItem = user.cart.find(item => {
+            // Handle if product is object or id 
+            const id = item.product ? (item.product._id || item.product).toString() : item.toString();
+            return id === productId;
+        });
+
+        if (cartItem) {
+            console.log(`Updating quantity for ${productId}. Old: ${cartItem.quantity}, New: ${quantity}`);
+            cartItem.quantity = Math.max(1, parseInt(quantity)); // Ensure minimum quantity of 1
+
+            // Explicitly mark modified just in case
+            user.markModified('cart');
+
+            await user.save();
+            console.log("Cart saved.");
+
+            // Recalculate bill
+            await user.populate('cart.product');
+            let bill = 0;
+            user.cart.forEach(item => {
+                if (item.product) {
+                    const itemTotal = (Number(item.product.price) - Number(item.product.discount)) * item.quantity;
+                    bill += itemTotal;
+                }
+            });
+            bill += 20; // Platform fee
+
+            return res.json({
+                success: true,
+                quantity: cartItem.quantity,
+                bill: bill
+            });
+        }
+
+        res.json({ success: false, message: "Item not found in cart" });
+    } catch (error) {
+        console.error(error);
+        res.json({ success: false, message: "Error updating quantity" });
+    }
+});
+
+// TEMPORARY: Cleanup cart duplicates route
+router.get("/cleanup-cart", isLoggedIn, async function (req, res) {
+    try {
+        let user = await userModel.findOne({ email: req.user.email });
+
+        console.log("Original cart length:", user.cart.length);
+        console.log("Original cart:", JSON.stringify(user.cart, null, 2));
+
+        // Consolidate duplicates in the cart (even if already in new format)
+        const productMap = new Map();
+
+        user.cart.forEach(item => {
+            let productId;
+            let quantity;
+
+            // Handle both old and new format
+            if (item.product) {
+                // New format
+                productId = item.product.toString();
+                quantity = item.quantity || 1;
+            } else {
+                // Old format
+                productId = item.toString();
+                quantity = 1;
+            }
+
+            if (productMap.has(productId)) {
+                productMap.get(productId).quantity += quantity;
+            } else {
+                productMap.set(productId, {
+                    product: productId,
+                    quantity: quantity
+                });
+            }
+        });
+
+        // Convert map back to array
+        user.cart = Array.from(productMap.values());
+        await user.save();
+
+        console.log("Cleaned cart length:", user.cart.length);
+        console.log("Cleaned cart:", JSON.stringify(user.cart, null, 2));
+
+        req.flash("success", `Cart cleaned! Reduced from duplicates to ${user.cart.length} unique items`);
+        res.redirect("/cart");
+    } catch (error) {
+        console.error("Error cleaning cart:", error);
+        req.flash("error", "Error cleaning cart");
+        res.redirect("/cart");
+    }
+});
+
+>>>>>>> 9ab3a03 (feat: redesign UI with premium dark/gold theme, fix shop and help center layouts)
 router.get("/account", isLoggedIn, async function (req, res) {
     let user = await userModel.findOne({ email: req.user.email }).populate("wishlist");
     res.render("myaccount", { user });

@@ -5,6 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scatch</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -55,6 +59,13 @@
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
+        /* Global Text Selection Highlight */
+        ::selection {
+            background-color: #B88E2F;
+            /* Gold Brand Color */
+            color: #ffffff;
+        }
+
         /* Override Tailwind classes for dark mode */
         [data-theme="dark"] .bg-white {
             background-color: var(--bg-card) !important;
@@ -65,14 +76,13 @@
             background-color: var(--bg-input) !important;
         }
 
+        [data-theme="dark"] .bg-\[\#18181B\],
         [data-theme="dark"] .bg-zinc-900 {
             background-color: #fafafa !important;
         }
 
-        [data-theme="dark"] .text-zinc-900 {
-            color: var(--text-primary) !important;
-        }
-
+        [data-theme="dark"] .text-\[\#18181B\],
+        [data-theme="dark"] .text-zinc-900,
         [data-theme="dark"] .text-zinc-800 {
             color: var(--text-primary) !important;
         }
@@ -113,28 +123,39 @@
             const theme = localStorage.getItem('theme') || 'light';
             document.documentElement.setAttribute('data-theme', theme);
         })();
+
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        darkText: '#18181B',
+                    }
+                }
+            }
+        }
     </script>
 </head>
 
 <body class="flex flex-col min-h-screen font-['helvetica_now_display']">
+    <!-- Professional Navbar with Logo -->
     <nav
         class="w-full fixed top-0 left-0 px-10 md:px-16 py-6 flex justify-between items-center z-50 bg-white/95 backdrop-blur-lg border-b border-zinc-200 shadow-sm">
         <!-- Logo -->
         <a href="<%= typeof loggedin !== 'undefined' && loggedin ? '/shop' : '/' %>"
-            class="flex items-center gap-2 hover:brightness-75 transition-all active:scale-95 active:brightness-50">
+            class="flex items-center gap-2 hover:opacity-90 transition-all active:scale-95">
             <img src="/images/scatch-logo.png" alt="Scatch" class="h-16 w-auto">
         </a>
 
         <% if(typeof loggedin !=='undefined' && loggedin){ %>
             <!-- Centered Search Bar (Only for logged in users) -->
-            <div class="hidden md:block flex-grow max-w-xl mx-8">
+            <div class="hidden md:block flex-1 max-w-xl mx-6">
                 <form action="/shop" method="GET" class="relative w-full">
-                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                        <i class="ri-search-line text-zinc-400"></i>
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
+                        <i class="ri-search-line text-zinc-400 text-lg"></i>
                     </div>
                     <input type="text" name="search"
-                        class="w-full py-2.5 pl-10 pr-4 bg-zinc-100 border border-zinc-200 text-zinc-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block outline-none transition-all placeholder:text-zinc-400"
-                        placeholder="Search product or brand here...">
+                        class="w-full py-3 pl-12 pr-4 bg-zinc-50 border border-zinc-200 text-[#18181B] text-sm rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent block outline-none transition-all placeholder:text-zinc-400 hover:bg-zinc-100"
+                        placeholder="Search products, brands...">
                 </form>
             </div>
 
@@ -142,20 +163,20 @@
             <div class="flex items-center gap-8">
                 <!-- Navigation Links -->
                 <div class="hidden md:flex items-center gap-5 font-medium text-sm text-zinc-700">
-                    <a class="relative hover:text-zinc-900 transition-colors group" href="/shop">
+                    <a class="relative hover:text-[#18181B] transition-colors group" href="/shop">
                         Shop
                         <span
-                            class="absolute -bottom-1 left-0 w-0 h-0.5 bg-zinc-900 transition-all duration-300 group-hover:w-full"></span>
+                            class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#18181B] transition-all duration-300 group-hover:w-full"></span>
                     </a>
-                    <a class="relative hover:text-zinc-900 transition-colors group" href="/shop#new-arrivals">
+                    <a class="relative hover:text-[#18181B] transition-colors group" href="/shop#new-arrivals">
                         New Arrivals
                         <span
-                            class="absolute -bottom-1 left-0 w-0 h-0.5 bg-zinc-900 transition-all duration-300 group-hover:w-full"></span>
+                            class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#18181B] transition-all duration-300 group-hover:w-full"></span>
                     </a>
-                    <a class="relative hover:text-zinc-900 transition-colors group" href="/about">
+                    <a class="relative hover:text-[#18181B] transition-colors group" href="/about">
                         About Us
                         <span
-                            class="absolute -bottom-1 left-0 w-0 h-0.5 bg-zinc-900 transition-all duration-300 group-hover:w-full"></span>
+                            class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#18181B] transition-all duration-300 group-hover:w-full"></span>
                     </a>
                 </div>
 
@@ -164,33 +185,72 @@
                     <!-- Cart Icon with Badge -->
                     <a href="/cart" class="relative hover:opacity-70 transition-all hover:scale-110 active:scale-95">
                         <i class="ri-shopping-cart-line text-2xl text-zinc-700"></i>
-                        <% if(typeof user !=='undefined' && user.cart && user.cart.length> 0) { %>
-                            <span
-                                class="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs font-bold rounded-full flex items-center justify-center">
-                                <%= user.cart.length %>
+                        <% let totalQty=(typeof user !=='undefined' && user.cart) ? user.cart.reduce((total, item)=>
+                            total + (item.quantity || 1), 0) : 0;
+                            %>
+                            <span id="cart-count-badge"
+                                class="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs font-bold rounded-full items-center justify-center <%= totalQty > 0 ? 'flex' : 'hidden' %>">
+                                <%= totalQty %>
                             </span>
-                            <% } %>
                     </a>
 
-                    <!-- Profile Picture -->
-                    <a href="/account"
-                        class="w-10 h-10 rounded-full overflow-hidden shrink-0 ml-2 border border-zinc-200 hover:border-zinc-400 transition-colors">
-                        <% if(typeof user !=='undefined' && user.picture){ %>
-                            <img class="w-full h-full object-cover" src="/images/uploads/<%= user.picture %>" alt="">
-                            <% } else { %>
-                                <div class="w-full h-full bg-zinc-200 flex items-center justify-center text-zinc-500">
-                                    <i class="ri-user-line"></i>
-                                </div>
-                                <% } %>
+                    <!-- Wishlist Icon with Badge -->
+                    <a href="/account?active=wishlist"
+                        class="relative hover:opacity-70 transition-all hover:scale-110 active:scale-95">
+                        <i class="ri-heart-line text-2xl text-zinc-700"></i>
+                        <% let wishlistQty=(typeof user !=='undefined' && user.wishlist) ? user.wishlist.length : 0; %>
+                            <span id="wishlist-count-badge"
+                                class="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs font-bold rounded-full items-center justify-center <%= wishlistQty > 0 ? 'flex' : 'hidden' %>">
+                                <%= wishlistQty %>
+                            </span>
                     </a>
+
+                    <!-- User Profile with Name & Dropdown -->
+                    <a href="/account"
+                        class="flex items-center gap-3 cursor-pointer hover:brightness-90 transition-all active:scale-95 active:brightness-75 relative group">
+                        <!-- Avatar -->
+                        <a href="/account" class="w-10 h-10 rounded-full overflow-hidden border-2 border-zinc-300">
+                            <% if(typeof user !=='undefined' && user.picture){ %>
+                                <img class="w-full h-full object-cover" src="/images/uploads/<%= user.picture %>"
+                                    alt="">
+                                <% } else { %>
+                                    <div
+                                        class="w-full h-full bg-zinc-200 flex items-center justify-center text-zinc-500">
+                                        <i class="ri-user-line text-lg"></i>
+                                    </div>
+                                    <% } %>
+                        </a>
+
+                        <!-- User Name & Dropdown Arrow -->
+                        <div class="flex items-center gap-1">
+                            <span class="text-sm font-semibold text-[#18181B]">
+                                <%= typeof user !=='undefined' && user.fullname ? user.fullname : 'User' %>
+                            </span>
+                            <i class="ri-arrow-down-s-line text-zinc-600"></i>
+                        </div>
                 </div>
             </div>
+            </div>
             <% } else { %>
-                <!-- Login/Register Links (For logged out users) -->
-                <div class="flex items-center gap-5 font-medium text-sm text-zinc-600">
-                    <a class="hover:text-black transition-colors" href="/about">About Us</a>
-                    <a class="hover:text-black transition-colors" href="/login">Login</a>
-                    <a class="hover:text-black transition-colors" href="/register">Register</a>
+                <!-- Navigation for logged out users -->
+                <div class="flex items-center gap-8 font-medium text-sm text-zinc-700">
+                    <a class="hover:text-[#18181B] transition-colors relative group" href="/about">
+                        About
+                        <span
+                            class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#18181B] transition-all group-hover:w-full"></span>
+                    </a>
+                    <a class="hover:text-[#18181B] transition-colors relative group" href="/contact">
+                        Contact
+                        <span
+                            class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#18181B] transition-all group-hover:w-full"></span>
+                    </a>
+                    <a class="px-4 py-2 hover:bg-zinc-100 rounded-lg transition-colors" href="/login">
+                        Login
+                    </a>
+                    <a class="px-4 py-2 bg-[#18181B] text-white hover:bg-[#18181B] rounded-lg transition-colors"
+                        href="/register">
+                        Register
+                    </a>
                 </div>
                 <% } %>
     </nav>

@@ -2,7 +2,7 @@
 </main>
 <!-- Pre-Footer Slogan Section -->
 <div class="w-full py-20 bg-zinc-100 flex items-center justify-center border-t border-zinc-200">
-    <h2 class="text-3xl md:text-5xl font-serif italic text-zinc-900 tracking-tight text-center px-4">
+    <h2 class="text-3xl md:text-5xl font-serif italic text-[#18181B] tracking-tight text-center px-4">
         "Let's Shop Beyond Boundaries"
     </h2>
 </div>
@@ -14,7 +14,7 @@
         <div class="lg:col-span-2">
             <a href="#" class="flex items-center gap-2 mb-6">
                 <!-- Simple Logo Icon -->
-                <div class="w-8 h-8 rounded-lg bg-white flex items-center justify-center text-zinc-900">
+                <div class="w-8 h-8 rounded-lg bg-white flex items-center justify-center text-[#18181B]">
                     <i class="ri-shopping-bag-3-fill text-xl"></i>
                 </div>
                 <span class="text-2xl font-bold tracking-tight">Scatch</span>
@@ -26,19 +26,19 @@
             <!-- Social Icons -->
             <div class="flex items-center gap-4">
                 <a href="#"
-                    class="w-10 h-10 rounded-full bg-zinc-800 flex items-center justify-center text-zinc-400 hover:bg-white hover:text-zinc-900 transition-all duration-300">
+                    class="w-10 h-10 rounded-full bg-[#18181B] flex items-center justify-center text-zinc-400 hover:bg-white hover:text-[#18181B] transition-all duration-300">
                     <i class="ri-facebook-fill"></i>
                 </a>
                 <a href="#"
-                    class="w-10 h-10 rounded-full bg-zinc-800 flex items-center justify-center text-zinc-400 hover:bg-white hover:text-zinc-900 transition-all duration-300">
+                    class="w-10 h-10 rounded-full bg-[#18181B] flex items-center justify-center text-zinc-400 hover:bg-white hover:text-[#18181B] transition-all duration-300">
                     <i class="ri-twitter-x-fill"></i>
                 </a>
                 <a href="#"
-                    class="w-10 h-10 rounded-full bg-zinc-800 flex items-center justify-center text-zinc-400 hover:bg-white hover:text-zinc-900 transition-all duration-300">
+                    class="w-10 h-10 rounded-full bg-[#18181B] flex items-center justify-center text-zinc-400 hover:bg-white hover:text-[#18181B] transition-all duration-300">
                     <i class="ri-instagram-fill"></i>
                 </a>
                 <a href="#"
-                    class="w-10 h-10 rounded-full bg-zinc-800 flex items-center justify-center text-zinc-400 hover:bg-white hover:text-zinc-900 transition-all duration-300">
+                    class="w-10 h-10 rounded-full bg-[#18181B] flex items-center justify-center text-zinc-400 hover:bg-white hover:text-[#18181B] transition-all duration-300">
                     <i class="ri-youtube-fill"></i>
                 </a>
             </div>
@@ -62,7 +62,7 @@
                 <li><a href="#" class="hover:text-white transition-colors">Men's Apparel</a></li>
                 <li><a href="#" class="hover:text-white transition-colors">Women's Apparel</a></li>
                 <li><a href="#" class="hover:text-white transition-colors">Accessories</a></li>
-                <li><a href="#" class="hover:text-white transition-colors">New Arrivals</a></li>
+                <li><a href="/shop#new-arrivals" class="hover:text-white transition-colors">New Arrivals</a></li>
             </ul>
         </div>
 
@@ -80,7 +80,7 @@
 
     <!-- Copyright Bar -->
     <div
-        class="max-w-7xl mx-auto pt-8 border-t border-zinc-800 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-zinc-500">
+        class="max-w-7xl mx-auto pt-8 border-t border-[#18181B] flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-zinc-500">
         <p>© 2001 - <%= new Date().getFullYear() %>, Scatch.com</p>
         <div class="flex gap-6">
             <a href="#" class="hover:text-white transition-colors">Privacy</a>
@@ -93,15 +93,16 @@
 <!-- Mobile Bottom Navigation (Android Friendly) -->
 <div
     class="fixed bottom-0 left-0 w-full bg-white border-t border-zinc-200 py-3 px-6 flex justify-between items-center z-50 md:hidden pb-safe">
-    <a href="/" class="flex flex-col items-center gap-1 text-zinc-500 hover:text-black transition-colors">
+    <a href="/" class="flex flex-col items-center gap-1 text-zinc-500 hover:text-[#18181B] transition-colors">
         <i class="ri-home-5-line text-xl"></i>
         <span class="text-[10px] font-medium">Home</span>
     </a>
-    <a href="/shop" class="flex flex-col items-center gap-1 text-zinc-900 transition-colors">
+    <a href="/shop" class="flex flex-col items-center gap-1 text-[#18181B] transition-colors">
         <i class="ri-store-2-fill text-xl"></i>
         <span class="text-[10px] font-medium">Shop</span>
     </a>
-    <a href="/cart" class="flex flex-col items-center gap-1 text-zinc-500 hover:text-black transition-colors relative">
+    <a href="/cart"
+        class="flex flex-col items-center gap-1 text-zinc-500 hover:text-[#18181B] transition-colors relative">
         <i class="ri-shopping-bag-3-line text-xl"></i>
         <span class="text-[10px] font-medium">Cart</span>
         <!-- Optional Badge -->
@@ -109,7 +110,7 @@
             <span class="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full"></span>
             <% } %>
     </a>
-    <a href="/account" class="flex flex-col items-center gap-1 text-zinc-500 hover:text-black transition-colors">
+    <a href="/account" class="flex flex-col items-center gap-1 text-zinc-500 hover:text-[#18181B] transition-colors">
         <i class="ri-user-3-line text-xl"></i>
         <span class="text-[10px] font-medium">Account</span>
     </a>

@@ -5,9 +5,9 @@
         <div class="w-full bg-zinc-100 px-4 md:px-12 py-8">
             <div class="max-w-7xl mx-auto">
                 <div class="flex items-center gap-2 text-sm text-zinc-500 mb-4">
-                    <a href="/shop" class="hover:text-zinc-900">Main Fashion</a>
+                    <a href="/shop" class="hover:text-[#18181B]">Main Fashion</a>
                     <i class="ri-arrow-right-s-line"></i>
-                    <span class="text-zinc-900 font-medium">
+                    <span class="text-[#18181B] font-medium">
                         <%= categoryName %>
                     </span>
                 </div>
@@ -16,7 +16,7 @@
                     <div class="absolute inset-0 bg-zinc-50"></div>
                     <div class="relative z-10 flex flex-col md:flex-row items-center justify-between p-8 md:p-12">
                         <div class="flex-1">
-                            <h1 class="text-4xl md:text-5xl font-bold text-zinc-900 mb-4">
+                            <h1 class="text-4xl md:text-5xl font-bold text-[#18181B] mb-4">
                                 20% OFF ONLY TODAY AND<br>GET SPECIAL GIFT!
                             </h1>
                             <p class="text-zinc-600 text-sm md:text-base">
@@ -49,7 +49,7 @@
                 <div class="flex items-center gap-4">
                     <span class="text-sm text-zinc-600">Sort by</span>
                     <select onchange="window.location.href='/category/<%= categoryName %>?sortby='+this.value"
-                        class="border border-zinc-200 rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-zinc-900">
+                        class="border border-zinc-200 rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-[#18181B]">
                         <option value="popular">Popularity</option>
                         <option value="newest">Newest</option>
                         <option value="price_low">Price: Low to High</option>
@@ -75,7 +75,7 @@
                                             <input type="checkbox" <%=cat===categoryName ? 'checked' : '' %>
                                             onclick="window.location.href='/category/<%= cat %>'"
                                                 class="w-4 h-4 rounded border-zinc-300">
-                                                <span class="text-sm text-zinc-600 group-hover:text-zinc-900">
+                                                <span class="text-sm text-zinc-600 group-hover:text-[#18181B]">
                                                     <%= cat %>
                                                 </span>
                                         </label>
@@ -106,7 +106,7 @@
                                     , '#D97706' , '#F59E0B' , '#10B981' , '#06B6D4' ]; %>
                                     <% colors.forEach(color=> { %>
                                         <button
-                                            class="w-8 h-8 rounded-full border-2 border-transparent hover:border-zinc-900"
+                                            class="w-8 h-8 rounded-full border-2 border-transparent hover:border-[#18181B]"
                                             style="background-color: <%= color %>"></button>
                                         <% }) %>
                             </div>
@@ -121,7 +121,7 @@
                                         <label class="cursor-pointer">
                                             <input type="radio" name="size" class="peer sr-only">
                                             <div
-                                                class="px-4 py-2 border border-zinc-200 rounded-lg text-sm peer-checked:bg-zinc-900 peer-checked:text-white peer-checked:border-zinc-900 hover:border-zinc-900 transition-all">
+                                                class="px-4 py-2 border border-zinc-200 rounded-lg text-sm peer-checked:bg-[#18181B] peer-checked:text-white peer-checked:border-[#18181B] hover:border-[#18181B] transition-all">
                                                 <%= size %>
                                             </div>
                                         </label>
@@ -160,7 +160,7 @@
 
                                 <!-- Content -->
                                 <div class="p-4">
-                                    <h3 class="font-bold text-zinc-900 text-base mb-2 truncate">
+                                    <h3 class="font-bold text-[#18181B] text-base mb-2 truncate">
                                         <%= item.name %>
                                     </h3>
                                     <div class="flex items-center gap-1 text-yellow-500 text-xs mb-3">
@@ -176,15 +176,15 @@
                                             <% if(item.discount> 0) { %>
                                                 <span class="text-xs text-zinc-400 line-through">₹<%= item.price %>
                                                 </span>
-                                                <span class="font-bold text-zinc-900 text-lg">₹<%= item.price -
+                                                <span class="font-bold text-[#18181B] text-lg">₹<%= item.price -
                                                         item.discount %></span>
                                                 <% } else { %>
-                                                    <span class="font-bold text-zinc-900 text-lg">₹<%= item.price %>
+                                                    <span class="font-bold text-[#18181B] text-lg">₹<%= item.price %>
                                                     </span>
                                                     <% } %>
                                         </div>
                                         <a href="javascript:void(0)" onclick="addToCart(event, '<%= item._id %>')"
-                                            class="w-10 h-10 rounded-full border-2 border-zinc-200 flex items-center justify-center hover:bg-zinc-900 hover:text-white hover:border-zinc-900 transition-all">
+                                            class="w-10 h-10 rounded-full border-2 border-zinc-200 flex items-center justify-center hover:bg-[#18181B] hover:text-white hover:border-[#18181B] transition-all">
                                             <i class="ri-add-line text-lg"></i>
                                         </a>
                                     </div>
@@ -210,7 +210,7 @@
 
                                         <% for(let i=1; i <=totalPages; i++) { %>
                                             <a href="/category/<%= categoryName %>?page=<%= i %>"
-                                                class="w-10 h-10 rounded-lg <%= i === currentPage ? 'bg-zinc-900 text-white' : 'border border-zinc-200 hover:bg-zinc-50' %> transition-colors flex items-center justify-center">
+                                                class="w-10 h-10 rounded-lg <%= i === currentPage ? 'bg-[#18181B] text-white' : 'border border-zinc-200 hover:bg-zinc-50' %> transition-colors flex items-center justify-center">
                                                 <%= i %>
                                             </a>
                                             <% } %>

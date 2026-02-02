@@ -1,0 +1,443 @@
+<%- include('./partials/header') %>
+
+    <!-- Google Fonts: Outfit (More Premium) -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <div class="min-h-screen bg-[#F5F5F7] py-12 px-4 sm:px-6 lg:px-8 font-['Outfit']">
+        <div class="max-w-7xl mx-auto">
+
+            <!-- Header -->
+            <div class="mb-12 flex flex-col md:flex-row justify-between items-center group">
+                <div class="text-center md:text-left mb-6 md:mb-0">
+                    <h1 class="text-4xl font-bold text-[#1B3C29] tracking-tight">Checkout</h1>
+                    <p class="text-zinc-500 mt-2 text-sm">Secure your order and complete the payment.</p>
+                </div>
+
+                <!-- Progress Steps -->
+                <div
+                    class="flex items-center gap-4 text-sm bg-white px-6 py-3 rounded-full shadow-sm border border-zinc-200/60">
+                    <span class="text-[#1B3C29] font-semibold flex items-center gap-2">
+                        <i class="ri-shopping-bag-3-fill"></i> Cart
+                    </span>
+                    <div class="w-8 h-[1px] bg-zinc-300"></div>
+                    <span
+                        class="text-[#1B3C29] font-bold flex items-center gap-2 bg-[#1B3C29]/10 px-3 py-1 rounded-full">
+                        <i class="ri-secure-payment-line"></i> Payment
+                    </span>
+                    <div class="w-8 h-[1px] bg-zinc-300"></div>
+                    <span class="text-zinc-400 flex items-center gap-2">
+                        <i class="ri-checkbox-circle-line"></i> Confirm
+                    </span>
+                </div>
+            </div>
+
+            <div class="flex flex-col lg:flex-row gap-12 items-start">
+
+                <!-- Left: Payment Details -->
+                <div class="w-full lg:w-[65%] order-2 lg:order-1 space-y-8">
+
+                    <!-- Express Checkout Section -->
+                    <div
+                        class="bg-white rounded-[2rem] shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] border border-zinc-100 p-8 relative overflow-hidden">
+                        <div
+                            class="absolute top-0 right-0 w-40 h-40 bg-[#1B3C29]/5 rounded-full blur-3xl -z-10 translate-x-10 -translate-y-10">
+                        </div>
+
+                        <h2
+                            class="text-sm font-bold text-zinc-400 uppercase tracking-widest mb-6 flex items-center gap-2">
+                            <i class="ri-flashlight-fill text-amber-500"></i> Express Checkout
+                        </h2>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <!-- Apple Pay -->
+                            <button onclick="openModal('apple')"
+                                class="relative group overflow-hidden flex items-center justify-center gap-2 py-4 bg-zinc-900 text-white rounded-2xl hover:scale-[1.02] transition-all shadow-lg hover:shadow-xl hover:shadow-zinc-900/10">
+                                <i class="ri-apple-fill text-xl"></i>
+                                <span class="font-semibold text-lg">Pay</span>
+                                <div
+                                    class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity">
+                                </div>
+                            </button>
+
+                            <!-- Google Pay -->
+                            <button onclick="openModal('google')"
+                                class="relative group overflow-hidden flex items-center justify-center gap-2 py-4 bg-white border-2 border-zinc-100 text-zinc-900 rounded-2xl hover:scale-[1.02] hover:border-blue-100 transition-all shadow-sm hover:shadow-xl hover:shadow-blue-900/5">
+                                <span class="text-blue-500 font-bold text-xl">G</span>
+                                <span class="font-semibold text-xl text-zinc-700">Pay</span>
+                            </button>
+
+                            <!-- Razorpay -->
+                            <button onclick="handleRazorpay()"
+                                class="relative group overflow-hidden flex items-center justify-center gap-2 py-4 bg-[#3399cc] text-white rounded-2xl hover:scale-[1.02] transition-all shadow-lg hover:shadow-xl hover:shadow-blue-500/20">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                                </div>
+                                <i class="ri-shield-flash-fill text-xl"></i>
+                                <span class="font-bold tracking-tight text-lg">Razorpay</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Divider -->
+                    <div class="relative flex items-center justify-center">
+                        <div class="w-full border-t border-zinc-200 absolute"></div>
+                        <span
+                            class="bg-[#F5F5F7] px-4 text-xs font-semibold text-zinc-400 uppercase tracking-widest relative z-10">Or
+                            pay securely with card</span>
+                    </div>
+
+                    <!-- Card Details Form -->
+                    <div
+                        class="bg-white rounded-[2rem] shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] border border-zinc-100 p-8 md:p-10">
+                        <div class="flex justify-between items-center mb-8">
+                            <h2 class="text-2xl font-bold text-[#1B3C29]">Credit Card</h2>
+                            <div class="flex -space-x-2">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Visa.svg"
+                                    class="h-8 bg-white p-1 rounded border border-zinc-100 shadow-sm z-10">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg"
+                                    class="h-8 bg-white p-1 rounded border border-zinc-100 shadow-sm z-20">
+                                <div
+                                    class="h-8 w-8 bg-zinc-50 rounded border border-zinc-100 flex items-center justify-center text-[10px] text-zinc-400 font-bold shadow-sm z-0 pl-2">
+                                    +2
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="card-details-section" class="space-y-6">
+                            <!-- Card Holder Name -->
+                            <div class="group">
+                                <label class="block text-xs font-bold text-zinc-500 uppercase tracking-wider mb-2">Card
+                                    Holder Name</label>
+                                <input type="text" placeholder="John Doe"
+                                    class="w-full px-5 py-4 rounded-xl bg-zinc-50 border-2 border-transparent text-[#1B3C29] font-medium focus:bg-white focus:border-[#1B3C29] outline-none transition-all placeholder:text-zinc-300 hover:bg-zinc-100">
+                            </div>
+
+                            <!-- Card Number -->
+                            <div class="group">
+                                <label class="block text-xs font-bold text-zinc-500 uppercase tracking-wider mb-2">Card
+                                    Number</label>
+                                <div class="relative">
+                                    <input type="text" placeholder="0000 0000 0000 0000" maxlength="19"
+                                        class="w-full px-5 py-4 rounded-xl bg-zinc-50 border-2 border-transparent text-[#1B3C29] font-medium focus:bg-white focus:border-[#1B3C29] outline-none transition-all placeholder:text-zinc-300 font-mono tracking-widest hover:bg-zinc-100">
+                                    <i class="ri-lock-2-line absolute right-5 top-4 text-zinc-300"></i>
+                                </div>
+                            </div>
+
+                            <!-- Expiry & CVV -->
+                            <div class="grid grid-cols-2 gap-6">
+                                <div class="group">
+                                    <label
+                                        class="block text-xs font-bold text-zinc-500 uppercase tracking-wider mb-2">Expiry
+                                        Date</label>
+                                    <input type="text" placeholder="MM/YY" maxlength="5"
+                                        class="w-full px-5 py-4 rounded-xl bg-zinc-50 border-2 border-transparent text-[#1B3C29] font-medium focus:bg-white focus:border-[#1B3C29] outline-none transition-all placeholder:text-zinc-300 text-center hover:bg-zinc-100">
+                                </div>
+                                <div class="group">
+                                    <label
+                                        class="block text-xs font-bold text-zinc-500 uppercase tracking-wider mb-2 flex items-center justify-between">
+                                        CVV
+                                        <i class="ri-information-line text-zinc-400 cursor-help"
+                                            title="3 digits on back"></i>
+                                    </label>
+                                    <input type="password" placeholder="•••" maxlength="3"
+                                        class="w-full px-5 py-4 rounded-xl bg-zinc-50 border-2 border-transparent text-[#1B3C29] font-medium focus:bg-white focus:border-[#1B3C29] outline-none transition-all placeholder:text-zinc-300 text-center text-lg tracking-widest hover:bg-zinc-100">
+                                </div>
+                            </div>
+
+                            <!-- Confirm Button -->
+                            <button onclick="handlePayment()"
+                                class="w-full py-5 bg-[#1B3C29] text-white rounded-2xl font-bold text-lg hover:bg-[#152e20] transition-all shadow-xl shadow-[#1B3C29]/20 flex items-center justify-center gap-3 group mt-4">
+                                <span>Pay ₹<%= bill %></span>
+                                <i
+                                    class="ri-secure-payment-line text-xl group-hover:scale-110 transition-transform"></i>
+                            </button>
+
+                            <div class="text-center">
+                                <span class="text-xs text-zinc-400 flex items-center justify-center gap-1">
+                                    <i class="ri-check-double-line text-green-500"></i>
+                                    256-bit SSL Encrypted Payment
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Order Summary (Receipt Style) -->
+                <div class="w-full lg:w-[35%] order-1 lg:order-2 sticky top-8">
+                    <div
+                        class="bg-white rounded-[2rem] shadow-xl shadow-zinc-200/50 border border-zinc-100 relative overflow-hidden">
+
+                        <!-- Decorative Receipt Top -->
+                        <div
+                            class="h-2 bg-[repeating-linear-gradient(45deg,#1B3C29,#1B3C29_10px,#ffffff_10px,#ffffff_20px)] opacity-10">
+                        </div>
+
+                        <div class="p-8">
+                            <h2 class="text-xl font-bold text-[#1B3C29] mb-1">Order Summary</h2>
+                            <p class="text-xs text-zinc-400 mb-6">Review your items before payment</p>
+
+                            <!-- Items -->
+                            <div
+                                class="space-y-4 mb-8 max-h-[300px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-zinc-200">
+                                <% user.cart.forEach(function(item){ %>
+                                    <div
+                                        class="flex items-center gap-3 p-3 rounded-lg hover:bg-zinc-50 transition-colors group cursor-pointer border border-transparent hover:border-zinc-100">
+                                        <div
+                                            class="w-16 h-16 rounded-xl bg-[<%= item.product.bgcolor %>]/10 flex-shrink-0 flex items-center justify-center p-2 border border-zinc-50 overflow-hidden relative">
+                                            <img src="/images/uploads/<%= item.product.image %>"
+                                                class="w-full h-full object-contain mix-blend-multiply group-hover:scale-110 transition-transform duration-500">
+                                        </div>
+                                        <div class="flex-1 min-w-0">
+                                            <h4 class="text-sm font-bold text-[#1B3C29] truncate">
+                                                <%= item.product.name %>
+                                            </h4>
+                                            <p class="text-xs text-zinc-500 mt-1">Quantity: <%= item.quantity %>
+                                            </p>
+                                        </div>
+                                        <div class="text-sm font-bold text-[#1B3C29] tabular-nums">₹<%=
+                                                (item.product.price - item.product.discount) * item.quantity %>
+                                        </div>
+                                    </div>
+                                    <% }) %>
+                            </div>
+
+                            <!-- Dashed Divider -->
+                            <div class="border-t-2 border-dashed border-zinc-200 my-6"></div>
+
+                            <!-- Calculations -->
+                            <div class="space-y-3">
+                                <div class="flex justify-between text-sm text-zinc-500">
+                                    <span>Subtotal</span>
+                                    <span class="font-medium tabular-nums">₹ <%= bill - 20 %></span>
+                                </div>
+                                <div class="flex justify-between text-sm text-zinc-500">
+                                    <span class="flex items-center gap-1">Platform Fee <i
+                                            class="ri-information-line text-zinc-300 text-xs"></i></span>
+                                    <span class="font-medium tabular-nums">₹ 20</span>
+                                </div>
+                                <div
+                                    class="flex justify-between text-sm text-[#1B3C29] font-medium bg-green-50 p-2 rounded-lg border border-green-100">
+                                    <span class="flex items-center gap-1"><i class="ri-truck-line text-green-600"></i>
+                                        Shipping</span>
+                                    <span class="text-green-700 font-bold">FREE</span>
+                                </div>
+                            </div>
+
+                            <!-- Total -->
+                            <div class="mt-8 pt-6 border-t border-zinc-100">
+                                <div class="flex justify-between items-end">
+                                    <div>
+                                        <span
+                                            class="text-xs text-zinc-400 font-bold uppercase tracking-widest block mb-1">Total
+                                            Due</span>
+                                        <div
+                                            class="text-4xl font-bold text-[#1B3C29] tracking-tight tabular-nums font-['Outfit']">
+                                            ₹<%= bill %>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="w-12 h-12 bg-[#1B3C29] rounded-full flex items-center justify-center text-white border-4 border-zinc-100 shadow-lg">
+                                        <i class="ri-arrow-down-line text-xl"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Bottom Decor -->
+                        <div class="bg-zinc-50 p-4 text-center border-t border-zinc-100">
+                            <div class="flex justify-center gap-4 text-zinc-300">
+                                <i class="ri-visa-line text-2xl"></i>
+                                <i class="ri-mastercard-line text-2xl"></i>
+                                <i class="ri-paypal-line text-2xl"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 text-center">
+                        <p class="text-xs text-zinc-400 max-w-xs mx-auto">
+                            By placing this order, you agree to our <a href="#"
+                                class="underline hover:text-zinc-600">Terms of Service</a> and <a href="#"
+                                class="underline hover:text-zinc-600">Privacy Policy</a>.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= MODALS ================= -->
+
+    <!-- Apple Pay Modal -->
+    <div id="apple-pay-modal" class="fixed inset-0 z-50 hidden font-['Outfit']">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-md transition-opacity opacity-0" id="apple-backdrop"
+            onclick="closeModal('apple')"></div>
+        <div class="absolute bottom-0 left-0 w-full sm:bottom-auto sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 sm:w-[420px] bg-[#FFFFFF] sm:rounded-[2rem] rounded-t-[2rem] shadow-2xl transform transition-transform translate-y-full sm:translate-y-10 opacity-0 overflow-hidden"
+            id="apple-sheet">
+            <div class="p-8 text-center relative">
+                <div
+                    class="w-20 h-20 bg-black rounded-3xl mx-auto flex items-center justify-center mb-6 shadow-xl shadow-black/20 ring-4 ring-black/5">
+                    <i class="ri-apple-fill text-5xl text-white"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-zinc-900 mb-2 tracking-tight">Apple Pay</h3>
+                <p class="text-zinc-500 text-sm mb-10 leading-relaxed">Confirm your payment securely with Face ID to
+                    <strong>Scatch Store</strong>.
+                </p>
+
+                <!-- Spinner -->
+                <div class="relative py-6 mb-8">
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="w-16 h-16 border-[5px] border-zinc-100 border-t-black rounded-full animate-spin">
+                        </div>
+                    </div>
+                    <div class="h-16"></div>
+                </div>
+
+                <div class="text-sm text-zinc-500 font-medium animate-pulse flex items-center justify-center gap-2">
+                    <i class="ri-focus-3-line"></i> Double-click side button
+                </div>
+            </div>
+
+            <!-- Bottom Action -->
+            <div
+                class="bg-zinc-50 p-5 rounded-b-[2rem] border-t border-zinc-100 flex justify-between items-center px-8">
+                <button onclick="closeModal('apple')"
+                    class="text-zinc-500 font-bold text-sm hover:text-zinc-900 transition-colors">Cancel</button>
+                <div class="flex items-center gap-2 text-zinc-900 font-bold text-2xl">
+                    ₹<%= bill %>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Google Pay Modal -->
+    <div id="google-pay-modal" class="fixed inset-0 z-50 hidden font-['Outfit']">
+        <div class="absolute inset-0 bg-black/70 backdrop-blur-md transition-opacity opacity-0" id="google-backdrop"
+            onclick="closeModal('google')"></div>
+        <div class="absolute bottom-0 left-0 w-full sm:bottom-auto sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 sm:w-[400px] bg-white sm:rounded-[24px] rounded-t-[24px] shadow-2xl transform transition-transform translate-y-full sm:translate-y-10 opacity-0 overflow-hidden"
+            id="google-sheet">
+            <!-- Google Header -->
+            <div class="bg-white border-b border-zinc-100 p-5 flex items-center justify-center relative">
+                <div class="flex items-center gap-1.5 opacity-90">
+                    <i class="ri-google-fill text-2xl text-zinc-700"></i>
+                    <span class="text-2xl font-medium text-zinc-600">Pay</span>
+                </div>
+                <div
+                    class="absolute right-5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-sm border border-blue-200">
+                    <% if(user.username) { %>
+                        <%= user.username.charAt(0).toUpperCase() %>
+                            <% } else { %>U<% } %>
+                </div>
+            </div>
+
+            <div class="p-8 text-center bg-[#F8F9FA]">
+                <div class="mb-8">
+                    <p class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-2">Total Payable</p>
+                    <h2 class="text-5xl font-normal text-zinc-900 tracking-tighter">₹<%= bill %>
+                    </h2>
+                </div>
+
+                <div
+                    class="bg-white p-4 rounded-xl border border-zinc-200 shadow-sm mb-8 text-left flex items-center gap-4 hover:border-blue-300 transition-colors cursor-pointer group">
+                    <div
+                        class="w-12 h-8 bg-white border border-zinc-100 rounded flex items-center justify-center shadow-sm">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Visa.svg" class="h-4">
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-sm font-bold text-zinc-900">Visa •••• 4242</p>
+                        <p class="text-[10px] text-zinc-400">HDFC Bank Credit Card</p>
+                    </div>
+                    <i class="ri-arrow-down-s-line text-zinc-400 group-hover:text-zinc-600"></i>
+                </div>
+
+                <button
+                    class="w-full py-4 bg-[#1F1F1F] text-white rounded-full font-medium shadow-lg shadow-black/10 hover:bg-black active:scale-[0.98] transition-all mb-4 text-lg">
+                    Pay Now
+                </button>
+                <button onclick="closeModal('google')"
+                    class="text-zinc-400 font-medium text-xs hover:text-zinc-600 pb-2">Cancel Payment</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- RAZORPAY SCRIPT -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+    <script>
+        function handlePayment() {
+            alert('Simulating Credit Card Payment Processing...');
+        }
+
+        function openModal(type) {
+            const modal = document.getElementById(`${type}-pay-modal`);
+            const backdrop = document.getElementById(`${type}-backdrop`);
+            const sheet = document.getElementById(`${type}-sheet`);
+
+            modal.classList.remove('hidden');
+
+            setTimeout(() => {
+                backdrop.classList.remove('opacity-0');
+                sheet.classList.remove('translate-y-full', 'sm:translate-y-10', 'opacity-0');
+            }, 10);
+        }
+
+        function closeModal(type) {
+            const modal = document.getElementById(`${type}-pay-modal`);
+            const backdrop = document.getElementById(`${type}-backdrop`);
+            const sheet = document.getElementById(`${type}-sheet`);
+
+            backdrop.classList.add('opacity-0');
+            sheet.classList.add('translate-y-full', 'sm:translate-y-10', 'opacity-0');
+
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        // Razorpay Integration
+        function handleRazorpay() {
+            var options = {
+                "key": "rzp_test_YOUR_KEY_HERE",
+                "amount": "<%= bill * 100 %>",
+                "currency": "INR",
+                "name": "Scatch",
+                "description": "Premium Order",
+                "image": "",
+                "handler": function (response) {
+                    alert("Payment Successful! ID: " + response.razorpay_payment_id);
+                },
+                "prefill": {
+                    "name": "<%= user.fullname %>",
+                    "email": "<%= user.email %>",
+                    "contact": "<%= user.contact || '' %>"
+                },
+                "theme": {
+                    "color": "#1B3C29"
+                }
+            };
+            var rzp1 = new Razorpay(options);
+            rzp1.on('payment.failed', function (response) {
+                alert("Payment Failed");
+            });
+            rzp1.open();
+            event.preventDefault();
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar for receipt items */
+        .scrollbar-thin::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .scrollbar-thin::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .scrollbar-thin::-webkit-scrollbar-thumb {
+            background-color: #E4E4E7;
+            border-radius: 20px;
+        }
+    </style>
+
+    <%- include('./partials/footer') %>

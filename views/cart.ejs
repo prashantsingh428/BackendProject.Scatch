@@ -1,63 +1,111 @@
 <%- include('./partials/header') %>
 
-    <div class="w-full min-h-screen bg-zinc-50 py-10 px-5 md:px-20">
-        <h1 class="text-3xl font-bold text-zinc-800 mb-8">Shopping Cart</h1>
+    <!-- Google Fonts: Outfit -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-        <% if (user.cart && user.cart.length> 0) { %>
-            <div class="flex flex-col lg:flex-row gap-10 items-start">
-                <!-- Cart Items List -->
-                <div class="w-full lg:w-[70%] flex flex-col gap-6">
-                    <% user.cart.forEach(function(item){ %>
-                        <div
-                            class="w-full bg-white rounded-xl overflow-hidden border border-zinc-200 shadow-sm flex flex-col sm:flex-row">
-                            <!-- Item Image -->
-                            <div
-                                class="w-full sm:w-40 h-40 sm:h-auto flex-shrink-0 flex items-center justify-center bg-[<%= item.bgcolor %>]/10 p-4">
-                                <img class="h-full object-contain mix-blend-multiply"
-                                    src="/images/uploads/<%= item.image %>" alt="<%= item.name %>">
-                            </div>
+    <div class="min-h-screen bg-[#F5EDE4] py-8 px-4 sm:px-6 lg:px-8 font-['Outfit']">
+        <div class="max-w-7xl mx-auto">
 
-                            <!-- Item Details -->
-                            <div class="flex-grow p-6 flex flex-col justify-between">
-                                <div class="flex justify-between items-start">
-                                    <div>
-                                        <h3 class="text-xl font-bold text-zinc-800 mb-1">
-                                            <%= item.name %>
-                                        </h3>
-                                        <p class="text-sm text-zinc-500">Color: <%= item.panelcolor %>
-                                        </p>
+            <!-- Breadcrumb -->
+            <nav class="mb-6 flex items-center gap-2 text-sm text-zinc-500">
+                <a href="/shop" class="hover:text-[#18181B] transition">Home</a>
+                <i class="ri-arrow-right-s-line"></i>
+                <span class="text-[#18181B] font-medium">Stores</span>
+            </nav>
+
+            <!-- Progress Indicator -->
+            <div class="mb-8 flex justify-center">
+                <div class="flex items-center gap-3 bg-white px-6 py-3 rounded-full shadow-sm">
+                    <span class="text-[#18181B] font-semibold">Cart</span>
+                    <div class="w-16 h-[2px] bg-zinc-300"></div>
+                    <span class="text-zinc-400">Shipping</span>
+                    <div class="w-16 h-[2px] bg-zinc-300"></div>
+                    <span class="text-zinc-400">Payment</span>
+                </div>
+            </div>
+
+            <!-- Page Title -->
+            <h1 class="text-4xl font-bold text-[#18181B] mb-10">My Cart</h1>
+
+            <% if (user.cart && user.cart.length> 0) { %>
+                <div class="flex flex-col lg:flex-row gap-8 items-start">
+
+                    <!-- Left: Cart Items -->
+                    <div class="w-full lg:w-[60%]">
+                        <div class="bg-white rounded-2xl shadow-sm p-6">
+                            <h2 class="text-xl font-semibold text-[#18181B] mb-6">My Cart (<%= user.cart.length %>)</h2>
+
+                            <div class="space-y-6">
+                                <% user.cart.forEach(function(item){ %>
+                                    <div class="flex gap-4 pb-6 border-b border-zinc-100 last:border-0"
+                                        data-item-id="<%= item.product._id %>"
+                                        data-item-price="<%= item.product.price - item.product.discount %>"
+                                        data-quantity="<%= item.quantity %>">
+                                        <!-- Product Image -->
+                                        <div
+                                            class="w-24 h-24 rounded-xl bg-[<%= item.product.bgcolor %>]/10 flex items-center justify-center flex-shrink-0 p-2">
+                                            <img class="h-full object-contain mix-blend-multiply"
+                                                src="/images/uploads/<%= item.product.image %>"
+                                                alt="<%= item.product.name %>">
+                                        </div>
+
+                                        <!-- Product Details -->
+                                        <div class="flex-1 flex flex-col justify-between">
+                                            <div>
+                                                <h3 class="text-lg font-bold text-[#18181B] mb-1">
+                                                    <%= item.product.name %>
+                                                </h3>
+                                                <p class="text-sm text-zinc-500">Canadian Footwear</p>
+                                                <p class="text-xs text-zinc-400 mt-1">Color: <%= item.product.panelcolor
+                                                        %> | Size: 6</p>
+                                            </div>
+
+                                            <div class="flex items-center justify-between mt-3">
+                                                <div class="flex items-center gap-3">
+                                                    <span class="text-sm text-zinc-400 line-through">₹<%=
+                                                            item.product.price %></span>
+                                                    <span class="text-lg font-bold text-[#18181B] item-total">₹<%=
+                                                            (item.product.price - item.product.discount) * item.quantity
+                                                            %></span>
+                                                    <span
+                                                        class="text-xs font-bold text-red-500 bg-red-50 px-2 py-1 rounded">20%
+                                                        OFF</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Quantity & Remove -->
+                                        <div class="flex flex-col items-end justify-between">
+                                            <a href="/cart/delete/<%= item.product._id %>"
+                                                class="text-zinc-400 hover:text-red-500 transition text-sm flex items-center gap-1">
+                                                <i class="ri-close-line"></i> Remove
+                                            </a>
+
+                                            <div class="flex items-center gap-2">
+                                                <button
+                                                    class="decrease-qty w-8 h-8 bg-[#18181B] text-white flex items-center justify-center hover:bg-[#18181B] transition">
+                                                    <i class="ri-subtract-line text-sm"></i>
+                                                </button>
+                                                <span class="qty-display w-8 text-center font-medium">
+                                                    <%= item.quantity %>
+                                                </span>
+                                                <button
+                                                    class="increase-qty w-8 h-8 bg-[#18181B] text-white flex items-center justify-center hover:bg-[#18181B] transition">
+                                                    <i class="ri-add-line text-sm"></i>
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <h4 class="text-lg font-semibold text-zinc-800">₹ <%= item.price %>
-                                    </h4>
-                                </div>
-
-                                <div class="flex justify-between items-end mt-4 sm:mt-0">
-                                    <div class="flex items-center gap-3 bg-zinc-100 rounded-full px-3 py-1">
-                                        <button
-                                            class="w-6 h-6 flex items-center justify-center rounded-full bg-white text-zinc-600 hover:text-black shadow-sm transition-colors text-xs">
-                                            <i class="ri-subtract-line"></i>
-                                        </button>
-                                        <span class="text-sm font-medium">01</span>
-                                        <button
-                                            class="w-6 h-6 flex items-center justify-center rounded-full bg-white text-zinc-600 hover:text-black shadow-sm transition-colors text-xs">
-                                            <i class="ri-add-line"></i>
-                                        </button>
-                                    </div>
-                                    <a href="/cart/delete/<%= item._id %>"
-                                        class="text-red-500 hover:text-red-600 text-sm font-medium transition-colors">
-                                        Remove
-                                    </a>
-                                </div>
+                                    <% }) %>
                             </div>
                         </div>
-                        <% }) %>
-                </div>
+                    </div>
 
-                <!-- Order Summary -->
-                <div class="w-full lg:w-[30%] sticky top-24">
-                    <div class="bg-white rounded-xl border border-zinc-200 shadow-sm p-6">
-                        <h3 class="text-xl font-bold text-zinc-800 mb-6">Order Summary</h3>
+                    <!-- Right: Order Summary -->
+                    <div class="w-full lg:w-[40%] sticky top-24">
+                        <div class="bg-white rounded-2xl shadow-sm p-6 space-y-6">
 
+<<<<<<< HEAD
                         <div class="space-y-4">
                             <div class="flex justify-between text-zinc-600">
                                 <span>Total MRP</span>
@@ -90,27 +138,288 @@
                                     class="w-full py-3.5 bg-zinc-900 text-white font-bold rounded-full hover:bg-black transition shadow-lg shadow-zinc-500/20">
                                     Place Order
                                 </button>
+=======
+                            <!-- Coupons -->
+                            <div>
+                                <h3 class="text-lg font-semibold text-[#18181B] mb-3">Coupons</h3>
+                                <div class="flex gap-2">
+                                    <input type="text" placeholder="Coupon code"
+                                        class="flex-1 px-4 py-2 border border-zinc-200 rounded-lg text-sm focus:outline-none focus:border-zinc-400">
+                                    <button
+                                        class="px-6 py-2 bg-[#18181B] text-white text-sm font-semibold rounded-lg hover:bg-[#18181B] transition">
+                                        APPLY NOW
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Your Order -->
+                            <div>
+                                <h3 class="text-lg font-semibold text-[#18181B] mb-4">Your Order</h3>
+
+                                <div class="space-y-3 text-sm">
+                                    <!-- Subtotal -->
+                                    <div class="flex justify-between">
+                                        <span class="text-zinc-600">Subtotal (<%= user.cart.length %> items)</span>
+                                        <% let totalMRP=0; user.cart.forEach(item=> { totalMRP +=
+                                            (Number(item.product.price) -
+                                            Number(item.product.discount)) * item.quantity; }); %>
+                                            <span id="cart-subtotal" class="font-medium text-[#18181B]">₹<%= totalMRP %>
+                                            </span>
+                                    </div>
+
+                                    <!-- Delivery -->
+                                    <div class="pt-3 border-t border-zinc-100">
+                                        <label class="flex items-center justify-between mb-2 cursor-pointer group">
+                                            <div class="flex items-center gap-2">
+                                                <input type="radio" name="delivery" checked
+                                                    class="w-4 h-4 text-orange-500">
+                                                <span class="text-zinc-700 group-hover:text-[#18181B]">Delivery</span>
+                                            </div>
+                                            <span class="font-medium text-[#18181B]">₹7.99</span>
+                                        </label>
+                                        <label class="flex items-center gap-2 cursor-pointer group">
+                                            <input type="radio" name="delivery" class="w-4 h-4 text-orange-500">
+                                            <span class="text-zinc-700 group-hover:text-[#18181B]">Pick Up</span>
+                                        </label>
+                                    </div>
+
+                                    <!-- Tip -->
+                                    <div class="pt-3 border-t border-zinc-100">
+                                        <div class="flex items-center justify-between mb-3">
+                                            <span class="text-zinc-700 font-medium">Tip</span>
+                                            <div class="flex gap-1 text-xs">
+                                                <button
+                                                    class="px-2 py-1 bg-zinc-100 text-zinc-600 rounded hover:bg-zinc-200">%</button>
+                                                <button class="px-2 py-1 bg-orange-500 text-white rounded">$</button>
+                                            </div>
+                                        </div>
+                                        <div class="flex gap-2 mb-2">
+                                            <label class="flex-1">
+                                                <input type="radio" name="tip" value="2" class="peer sr-only">
+                                                <div
+                                                    class="px-4 py-2 text-center border border-zinc-200 rounded-lg cursor-pointer peer-checked:border-orange-500 peer-checked:bg-orange-50 hover:border-zinc-300 transition">
+                                                    $2.00
+                                                </div>
+                                            </label>
+                                            <label class="flex-1">
+                                                <input type="radio" name="tip" value="4" checked class="peer sr-only">
+                                                <div
+                                                    class="px-4 py-2 text-center border border-orange-500 bg-orange-50 rounded-lg cursor-pointer peer-checked:border-orange-500 peer-checked:bg-orange-50 hover:border-orange-600 transition">
+                                                    $4.00
+                                                </div>
+                                            </label>
+                                            <label class="flex-1">
+                                                <input type="radio" name="tip" value="7" class="peer sr-only">
+                                                <div
+                                                    class="px-4 py-2 text-center border border-zinc-200 rounded-lg cursor-pointer peer-checked:border-orange-500 peer-checked:bg-orange-50 hover:border-zinc-300 transition">
+                                                    $7.00
+                                                </div>
+                                            </label>
+                                        </div>
+                                        <div class="text-right text-[#18181B] font-medium">Total: $2.50</div>
+                                    </div>
+
+                                    <!-- Service Fee -->
+                                    <div class="flex justify-between pt-3 border-t border-zinc-100">
+                                        <span class="text-zinc-600">Service Fee</span>
+                                        <span class="font-medium text-[#18181B]">$1.50</span>
+                                    </div>
+
+                                    <!-- Tax -->
+                                    <div class="flex justify-between">
+                                        <span class="text-zinc-600">Tax</span>
+                                        <span class="font-medium text-[#18181B]">$7.00</span>
+                                    </div>
+
+                                    <!-- E-Markets Credits -->
+                                    <div class="pt-3 border-t border-zinc-100">
+                                        <label class="flex items-center gap-2 cursor-pointer group">
+                                            <input id="use-credits" type="checkbox"
+                                                class="w-4 h-4 rounded text-orange-500 border-zinc-300">
+                                            <span class="text-zinc-700 group-hover:text-[#18181B]">Use E-Markets
+                                                Credits</span>
+                                            <span class="ml-auto font-medium text-[#18181B]">$8.00</span>
+                                        </label>
+                                    </div>
+
+                                    <!-- Total Payable -->
+                                    <div class="flex justify-between items-center pt-4 border-t-2 border-zinc-200">
+                                        <span class="text-lg font-bold text-[#18181B]">Total Payable</span>
+                                        <span id="grand-total" class="text-2xl font-bold text-[#18181B]">₹<%= bill %>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!-- Checkout Button -->
+                                <a href="/checkout" class="block w-full mt-6">
+                                    <button
+                                        class="w-full py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold text-lg rounded-xl hover:from-orange-600 hover:to-orange-700 transition shadow-lg shadow-orange-500/30">
+                                        PROCEED TO CHECKOUT
+                                    </button>
+                                </a>
+>>>>>>> 9ab3a03 (feat: redesign UI with premium dark/gold theme, fix shop and help center layouts)
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <% } else { %>
-                <!-- Empty State -->
-                <div
-                    class="w-full flex flex-col items-center justify-center py-20 bg-white rounded-xl border border-dashed border-zinc-300">
-                    <div class="w-20 h-20 bg-zinc-50 rounded-full flex items-center justify-center mb-6 text-zinc-400">
-                        <i class="ri-shopping-cart-line text-4xl"></i>
+
+                <!-- Features Section -->
+                <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Gift Cards -->
+                    <div class="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition">
+                        <div class="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center mb-4">
+                            <i class="ri-gift-line text-2xl text-blue-500"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-[#18181B] mb-2">Gift Cards</h3>
+                        <p class="text-sm text-zinc-600">Lorem ipsum bibendum auctor, nisl odio elit consequat ipsum,
+                            nec sagittis sem nibh id elit.</p>
                     </div>
-                    <h2 class="text-2xl font-bold text-zinc-800 mb-2">Your cart is empty</h2>
-                    <p class="text-zinc-500 mb-8 max-w-sm text-center">Looks like you haven't added anything to your
-                        cart yet. Go ahead and explore top categories.</p>
-                    <a href="/shop"
-                        class="px-8 py-3 bg-blue-600 text-white font-medium rounded-full hover:bg-blue-700 transition shadow-lg shadow-blue-500/30">
-                        Start Shopping
-                    </a>
+
+                    <!-- 100% Original -->
+                    <div class="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition">
+                        <div class="w-12 h-12 bg-green-50 rounded-full flex items-center justify-center mb-4">
+                            <i class="ri-verified-badge-line text-2xl text-green-500"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-[#18181B] mb-2">100% ORIGINAL</h3>
+                        <p class="text-sm text-zinc-600">Lorem ipsum bibendum auctor, nisl odio elit consequat ipsum,
+                            nec sagittis sem nibh id elit.</p>
+                    </div>
+
+                    <!-- Easy Returns -->
+                    <div class="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition">
+                        <div class="w-12 h-12 bg-purple-50 rounded-full flex items-center justify-center mb-4">
+                            <i class="ri-arrow-left-right-line text-2xl text-purple-500"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-[#18181B] mb-2">Easy Returns</h3>
+                        <p class="text-sm text-zinc-600">Lorem ipsum bibendum auctor, nisl odio elit consequat ipsum,
+                            nec sagittis sem nibh id elit.</p>
+                    </div>
                 </div>
-                <% } %>
+
+                <% } else { %>
+                    <!-- Empty State -->
+                    <div class="w-full flex flex-col items-center justify-center py-20 bg-white rounded-2xl shadow-sm">
+                        <div class="w-24 h-24 bg-orange-50 rounded-full flex items-center justify-center mb-6">
+                            <i class="ri-shopping-cart-line text-5xl text-orange-500"></i>
+                        </div>
+                        <h2 class="text-3xl font-bold text-[#18181B] mb-3">Your cart is empty</h2>
+                        <p class="text-zinc-600 mb-8 max-w-md text-center">Looks like you haven't added anything to your
+                            cart yet. Go ahead and explore top categories.</p>
+                        <a href="/shop"
+                            class="px-8 py-4 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold rounded-xl hover:from-orange-600 hover:to-orange-700 transition shadow-lg shadow-orange-500/30">
+                            Start Shopping
+                        </a>
+                    </div>
+                    <% } %>
+        </div>
     </div>
+
+    <script>
+        // Quantity control functionality with backend persistence
+        document.addEventListener('DOMContentLoaded', function () {
+            const quantityControls = document.querySelectorAll('[data-item-id]');
+
+            quantityControls.forEach(control => {
+                const itemId = control.getAttribute('data-item-id');
+                const decreaseBtn = control.querySelector('.decrease-qty');
+                const increaseBtn = control.querySelector('.increase-qty');
+                const qtyDisplay = control.querySelector('.qty-display');
+                const itemPrice = parseFloat(control.getAttribute('data-item-price'));
+                const itemTotalEl = control.querySelector('.item-total');
+
+                // Get initial quantity from server
+                let quantity = parseInt(control.getAttribute('data-quantity')) || 1;
+
+                // Decrease quantity
+                decreaseBtn?.addEventListener('click', async function (e) {
+                    e.preventDefault();
+                    if (quantity > 1) {
+                        quantity--;
+                        await updateQuantity();
+                    }
+                });
+
+                // Increase quantity
+                increaseBtn?.addEventListener('click', async function (e) {
+                    e.preventDefault();
+                    quantity++;
+                    await updateQuantity();
+                });
+
+                async function updateQuantity() {
+                    // Update display immediately
+                    qtyDisplay.textContent = quantity;
+                    const itemTotal = itemPrice * quantity;
+                    itemTotalEl.textContent = '₹' + itemTotal.toFixed(0);
+
+                    // Save to backend
+                    try {
+                        const response = await fetch('/cart/updatequantity', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                productId: itemId,
+                                quantity: quantity
+                            })
+                        });
+
+                        const data = await response.json();
+                        if (data.success) {
+                            // Update grand total from server response
+                            updateGrandTotal();
+                        } else {
+                            console.error('Failed to update quantity:', data.message);
+                        }
+                    } catch (error) {
+                        console.error('Error updating quantity:', error);
+                    }
+                }
+            });
+
+            function updateGrandTotal() {
+                let subtotal = 0;
+
+                // Sum all item totals
+                document.querySelectorAll('.item-total').forEach(el => {
+                    const price = parseFloat(el.textContent.replace('₹', ''));
+                    subtotal += price;
+                });
+
+                // Update subtotal display
+                const subtotalEl = document.getElementById('cart-subtotal');
+                if (subtotalEl) {
+                    subtotalEl.textContent = '₹' + subtotal.toFixed(0);
+                }
+
+                // Calculate grand total (subtotal + delivery + service + tax - credits if checked)
+                const delivery = 7.99;
+                const tip = 2.50;
+                const serviceFee = 1.50;
+                const tax = 7.00;
+
+                let grandTotal = subtotal + delivery + tip + serviceFee + tax;
+
+                // Check if E-Markets Credits is checked
+                const creditsCheckbox = document.getElementById('use-credits');
+                if (creditsCheckbox && creditsCheckbox.checked) {
+                    grandTotal -= 8.00;
+                }
+
+                // Update grand total display
+                const grandTotalEl = document.getElementById('grand-total');
+                if (grandTotalEl) {
+                    grandTotalEl.textContent = '₹' + grandTotal.toFixed(2);
+                }
+            }
+
+            // Handle E-Markets Credits checkbox
+            const creditsCheckbox = document.getElementById('use-credits');
+            if (creditsCheckbox) {
+                creditsCheckbox.addEventListener('change', updateGrandTotal);
+            }
+        });
+    </script>
 
     <%- include('./partials/footer') %>

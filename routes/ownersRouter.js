@@ -112,9 +112,105 @@ router.get("/admin/gallery/delete/:filename", isOwnerLoggedIn, async function (r
     }
 });
 
+router.post("/admin/flashsale/update", isOwnerLoggedIn, async function (req, res) {
+    try {
+        const { startDate, startTime, endDate, endTime, isActive } = req.body;
+
+        let owner = await ownerModel.findOne();
+        if (!owner) {
+            req.flash("error", "Owner not found");
+            return res.redirect("/owners/admin");
+        }
+
+        // Create proper Date objects and validate
+        let startDateTime = null;
+        let endDateTime = null;
+
+        if (startDate && startTime) {
+            startDateTime = new Date(`${startDate}T${startTime}`);
+        }
+        if (endDate && endTime) {
+            endDateTime = new Date(`${endDate}T${endTime}`);
+        }
+
+        owner.flashSale = {
+            startTime: startDateTime,
+            endTime: endDateTime,
+            isActive: isActive === 'on' || isActive === true
+        };
+
+        owner.markModified('flashSale');
+        await owner.save();
+        req.flash("success", "Flash sale settings updated successfully.");
+        res.redirect("/owners/admin");
+
+    } catch (err) {
+        console.error("Error updating flash sale:", err);
+        req.flash("error", "Error updating flash sale settings");
+        res.redirect("/owners/admin");
+    }
+});
+
+router.get("/admin/product/delete/:id", isOwnerLoggedIn, async function (req, res) {
+    try {
+        await productModel.findByIdAndDelete(req.params.id);
+        req.flash("success", "Product deleted successfully.");
+        res.redirect("/owners/admin");
+    } catch (err) {
+        req.flash("error", "Error deleting product.");
+        res.redirect("/owners/admin");
+    }
+});
+
+router.get("/admin/product/edit/:id", isOwnerLoggedIn, async function (req, res) {
+    try {
+        const product = await productModel.findById(req.params.id);
+        if (!product) {
+            req.flash("error", "Product not found.");
+            return res.redirect("/owners/admin");
+        }
+        let success = req.flash("success");
+        // Reuse createproducts view but pass 'product' to pre-fill
+        res.render("createproducts", { success, product: product, editMode: true });
+    } catch (err) {
+        req.flash("error", "Error loading product for edit.");
+        res.redirect("/owners/admin");
+    }
+});
+
+router.post("/admin/product/update/:id", isOwnerLoggedIn, upload.single("image"), async function (req, res) {
+    try {
+        let { name, price, discount, bgcolor, panelcolor, textcolor, flashSale, category, brand, collections } = req.body;
+
+        let updateData = {
+            name, price, discount, bgcolor, panelcolor, textcolor,
+            flashSale: flashSale === 'true',
+            category, brand
+        };
+
+        // Handle collections
+        if (collections) {
+            updateData.collections = Array.isArray(collections) ? collections : [collections];
+        }
+
+        // Only update image if a new one is uploaded
+        if (req.file) {
+            updateData.image = req.file.filename;
+        }
+
+        await productModel.findByIdAndUpdate(req.params.id, updateData);
+        req.flash("success", "Product updated successfully.");
+        res.redirect("/owners/admin");
+
+    } catch (err) {
+        req.flash("error", "Error updating product.");
+        res.redirect("/owners/admin");
+    }
+});
+
 router.get("/create", isOwnerLoggedIn, function (req, res) {
     let success = req.flash("success");
-    res.render("createproducts", { success });
+    res.render("createproducts", { success, product: null, editMode: false });
 });
 
 

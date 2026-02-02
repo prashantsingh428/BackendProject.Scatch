@@ -1,13 +1,96 @@
 <%- include('./partials/header') %>
-    <div class="w-full h-screen flex flex-col items-center justify-center text-center">
-        <h3 class="text-4xl mb-6">welcome to <span class="text-blue-400 font-semibold">Scatch</span></h3>
-        <p class="text-xl mb-10 text-gray-600">Please choose an option to continue</p>
-        <div class="flex gap-5">
-            <a href="/login"
-                class="px-8 py-3 bg-blue-500 text-white rounded-full text-lg hover:bg-blue-600 transition">Login</a>
-            <a href="/register"
-                class="px-8 py-3 bg-zinc-800 text-white rounded-full text-lg hover:bg-zinc-900 transition">Create
-                Account</a>
+
+    <div class="relative w-full min-h-screen bg-white overflow-hidden flex items-center justify-center">
+        <!-- Sophisticated Background Elements -->
+        <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-zinc-100 rounded-full blur-[120px] opacity-60">
         </div>
+        <div
+            class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-zinc-50 rounded-full blur-[120px] opacity-60">
+        </div>
+
+        <!-- Hero Container -->
+        <div class="container mx-auto px-6 relative z-10 flex flex-col items-center">
+            <!-- Badge -->
+            <div class="mb-8 animate-fade-in-down">
+                <span
+                    class="px-4 py-2 bg-zinc-100 text-[#18181B] text-[10px] font-bold tracking-[0.2em] uppercase rounded-full border border-zinc-200/50">
+                    Premium Fashion Destination
+                </span>
+            </div>
+
+            <!-- Main Heading -->
+            <div class="text-center max-w-4xl mb-10 animate-fade-in">
+                <h1 class="text-6xl md:text-8xl font-serif text-[#18181B] leading-[1.05] tracking-tight mb-8">
+                    Redefine Your <br />
+                    <span class="italic text-[#B88E2F]">Signature</span> Style
+                </h1>
+                <p class="text-lg md:text-xl text-zinc-500 max-w-2xl mx-auto leading-relaxed">
+                    Experience the next generation of curated fashion. Scatch brings together elite collections and
+                    effortless shopping in one sophisticated platform.
+                </p>
+            </div>
+
+            <!-- CTA Buttons -->
+            <div class="flex flex-col sm:flex-row gap-5 items-center animate-fade-in-up"
+                style="animation-delay: 300ms;">
+                <a href="/owners/admin"
+                    class="group relative px-10 py-5 bg-[#18181B] text-white rounded-2xl font-bold text-sm tracking-widest uppercase transition-all hover:scale-[1.02] active:scale-[0.98] shadow-2xl shadow-zinc-900/20 flex items-center gap-3">
+                    Manage Store
+                    <i
+                        class="ri-arrow-right-up-line transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"></i>
+                </a>
+                <a href="/register"
+                    class="px-10 py-5 bg-white text-[#18181B] border border-zinc-200 rounded-2xl font-bold text-sm tracking-widest uppercase transition-all hover:bg-zinc-50 hover:border-zinc-300">
+                    Create Account
+                </a>
+            </div>
+
+            <!-- Trust Indicators -->
+            <div class="mt-24 grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-16 opacity-40 animate-fade-in"
+                style="animation-delay: 600ms;">
+                <div class="flex flex-col items-center gap-2">
+                    <i class="ri-shield-check-line text-2xl"></i>
+                    <span class="text-[10px] font-bold tracking-widest uppercase">Secure</span>
+                </div>
+                <div class="flex flex-col items-center gap-2">
+                    <i class="ri-truck-line text-2xl"></i>
+                    <span class="text-[10px] font-bold tracking-widest uppercase">Express</span>
+                </div>
+                <div class="flex flex-col items-center gap-2">
+                    <i class="ri-award-line text-2xl"></i>
+                    <span class="text-[10px] font-bold tracking-widest uppercase">Premium</span>
+                </div>
+                <div class="flex flex-col items-center gap-2">
+                    <i class="ri-customer-service-2-line text-2xl"></i>
+                    <span class="text-[10px] font-bold tracking-widest uppercase">Support</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Decorative Floating Elements (Animation visual) -->
+        <div
+            class="hidden lg:block absolute top-[20%] right-[15%] w-32 h-44 bg-white/40 backdrop-blur-md rounded-2xl border border-white/20 shadow-xl rotate-12 animate-float">
+        </div>
+        <div class="hidden lg:block absolute bottom-[20%] left-[15%] w-40 h-28 bg-white/40 backdrop-blur-md rounded-2xl border border-white/20 shadow-xl -rotate-6 animate-float"
+            style="animation-delay: 1.5s;"></div>
     </div>
+
+    <style>
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(var(--tw-rotate));
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(var(--tw-rotate));
+            }
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+    </style>
+
     <%- include('./partials/footer') %>
