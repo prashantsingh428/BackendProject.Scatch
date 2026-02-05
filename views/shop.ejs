@@ -10,32 +10,34 @@
         <% } %>
 
             <!-- Hero Carousel Section -->
-            <div class="relative w-full h-[500px] md:h-[550px] mb-12 overflow-hidden group bg-[#f8f9fa]">
+            <div class="relative w-full h-[380px] md:h-[550px] mb-8 md:mb-12 overflow-hidden group bg-[#f8f9fa]">
                 <!-- Carousel Container -->
                 <div id="hero-carousel" class="w-full h-full relative">
-                    <!-- Slide 1: Premium Fashion (Flex-Inspired Layout) -->
+                    <!-- Slide 1: Premium Fashion -->
                     <div
                         class="carousel-slide absolute top-0 left-0 w-full h-full bg-[#f8f9fa] flex items-center justify-center transition-opacity duration-700 opacity-100 z-10 overflow-hidden">
+                        <!-- Dark Overlay -->
+                        <div class="absolute inset-0 bg-black/5 pointer-events-none z-0"></div>
 
                         <div
                             class="container mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center justify-between h-full relative z-10">
                             <!-- Left: Typography -->
                             <div
-                                class="w-full md:w-1/2 flex flex-col items-start justify-center text-left space-y-6 pt-10 md:pt-0">
-                                <div class="flex items-center gap-2 text-xs font-bold tracking-widest text-[#18181B]/60 uppercase animate-fade-in-up"
+                                class="w-full md:w-1/2 flex flex-col items-center md:items-start justify-center text-center md:text-left space-y-4 md:space-y-6 pt-12 md:pt-0 relative z-20">
+                                <div class="flex items-center gap-2 text-[10px] md:text-xs font-bold tracking-widest text-[#18181B]/60 uppercase animate-fade-in-up"
                                     style="animation-delay: 100ms;">
                                     <span>Premium Collection 2024</span>
                                     <i class="ri-arrow-right-line"></i>
                                 </div>
 
-                                <h1 class="text-4xl md:text-6xl font-serif text-[#18181B] leading-[1.1] animate-fade-in-up"
+                                <h1 class="text-3xl md:text-6xl font-serif text-[#18181B] leading-[1.1] animate-fade-in-up"
                                     style="animation-delay: 300ms;">
                                     Elevate Your <span class="italic text-[#B88E2F]">Style</span> & <br>
                                     Personal <span class="italic text-[#B88E2F]">Wardrobe</span> in <br>
                                     One Smart Platform
                                 </h1>
 
-                                <p class="text-zinc-500 max-w-md text-sm md:text-base leading-relaxed animate-fade-in-up"
+                                <p class="text-zinc-500 max-w-md text-sm md:text-base leading-relaxed animate-fade-in-up px-4 md:px-0"
                                     style="animation-delay: 500ms;">
                                     From casual wear to formal attire, Scatch keeps your personal style in sync. One
                                     store, infinite possibilities, built to simplify your fashion choices.
@@ -57,7 +59,7 @@
 
                             <!-- Right: 3D Visuals (Cards) -->
                             <div
-                                class="hidden md:flex w-1/2 h-full items-center justify-center relative perspective-1000">
+                                class="hidden md:flex w-1/2 h-full items-center justify-start md:pl-20 relative perspective-1000">
                                 <!-- Decorative Background Blur -->
                                 <div
                                     class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#B88E2F]/10 rounded-full blur-3xl -z-10">
@@ -137,31 +139,31 @@
                         </div>
 
                         <!-- Gradient for mobile text readability if needed -->
-                        <div
-                            class="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent md:hidden pointer-events-none">
-                        </div>
+
                     </div>
 
-                    <!-- Slide 2: Winter Series (Blue Theme - Reversed Layout) -->
+                    <!-- Slide 2: Winter Series -->
                     <div
                         class="carousel-slide absolute top-0 left-0 w-full h-full bg-[#f0f4f8] flex items-center justify-center transition-opacity duration-700 opacity-0 z-0 overflow-hidden">
+                        <!-- Dark Overlay -->
+                        <div class="absolute inset-0 bg-black/5 pointer-events-none z-0"></div>
                         <div
                             class="container mx-auto px-6 md:px-12 flex flex-col md:flex-row-reverse items-center justify-between h-full relative z-10">
 
                             <!-- Right: Text (Reversed) -->
                             <div
-                                class="w-full md:w-1/2 flex flex-col items-end justify-center text-right space-y-6 pt-10 md:pt-0">
+                                class="w-full md:w-1/2 flex flex-col items-center md:items-end justify-center text-center md:text-right space-y-4 md:space-y-6 pt-12 md:pt-0 relative z-20">
                                 <div
-                                    class="flex items-center gap-2 text-xs font-bold tracking-widest text-slate-500 uppercase">
+                                    class="flex items-center gap-2 text-[10px] md:text-xs font-bold tracking-widest text-slate-500 uppercase">
                                     <i class="ri-asterisk"></i>
                                     <span>Winter Series 2024</span>
                                 </div>
-                                <h1 class="text-4xl md:text-6xl font-serif text-slate-800 leading-[1.1]">
+                                <h1 class="text-3xl md:text-6xl font-serif text-slate-800 leading-[1.1]">
                                     Refined <span class="italic text-blue-600">Comfort</span> & <br>
                                     Timeless <span class="italic text-blue-600">Detailed</span> <br>
                                     Essentials
                                 </h1>
-                                <p class="text-slate-500 max-w-md text-sm md:text-base leading-relaxed">
+                                <p class="text-slate-500 max-w-md text-sm md:text-base leading-relaxed px-4 md:px-0">
                                     Crafted for the cold, designed for the bold. Experience the softness of premium
                                     cotton blends in our latest winter drop.
                                 </p>
@@ -179,7 +181,7 @@
 
                             <!-- Left: Visuals (Reversed) -->
                             <div
-                                class="hidden md:flex w-1/2 h-full items-center justify-center relative perspective-1000">
+                                class="hidden md:flex w-1/2 h-full items-center justify-end md:pr-20 relative perspective-1000">
                                 <div
                                     class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-blue-100 rounded-full blur-3xl -z-10">
                                 </div>
@@ -253,9 +255,17 @@
                         </div>
                     </div>
 
-                    <!-- Slide 3: New Arrivals (Warm Theme - Center/Fan Layout) -->
+                    <!-- Slide 3: New Arrivals -->
                     <div
                         class="carousel-slide absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[#FFF8E7] to-[#FFE4C4] flex items-center justify-center transition-opacity duration-700 opacity-0 z-0 overflow-hidden">
+                        <!-- Dark Overlay -->
+                        <div class="absolute inset-0 bg-black/5 pointer-events-none z-0"></div>
+
+                        <!-- Mobile Background Texture -->
+                        <div class="absolute inset-0 md:hidden opacity-10 pointer-events-none z-0"
+                            style="background-image: url('/images/uploads/3bag 1.png'); background-size: 150%; background-position: center; background-repeat: no-repeat; filter: grayscale(100%);">
+                        </div>
+
                         <div
                             class="container mx-auto px-6 md:px-12 flex flex-col items-center justify-center h-full relative z-10 text-center">
 
@@ -264,7 +274,7 @@
                                 <span
                                     class="inline-block px-3 py-1 rounded-full bg-orange-100 text-orange-700 text-[10px] font-bold tracking-widest uppercase mb-4 animate-fade-in-up">Just
                                     Dropped</span>
-                                <h1 class="text-5xl md:text-7xl font-serif text-stone-800 leading-tight mb-6 animate-fade-in-up"
+                                <h1 class="text-3xl md:text-7xl font-serif text-stone-800 leading-tight mb-6 animate-fade-in-up"
                                     style="animation-delay: 150ms;">
                                     Pure <span class="italic text-orange-600">Natural</span> <br>
                                     Aesthetics
@@ -718,7 +728,7 @@
                         %>
 
                         <% if (flashProducts && flashProducts.length> 0) { %>
-                            <!-- Flash Sale Section (Ultra-Modern Refined) -->
+                            <!-- Flash Sale Section -->
                             <div class="w-full mb-8 relative">
                                 <!-- Background Decoration (Subtle Fade) -->
                                 <div
@@ -726,9 +736,11 @@
                                 </div>
 
                                 <div class="w-full">
-                                    <!-- Header: Sleek & Modern -->
-                                    <div class="flex flex-col md:flex-row items-end justify-between mb-8 px-12">
-                                        <div class="flex flex-col gap-2">
+                                    <!-- Header -->
+                                    <div
+                                        class="flex flex-col md:flex-row items-center md:items-end justify-between mb-8 px-6 md:px-12">
+                                        <div
+                                            class="flex flex-col gap-2 items-center md:items-start text-center md:text-left">
                                             <div class="flex items-center gap-3 mb-2">
                                                 <div class="w-2 h-2 bg-red-600 rounded-full animate-ping"></div>
                                                 <span
@@ -943,19 +955,25 @@
                                         filter: blur(2px) grayscale(0.4);
                                     }
 
+                                    .focus-hover-container {
+                                        perspective: 1500px;
+                                        transform-style: preserve-3d;
+                                    }
+
                                     .focus-hover-container .promo-card:hover {
-                                        transform: scale(1.15) !important;
+                                        transform: perspective(1500px) scale(1.1) !important;
                                         opacity: 1 !important;
                                         filter: blur(0) grayscale(0) !important;
-                                        z-index: 50;
-                                        box-shadow: 0 40px 70px -15px rgba(0, 0, 0, 0.4);
+                                        z-index: 1000 !important;
+                                        box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.5);
                                     }
 
                                     .promo-card {
-                                        transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+                                        transition: transform 0.1s ease-out, opacity 0.4s ease, filter 0.4s ease;
                                         min-width: 320px;
                                         flex-shrink: 0;
                                         transform-origin: center center;
+                                        backface-visibility: hidden;
                                     }
 
                                     .no-scrollbar::-webkit-scrollbar {
@@ -977,237 +995,435 @@
                                     </div>
 
                                     <div id="promo-card-slider"
-                                        class="focus-hover-container flex gap-8 overflow-x-auto no-scrollbar px-12 py-10"
+                                        class="focus-hover-container flex gap-0 overflow-x-auto no-scrollbar px-12 py-10"
                                         onmouseenter="stopPromoScroll()" onmouseleave="startPromoScroll()">
 
                                         <!-- Card 1: Jackets -->
                                         <div
-                                            class="promo-card relative bg-[#EFF6FF] rounded-[2rem] p-8 flex flex-col justify-between overflow-hidden border border-blue-50 h-[28rem]">
+                                            class="promo-card relative bg-[#BCCCDC] rounded-[2.5rem] p-10 flex flex-col justify-between overflow-hidden border border-white/20 h-[30rem] shadow-xl">
+                                            <!-- Subtle Background Image -->
+                                            <div class="absolute inset-0 opacity-40 bg-cover bg-center mix-blend-overlay"
+                                                style="background-image: url('https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?q=80&w=800&auto=format&fit=crop');">
+                                            </div>
                                             <div class="z-10 relative">
                                                 <span
-                                                    class="text-[#B88E2F] text-xs font-bold tracking-widest mb-3 block">30%
+                                                    class="text-amber-700/70 text-xs font-black tracking-[0.2em] mb-4 block uppercase leading-none">30%
                                                     OFF</span>
-                                                <h3 class="text-4xl font-black text-darkText mb-3 leading-tight">
+                                                <h3
+                                                    class="text-4xl font-serif font-black text-darkText mb-2 leading-tight">
                                                     Modern
                                                     <br>Jackets
                                                 </h3>
-                                                <ul class="mb-6 space-y-1">
+                                                <p class="text-[10px] text-zinc-500 max-w-[180px] mb-6 leading-relaxed">
+                                                    Experience unmatched warmth and style with our premium waterproof
+                                                    selection.
+                                                </p>
+                                                <ul class="mb-8 space-y-1">
                                                     <li
-                                                        class="flex items-center text-zinc-500 text-[10px] font-bold uppercase tracking-wide">
-                                                        <i class="ri-check-line mr-1 text-[#B88E2F]"></i> Water
+                                                        class="flex items-center text-zinc-600 text-[11px] font-bold uppercase tracking-wider">
+                                                        <i class="ri-check-line mr-2 text-amber-700"></i> Water
                                                         Resistant
                                                     </li>
                                                     <li
-                                                        class="flex items-center text-zinc-500 text-[10px] font-bold uppercase tracking-wide">
-                                                        <i class="ri-check-line mr-1 text-[#B88E2F]"></i> Thermal Lining
+                                                        class="flex items-center text-zinc-600 text-[11px] font-bold uppercase tracking-wider">
+                                                        <i class="ri-check-line mr-2 text-amber-700"></i> Thermal Lining
                                                     </li>
                                                 </ul>
                                                 <button
-                                                    class="px-6 py-3 bg-[#B88E2F] text-white text-xs font-bold uppercase tracking-wider hover:bg-darkText transition-colors rounded-full shadow-lg shadow-[#B88E2F]/20 w-fit">Buy
-                                                    Now</button>
+                                                    class="px-8 py-3 bg-[#B88E2F] text-white text-[11px] font-black uppercase tracking-[0.15em] hover:bg-darkText transition-all rounded-lg shadow-lg shadow-[#B88E2F]/20 w-fit">BUY
+                                                    NOW</button>
+
+                                                <!-- Promo Footer -->
+                                                <div class="mt-8 flex flex-col gap-2 opacity-50">
+                                                    <div
+                                                        class="flex items-center text-[9px] font-black uppercase tracking-widest text-darkText">
+                                                        <i class="ri-time-line mr-2 text-amber-700"></i> Limited Time
+                                                        Offer!
+                                                    </div>
+                                                    <div
+                                                        class="flex items-center text-[9px] font-black uppercase tracking-widest text-darkText">
+                                                        <i class="ri-truck-line mr-2 text-amber-700"></i> Free Shipping
+                                                        & Returns
+                                                    </div>
+                                                    <div
+                                                        class="flex items-center text-[9px] font-black uppercase tracking-widest text-darkText font-serif italic">
+                                                        <i class="ri-discount-percent-line mr-2 text-amber-700"></i>
+                                                        Save up to 30% Today
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="absolute right-0 bottom-0 flex justify-end">
+                                            <div class="absolute right-0 bottom-0 pointer-events-none">
                                                 <% if (products && products.length> 0) { %>
                                                     <img src="/images/uploads/<%= products[0].image %>"
-                                                        class="relative w-56 h-56 object-contain drop-shadow-xl transition-transform duration-500">
+                                                        class="relative w-64 h-64 object-contain drop-shadow-2xl translate-x-10 translate-y-10 group-hover:scale-110 transition-transform duration-700">
                                                     <% } %>
                                             </div>
                                         </div>
 
                                         <!-- Card 2: Dresses -->
                                         <div
-                                            class="promo-card relative bg-[#FDF4F0] rounded-[2rem] p-8 flex flex-col justify-between overflow-hidden border border-orange-50 h-[28rem]">
+                                            class="promo-card relative bg-[#E6D4C6] rounded-[2.5rem] p-10 flex flex-col justify-between overflow-hidden border border-white/20 h-[30rem] shadow-xl">
+                                            <!-- Subtle Background Image -->
+                                            <div class="absolute inset-0 opacity-40 bg-cover bg-center mix-blend-overlay"
+                                                style="background-image: url('https://images.unsplash.com/photo-1595777457583-95e059d581b8?q=80&w=800&auto=format&fit=crop');">
+                                            </div>
                                             <div class="z-10 relative">
                                                 <span
-                                                    class="text-[#B88E2F] text-xs font-bold tracking-widest mb-3 block">15%
+                                                    class="text-amber-700/70 text-xs font-black tracking-[0.2em] mb-4 block uppercase leading-none">15%
                                                     OFF</span>
-                                                <h3 class="text-4xl font-black text-darkText mb-3 leading-tight">
+                                                <h3
+                                                    class="text-4xl font-serif font-black text-darkText mb-2 leading-tight">
                                                     Summer
                                                     <br>Dresses
                                                 </h3>
-                                                <ul class="mb-6 space-y-1">
+                                                <p class="text-[10px] text-zinc-500 max-w-[180px] mb-6 leading-relaxed">
+                                                    Flowing silhouettes and organic fabrics for your perfect
+                                                    sun-drenched days.
+                                                </p>
+                                                <ul class="mb-8 space-y-1">
                                                     <li
-                                                        class="flex items-center text-zinc-500 text-[10px] font-bold uppercase tracking-wide">
-                                                        <i class="ri-check-line mr-1 text-[#B88E2F]"></i> 100% Organic
+                                                        class="flex items-center text-zinc-600 text-[11px] font-bold uppercase tracking-wider">
+                                                        <i class="ri-check-line mr-2 text-amber-700"></i> 100% Organic
                                                         Cotton
                                                     </li>
                                                     <li
-                                                        class="flex items-center text-zinc-500 text-[10px] font-bold uppercase tracking-wide">
-                                                        <i class="ri-check-line mr-1 text-[#B88E2F]"></i> Breathable
+                                                        class="flex items-center text-zinc-600 text-[11px] font-bold uppercase tracking-wider">
+                                                        <i class="ri-check-line mr-2 text-amber-700"></i> Breathable
                                                     </li>
                                                 </ul>
                                                 <button
-                                                    class="px-6 py-3 bg-[#B88E2F] text-white text-xs font-bold uppercase tracking-wider hover:bg-darkText transition-colors rounded-full shadow-lg shadow-[#B88E2F]/20 w-fit">Buy
-                                                    Now</button>
+                                                    class="px-8 py-3 bg-[#B88E2F] text-white text-[11px] font-black uppercase tracking-[0.15em] hover:bg-darkText transition-all rounded-lg shadow-lg shadow-[#B88E2F]/20 w-fit">BUY
+                                                    NOW</button>
+
+                                                <!-- Promo Footer -->
+                                                <div class="mt-8 flex flex-col gap-2 opacity-50">
+                                                    <div
+                                                        class="flex items-center text-[9px] font-black uppercase tracking-widest text-darkText">
+                                                        <i class="ri-time-line mr-2 text-amber-700"></i> Limited Time
+                                                        Offer!
+                                                    </div>
+                                                    <div
+                                                        class="flex items-center text-[9px] font-black uppercase tracking-widest text-darkText">
+                                                        <i class="ri-truck-line mr-2 text-amber-700"></i> Free Shipping
+                                                        & Returns
+                                                    </div>
+                                                    <div
+                                                        class="flex items-center text-[9px] font-black uppercase tracking-widest text-darkText font-serif italic">
+                                                        <i class="ri-discount-percent-line mr-2 text-amber-700"></i>
+                                                        Save up to 30% Today
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="absolute right-0 bottom-0 flex justify-end">
+                                            <div class="absolute right-0 bottom-0 pointer-events-none">
                                                 <% if (products && products.length> 1) { %>
                                                     <img src="/images/uploads/<%= products[1].image %>"
-                                                        class="relative w-56 h-56 object-contain drop-shadow-xl transition-transform duration-500">
+                                                        class="relative w-64 h-64 object-contain drop-shadow-2xl translate-x-10 translate-y-10 group-hover:scale-110 transition-transform duration-700">
                                                     <% } %>
                                             </div>
                                         </div>
 
                                         <!-- Card 3: Sneakers -->
                                         <div
-                                            class="promo-card relative bg-[#F0FDF4] rounded-[2rem] p-8 flex flex-col justify-between overflow-hidden border border-green-50 h-[28rem]">
+                                            class="promo-card relative bg-[#D1D4C7] rounded-[2.5rem] p-10 flex flex-col justify-between overflow-hidden border border-white/20 h-[30rem] shadow-xl">
+                                            <!-- Subtle Background Image -->
+                                            <div class="absolute inset-0 opacity-40 bg-cover bg-center mix-blend-overlay"
+                                                style="background-image: url('https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=800&auto=format&fit=crop');">
+                                            </div>
                                             <div class="z-10 relative">
                                                 <span
-                                                    class="text-[#B88E2F] text-xs font-bold tracking-widest mb-3 block">NEW
+                                                    class="text-amber-700/70 text-xs font-black tracking-[0.2em] mb-4 block uppercase leading-none">NEW
                                                     IN</span>
-                                                <h3 class="text-4xl font-black text-darkText mb-3 leading-tight">
+                                                <h3
+                                                    class="text-4xl font-serif font-black text-darkText mb-2 leading-tight">
                                                     Urban
                                                     <br>Sneakers
                                                 </h3>
-                                                <ul class="mb-6 space-y-1">
+                                                <p class="text-[10px] text-zinc-500 max-w-[180px] mb-6 leading-relaxed">
+                                                    High-performance tech meets urban aesthetics for every step of your
+                                                    journey.
+                                                </p>
+                                                <ul class="mb-8 space-y-1">
                                                     <li
-                                                        class="flex items-center text-zinc-500 text-[10px] font-bold uppercase tracking-wide">
-                                                        <i class="ri-check-line mr-1 text-[#B88E2F]"></i> Cushion Tech
+                                                        class="flex items-center text-zinc-600 text-[11px] font-bold uppercase tracking-wider">
+                                                        <i class="ri-check-line mr-2 text-amber-700"></i> Cushion Tech
                                                     </li>
                                                     <li
-                                                        class="flex items-center text-zinc-500 text-[10px] font-bold uppercase tracking-wide">
-                                                        <i class="ri-check-line mr-1 text-[#B88E2F]"></i> Anti-Slip Sole
+                                                        class="flex items-center text-zinc-600 text-[11px] font-bold uppercase tracking-wider">
+                                                        <i class="ri-check-line mr-2 text-amber-700"></i> Anti-Slip Sole
                                                     </li>
                                                 </ul>
                                                 <button
-                                                    class="px-6 py-3 bg-[#B88E2F] text-white text-xs font-bold uppercase tracking-wider hover:bg-darkText transition-colors rounded-full shadow-lg shadow-[#B88E2F]/20 w-fit">Buy
-                                                    Now</button>
+                                                    class="px-8 py-3 bg-[#B88E2F] text-white text-[11px] font-black uppercase tracking-[0.15em] hover:bg-darkText transition-all rounded-lg shadow-lg shadow-[#B88E2F]/20 w-fit">BUY
+                                                    NOW</button>
+
+                                                <!-- Promo Footer -->
+                                                <div class="mt-8 flex flex-col gap-2 opacity-50">
+                                                    <div
+                                                        class="flex items-center text-[9px] font-black uppercase tracking-widest text-darkText">
+                                                        <i class="ri-time-line mr-2 text-amber-700"></i> Limited Time
+                                                        Offer!
+                                                    </div>
+                                                    <div
+                                                        class="flex items-center text-[9px] font-black uppercase tracking-widest text-darkText">
+                                                        <i class="ri-truck-line mr-2 text-amber-700"></i> Free Shipping
+                                                        & Returns
+                                                    </div>
+                                                    <div
+                                                        class="flex items-center text-[9px] font-black uppercase tracking-widest text-darkText font-serif italic">
+                                                        <i class="ri-discount-percent-line mr-2 text-amber-700"></i>
+                                                        Save up to 30% Today
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="absolute right-0 bottom-0 flex justify-end">
+                                            <div class="absolute right-0 bottom-0 pointer-events-none">
                                                 <% if (products && products.length> 2) { %>
                                                     <img src="/images/uploads/<%= products[2].image %>"
-                                                        class="relative w-56 h-56 object-contain drop-shadow-xl transition-transform duration-500">
+                                                        class="relative w-64 h-64 object-contain drop-shadow-2xl translate-x-10 translate-y-10 group-hover:scale-110 transition-transform duration-700">
                                                     <% } %>
                                             </div>
                                         </div>
 
-                                        <!-- Card 4: Watches (New) -->
+                                        <!-- Card 4: Watches -->
                                         <div
-                                            class="promo-card relative bg-[#F3F4F6] rounded-[2rem] p-8 flex flex-col justify-between overflow-hidden border border-gray-100 h-[28rem]">
+                                            class="promo-card relative bg-[#D7D8DA] rounded-[2.5rem] p-10 flex flex-col justify-between overflow-hidden border border-white/20 h-[30rem] shadow-xl">
+                                            <!-- Subtle Background Image -->
+                                            <div class="absolute inset-0 opacity-40 bg-cover bg-center mix-blend-overlay"
+                                                style="background-image: url('https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=800&auto=format&fit=crop');">
+                                            </div>
                                             <div class="z-10 relative">
                                                 <span
-                                                    class="text-[#B88E2F] text-xs font-bold tracking-widest mb-3 block">EXCLUSIVE</span>
-                                                <h3 class="text-4xl font-black text-darkText mb-3 leading-tight">
+                                                    class="text-amber-700/70 text-xs font-black tracking-[0.2em] mb-4 block uppercase leading-none">EXCLUSIVE</span>
+                                                <h3
+                                                    class="text-4xl font-serif font-black text-darkText mb-2 leading-tight">
                                                     Luxury
                                                     <br>Watches
                                                 </h3>
-                                                <ul class="mb-6 space-y-1">
+                                                <p class="text-[10px] text-zinc-500 max-w-[180px] mb-6 leading-relaxed">
+                                                    Timeless precision and sophisticated design crafted for the modern
+                                                    individual.
+                                                </p>
+                                                <ul class="mb-8 space-y-1">
                                                     <li
-                                                        class="flex items-center text-zinc-500 text-[10px] font-bold uppercase tracking-wide">
-                                                        <i class="ri-check-line mr-1 text-[#B88E2F]"></i> Swiss Movement
+                                                        class="flex items-center text-zinc-600 text-[11px] font-bold uppercase tracking-wider">
+                                                        <i class="ri-check-line mr-2 text-amber-700"></i> Swiss Movement
                                                     </li>
                                                     <li
-                                                        class="flex items-center text-zinc-500 text-[10px] font-bold uppercase tracking-wide">
-                                                        <i class="ri-check-line mr-1 text-[#B88E2F]"></i> Sapphire
+                                                        class="flex items-center text-zinc-600 text-[11px] font-bold uppercase tracking-wider">
+                                                        <i class="ri-check-line mr-2 text-amber-700"></i> Sapphire
                                                         Crystal
                                                     </li>
                                                 </ul>
                                                 <button
-                                                    class="px-6 py-3 bg-[#B88E2F] text-white text-xs font-bold uppercase tracking-wider hover:bg-darkText transition-colors rounded-full shadow-lg shadow-[#B88E2F]/20 w-fit">Buy
-                                                    Now</button>
+                                                    class="px-8 py-3 bg-[#B88E2F] text-white text-[11px] font-black uppercase tracking-[0.15em] hover:bg-darkText transition-all rounded-lg shadow-lg shadow-[#B88E2F]/20 w-fit">BUY
+                                                    NOW</button>
+
+                                                <!-- Promo Footer -->
+                                                <div class="mt-8 flex flex-col gap-2 opacity-50">
+                                                    <div
+                                                        class="flex items-center text-[9px] font-black uppercase tracking-widest text-darkText">
+                                                        <i class="ri-time-line mr-2 text-amber-700"></i> Limited Time
+                                                        Offer!
+                                                    </div>
+                                                    <div
+                                                        class="flex items-center text-[9px] font-black uppercase tracking-widest text-darkText">
+                                                        <i class="ri-truck-line mr-2 text-amber-700"></i> Free Shipping
+                                                        & Returns
+                                                    </div>
+                                                    <div
+                                                        class="flex items-center text-[9px] font-black uppercase tracking-widest text-darkText font-serif italic">
+                                                        <i class="ri-discount-percent-line mr-2 text-amber-700"></i>
+                                                        Save up to 30% Today
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="absolute right-0 bottom-0 flex justify-end">
+                                            <div class="absolute right-0 bottom-0 pointer-events-none">
                                                 <% if (products && products.length> 3) { %>
                                                     <img src="/images/uploads/<%= products[3].image %>"
-                                                        class="relative w-56 h-56 object-contain drop-shadow-xl transition-transform duration-500">
-                                                    <% } else if (products && products.length> 0) { %>
-                                                        <img src="/images/uploads/<%= products[0].image %>"
-                                                            class="relative w-56 h-56 object-contain drop-shadow-xl transition-transform duration-500">
-                                                        <% } %>
+                                                        class="relative w-64 h-64 object-contain drop-shadow-2xl translate-x-10 translate-y-10 group-hover:scale-110 transition-transform duration-700">
+                                                    <% } %>
                                             </div>
                                         </div>
 
-                                        <!-- Card 5: Bags (New) -->
+                                        <!-- Card 5: Bags -->
                                         <div
-                                            class="promo-card relative bg-[#FFF7ED] rounded-[2rem] p-8 flex flex-col justify-between overflow-hidden border border-orange-100 h-[28rem]">
+                                            class="promo-card relative bg-[#DCC8B8] rounded-[2.5rem] p-10 flex flex-col justify-between overflow-hidden border border-white/20 h-[30rem] shadow-xl">
+                                            <!-- Subtle Background Image -->
+                                            <div class="absolute inset-0 opacity-40 bg-cover bg-center mix-blend-overlay"
+                                                style="background-image: url('https://images.unsplash.com/photo-1548036328-c9fa89d128fa?q=80&w=800&auto=format&fit=crop');">
+                                            </div>
                                             <div class="z-10 relative">
                                                 <span
-                                                    class="text-[#B88E2F] text-xs font-bold tracking-widest mb-3 block">TRAVEL</span>
-                                                <h3 class="text-4xl font-black text-darkText mb-3 leading-tight">
+                                                    class="text-amber-700/70 text-xs font-black tracking-[0.2em] mb-4 block uppercase leading-none">TRAVEL</span>
+                                                <h3
+                                                    class="text-4xl font-serif font-black text-darkText mb-2 leading-tight">
                                                     Leather
                                                     <br>Bags
                                                 </h3>
-                                                <ul class="mb-6 space-y-1">
+                                                <p class="text-[10px] text-zinc-500 max-w-[180px] mb-6 leading-relaxed">
+                                                    Handcrafted durability and classic elegance for your daily ventures.
+                                                </p>
+                                                <ul class="mb-8 space-y-1">
                                                     <li
-                                                        class="flex items-center text-zinc-500 text-[10px] font-bold uppercase tracking-wide">
-                                                        <i class="ri-check-line mr-1 text-[#B88E2F]"></i> Genuine
+                                                        class="flex items-center text-zinc-600 text-[11px] font-bold uppercase tracking-wider">
+                                                        <i class="ri-check-line mr-2 text-amber-700"></i> Genuine
                                                         Leather
                                                     </li>
                                                     <li
-                                                        class="flex items-center text-zinc-500 text-[10px] font-bold uppercase tracking-wide">
-                                                        <i class="ri-check-line mr-1 text-[#B88E2F]"></i> Handcrafted
+                                                        class="flex items-center text-zinc-600 text-[11px] font-bold uppercase tracking-wider">
+                                                        <i class="ri-check-line mr-2 text-amber-700"></i> Handcrafted
                                                     </li>
                                                 </ul>
                                                 <button
-                                                    class="px-6 py-3 bg-[#B88E2F] text-white text-xs font-bold uppercase tracking-wider hover:bg-darkText transition-colors rounded-full shadow-lg shadow-[#B88E2F]/20 w-fit">Buy
-                                                    Now</button>
+                                                    class="px-8 py-3 bg-[#B88E2F] text-white text-[11px] font-black uppercase tracking-[0.15em] hover:bg-darkText transition-all rounded-lg shadow-lg shadow-[#B88E2F]/20 w-fit">BUY
+                                                    NOW</button>
+
+                                                <!-- Promo Footer -->
+                                                <div class="mt-8 flex flex-col gap-2 opacity-50">
+                                                    <div
+                                                        class="flex items-center text-[9px] font-black uppercase tracking-widest text-darkText">
+                                                        <i class="ri-time-line mr-2 text-amber-700"></i> Limited Time
+                                                        Offer!
+                                                    </div>
+                                                    <div
+                                                        class="flex items-center text-[9px] font-black uppercase tracking-widest text-darkText">
+                                                        <i class="ri-truck-line mr-2 text-amber-700"></i> Free Shipping
+                                                        & Returns
+                                                    </div>
+                                                    <div
+                                                        class="flex items-center text-[9px] font-black uppercase tracking-widest text-darkText font-serif italic">
+                                                        <i class="ri-discount-percent-line mr-2 text-amber-700"></i>
+                                                        Save up to 30% Today
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="absolute right-0 bottom-0 flex justify-end">
+                                            <div class="absolute right-0 bottom-0 pointer-events-none">
                                                 <% if (products && products.length> 4) { %>
                                                     <img src="/images/uploads/<%= products[4].image %>"
-                                                        class="relative w-56 h-56 object-contain drop-shadow-xl transition-transform duration-500">
-                                                    <% } else if (products && products.length> 0) { %>
-                                                        <img src="/images/uploads/<%= products[0].image %>"
-                                                            class="relative w-56 h-56 object-contain drop-shadow-xl transition-transform duration-500">
-                                                        <% } %>
+                                                        class="relative w-64 h-64 object-contain drop-shadow-2xl translate-x-10 translate-y-10 group-hover:scale-110 transition-transform duration-700">
+                                                    <% } %>
                                             </div>
                                         </div>
 
-                                        <!-- Card 6: Eyewear (New) -->
+                                        <!-- Card 6: Eyewear -->
                                         <div
-                                            class="promo-card relative bg-[#FEFCE8] rounded-[2rem] p-8 flex flex-col justify-between overflow-hidden border border-yellow-100 h-[28rem]">
+                                            class="promo-card relative bg-[#EBE7D1] rounded-[2.5rem] p-10 flex flex-col justify-between overflow-hidden border border-white/20 h-[30rem] shadow-xl">
+                                            <!-- Subtle Background Image -->
+                                            <div class="absolute inset-0 opacity-40 bg-cover bg-center mix-blend-overlay"
+                                                style="background-image: url('https://images.unsplash.com/photo-1572635196237-14b3f281503f?q=80&w=800&auto=format&fit=crop');">
+                                            </div>
                                             <div class="z-10 relative">
                                                 <span
-                                                    class="text-[#B88E2F] text-xs font-bold tracking-widest mb-3 block">SUMMER</span>
-                                                <h3 class="text-4xl font-black text-darkText mb-3 leading-tight">
+                                                    class="text-amber-700/70 text-xs font-black tracking-[0.2em] mb-4 block uppercase leading-none">SUMMER</span>
+                                                <h3
+                                                    class="text-4xl font-serif font-black text-darkText mb-2 leading-tight">
                                                     Designer
                                                     <br>Eyewear
                                                 </h3>
-                                                <ul class="mb-6 space-y-1">
+                                                <p class="text-[10px] text-zinc-500 max-w-[180px] mb-6 leading-relaxed">
+                                                    Perfect clarity and UV protection wrapped in our most iconic frames.
+                                                </p>
+                                                <ul class="mb-8 space-y-1">
                                                     <li
-                                                        class="flex items-center text-zinc-500 text-[10px] font-bold uppercase tracking-wide">
-                                                        <i class="ri-check-line mr-1 text-[#B88E2F]"></i> UV Protection
+                                                        class="flex items-center text-zinc-600 text-[11px] font-bold uppercase tracking-wider">
+                                                        <i class="ri-check-line mr-2 text-amber-700"></i> UV Protection
                                                     </li>
                                                     <li
-                                                        class="flex items-center text-zinc-500 text-[10px] font-bold uppercase tracking-wide">
-                                                        <i class="ri-check-line mr-1 text-[#B88E2F]"></i> Polarized Lens
+                                                        class="flex items-center text-zinc-600 text-[11px] font-bold uppercase tracking-wider">
+                                                        <i class="ri-check-line mr-2 text-amber-700"></i> Polarized Lens
                                                     </li>
                                                 </ul>
                                                 <button
-                                                    class="px-6 py-3 bg-[#B88E2F] text-white text-xs font-bold uppercase tracking-wider hover:bg-darkText transition-colors rounded-full shadow-lg shadow-[#B88E2F]/20 w-fit">Buy
-                                                    Now</button>
+                                                    class="px-8 py-3 bg-[#B88E2F] text-white text-[11px] font-black uppercase tracking-[0.15em] hover:bg-darkText transition-all rounded-lg shadow-lg shadow-[#B88E2F]/20 w-fit">BUY
+                                                    NOW</button>
+
+                                                <!-- Promo Footer -->
+                                                <div class="mt-8 flex flex-col gap-2 opacity-50">
+                                                    <div
+                                                        class="flex items-center text-[9px] font-black uppercase tracking-widest text-darkText">
+                                                        <i class="ri-time-line mr-2 text-amber-700"></i> Limited Time
+                                                        Offer!
+                                                    </div>
+                                                    <div
+                                                        class="flex items-center text-[9px] font-black uppercase tracking-widest text-darkText">
+                                                        <i class="ri-truck-line mr-2 text-amber-700"></i> Free Shipping
+                                                        & Returns
+                                                    </div>
+                                                    <div
+                                                        class="flex items-center text-[9px] font-black uppercase tracking-widest text-darkText font-serif italic">
+                                                        <i class="ri-discount-percent-line mr-2 text-amber-700"></i>
+                                                        Save up to 30% Today
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="absolute right-0 bottom-0 flex justify-end">
+                                            <div class="absolute right-0 bottom-0 pointer-events-none">
                                                 <% if (products && products.length> 5) { %>
                                                     <img src="/images/uploads/<%= products[5].image %>"
-                                                        class="relative w-56 h-56 object-contain drop-shadow-xl transition-transform duration-500">
-                                                    <% } else if (products && products.length> 0) { %>
-                                                        <img src="/images/uploads/<%= products[0].image %>"
-                                                            class="relative w-56 h-56 object-contain drop-shadow-xl transition-transform duration-500">
-                                                        <% } %>
+                                                        class="relative w-64 h-64 object-contain drop-shadow-xl translate-x-10 translate-y-10 group-hover:scale-110 transition-transform duration-700">
+                                                    <% } %>
                                             </div>
                                         </div>
                                     </div>
                                     <script>
                                         (function () {
-                                            const slider = document.getElementById('promo-slider');
-                                            let scrollAmount = 0;
-                                            let scrollSpeed = 0.8; // Lower is smoother/slower
+                                            const slider = document.getElementById('promo-card-slider');
+                                            const cards = slider.querySelectorAll('.promo-card');
+                                            let isScrolling = false;
 
-                                            function scroll() {
-                                                if (slider) {
-                                                    slider.scrollLeft += scrollSpeed;
-                                                    // Infinite scroll reset effect (optional, here we rewind)
-                                                    if (slider.scrollLeft >= (slider.scrollWidth - slider.clientWidth - 5)) {
-                                                        // Smooth rewind or jump? Let's smooth rewind
-                                                        slider.scrollTo({ left: 0, behavior: 'smooth' });
-                                                    }
-                                                }
-                                                requestAnimationFrame(scroll);
+                                            function updateCoverFlow() {
+                                                const sliderRect = slider.getBoundingClientRect();
+                                                const sliderCenter = sliderRect.left + sliderRect.width / 2;
+
+                                                cards.forEach(card => {
+                                                    const cardRect = card.getBoundingClientRect();
+                                                    const cardCenter = cardRect.left + cardRect.width / 2;
+                                                    const distanceFromCenter = cardCenter - sliderCenter;
+
+                                                    // Normalized distance (0 at center, 1 or -1 at edges of viewport)
+                                                    const normalizedDistance = distanceFromCenter / (sliderRect.width / 1.5);
+
+                                                    // Calculate rotation (max ~45 degrees)
+                                                    const rotation = normalizedDistance * -45;
+
+                                                    // Calculate scale (1 at center, 0.8 at edges)
+                                                    const scale = 1 - Math.min(Math.abs(normalizedDistance) * 0.2, 0.2);
+
+                                                    // Calculate opacity (1 at center, 0.6 at edges)
+                                                    const opacity = 1 - Math.min(Math.abs(normalizedDistance) * 0.4, 0.4);
+
+                                                    // Apply transforms
+                                                    card.style.transform = `perspective(1000px) rotateY(${rotation}deg) scale(${scale})`;
+                                                    card.style.opacity = opacity;
+                                                    card.style.zIndex = Math.round(100 - Math.abs(distanceFromCenter) / 10);
+                                                });
                                             }
 
-                                            // Start
-                                            requestAnimationFrame(scroll);
+                                            // Continuous scroll logic
+                                            function startContinuousScroll() {
+                                                function step() {
+                                                    slider.scrollLeft += 0.8; // Constant smooth speed
+
+                                                    // Loop back for infinite effect
+                                                    if (slider.scrollLeft >= (slider.scrollWidth - slider.clientWidth - 1)) {
+                                                        slider.scrollLeft = 1;
+                                                    }
+
+                                                    updateCoverFlow();
+                                                    requestAnimationFrame(step);
+                                                }
+                                                requestAnimationFrame(step);
+                                            }
+
+                                            // Event Listeners (Removed hover pause)
+                                            slider.addEventListener('scroll', () => {
+                                                updateCoverFlow();
+                                            });
+
+                                            // Initial call
+                                            updateCoverFlow();
+                                            startContinuousScroll();
+
+                                            // Handle window resize
+                                            window.addEventListener('resize', updateCoverFlow);
                                         })();
                                     </script>
                                 </div>
@@ -1319,7 +1535,7 @@
                                 <!-- Scrolling Gallery Section (Dynamic) -->
                                 <% if (typeof owner !=='undefined' ) { %>
                                     <div id="new-arrivals"
-                                        class="w-full mb-6 py-6 bg-[#FFFBF7] rounded-2xl -mx-4 px-4 sm:mx-0 sm:px-8 border border-[#FBEAD2]/20 shadow-sm relative overflow-hidden">
+                                        class="w-[calc(100%+2rem)] sm:w-full mb-4 md:mb-8 py-4 md:py-8 bg-zinc-300 rounded-none md:rounded-2xl -mx-4 px-4 sm:mx-0 sm:px-8 border border-zinc-300/20 shadow-sm relative overflow-hidden">
                                         <!-- Background Decoration -->
                                         <div
                                             class="absolute top-0 right-0 w-64 h-64 bg-[#FBEAD2] rounded-full blur-[100px] opacity-40 -z-10">
@@ -1329,7 +1545,7 @@
                                         </div>
 
                                         <div
-                                            class="flex items-center justify-center w-full max-w-6xl mx-auto mb-12 relative z-10 px-4 gap-4 md:gap-8">
+                                            class="flex items-center justify-center w-full max-w-6xl mx-auto mb-6 md:mb-12 relative z-10 px-4 gap-4 md:gap-8">
 
                                             <!-- Left Decorative Element -->
                                             <div
@@ -1368,13 +1584,11 @@
                                         <div class="relative w-full overflow-hidden">
                                             <!-- Gradient Masks for Fade Effect -->
                                             <div
-                                                class="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#FFFBF7] to-transparent z-20">
+                                                class="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-zinc-300 to-transparent z-20">
                                             </div>
                                             <div
-                                                class="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#FFFBF7] to-transparent z-20">
+                                                class="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-zinc-300 to-transparent z-20">
                                             </div>
-
-                                            <!-- Scrolling Track -->
                                             <div class="flex gap-6 animate-scroll w-max hover:pause-scroll">
                                                 <!-- Logic: Normalized Gallery Objects -->
                                                 <% var galleryItems=[]; if (typeof owner !=='undefined' && owner &&
@@ -1407,7 +1621,7 @@
                                                     <% for(let i=0; i<3; i++) { %>
                                                         <% galleryItems.forEach(function(item){ %>
                                                             <div
-                                                                class="flex-shrink-0 w-40 md:w-56 bg-white rounded-xl overflow-hidden shadow-lg border border-zinc-100 transform hover:-translate-y-2 hover:rotate-1 hover:shadow-2xl transition-all duration-300 group relative z-10 w-full">
+                                                                class="flex-shrink-0 w-40 md:w-56 bg-white rounded-xl overflow-hidden shadow-lg border border-zinc-100 transform hover:-translate-y-2 hover:rotate-1 hover:shadow-2xl transition-all duration-300 group relative z-10">
 
                                                                 <!-- Image -->
                                                                 <div
@@ -1700,7 +1914,6 @@
                                                     <% }) %>
                                             </div>
 
-                                            <!-- View More Button -->
                                         </div>
 
                                         <!-- Service Features Section (Marquee) -->
@@ -1946,9 +2159,6 @@
                             <i class="ri-arrow-right-line group-hover:translate-x-1 transition-transform"></i>
                         </a>
                     </div>
-
-                    <!-- Right: Image to fill space -->
-                    <!-- Right: Image to fill space (Advanced 3D Hover Effect) -->
                     <div
                         class="w-full md:w-1/2 h-[500px] md:h-[600px] relative flex items-center justify-center p-4 md:p-8 group">
 

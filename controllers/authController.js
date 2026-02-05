@@ -52,7 +52,6 @@ module.exports.loginUser = async function (req, res) {
     });
 };
 
-// 🔥 REQUIRED for usersRouter
 module.exports.logout = function (req, res) {
     res.clearCookie("token");
     res.redirect("/");

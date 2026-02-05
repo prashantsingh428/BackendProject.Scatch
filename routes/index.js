@@ -17,35 +17,11 @@ router.post("/update-profile-picture", isLoggedIn, upload.single("image"), async
 router.post("/update-profile", isLoggedIn, async function (req, res) {
     let user = await userModel.findOne({ email: req.user.email });
 
-    // Update fields
+
     user.fullname = req.body.fullname;
-    // user.email = req.body.email; // Keeping email update optional or maybe not allowing it if it identifies the user, but prompt said "update my email". If email changes, login might be affected if based on email. The prompt says "update my email". Let's assume it's allowed.
-    // However, if we change email, isLoggedIn middleware based on cookie might break if token encodes email? 
-    // isLoggedin uses decoded.email. If we change email in DB but not in token, it's fine for current session but might be weird.
-    // Let's allow it but we might need to update the token? Or just let them save it.
-    // Wait, isLoggedin finds user by decoded.email. 
-    // If I change user.email in DB, next time isLoggedin runs:
-    // decoded.email (OLD) -> findOne({email: OLD}) -> returns NULL (since DB has NEW).
-    // So changing email will effectively log them out or cause errors on next request.
-    // I should probably NOT allow email change without re-login or NOT allow it at all in this simple flow.
-    // User request: "update my email". 
-    // I will allow it but I warn them / or I should update the token. 
-    // Simpler: Just update it. The user will be logged out on next request because user not found.
-    // Actually, `isLoggedIn` checks `req.user`.
-    // Let's just update it. If they get logged out, that's somewhat expected security behavior for email change.
-
-    // Let's check `isLoggedIn.js`: `const user = await userModel.findOne({ email: decoded.email })`. 
-    // Yes, changing email will break the session. 
-    // I will comment out email update for safety or handle it? 
-    // Handing it properly requires generating new token. 
-    // I'll update it and set a new cookie if I can, or just let them be logged out.
-    // "update my email" -> I'll implementation it.
-
-    // Actually, to make it seamless, I should issue a new token.
     const jwt = require("jsonwebtoken");
     if (req.body.email !== user.email) {
         user.email = req.body.email;
-        // Generate new token
         let token = jwt.sign({ email: user.email, id: user._id }, process.env.JWT_KEY);
         res.cookie("token", token);
     }
@@ -53,10 +29,10 @@ router.post("/update-profile", isLoggedIn, async function (req, res) {
     user.contact = req.body.contact;
     user.dob = req.body.dob;
     user.address = req.body.address;
-    user.username = req.body.username;
+    user.username = req.body.username
     user.state = req.body.state;
     user.city = req.body.city;
-    user.country = "India"; // Forcing India as per previous request/UI, or taking from body if we want flexibility. User said "my country name ... also show". The form has it fixed to India. Let's save "India".
+    user.country = "India";
 
     await user.save();
     res.redirect("/account");
@@ -200,7 +176,6 @@ router.get("/category/:categoryName", isLoggedIn, async function (req, res) {
 router.get("/addtocart/:productid", isLoggedIn, async function (req, res) {
     let user = await userModel.findOne({ email: req.user.email });
 
-    // Migrate old cart format if needed AND consolidate duplicates
     if (user.cart.length > 0 && !user.cart[0].product && !user.cart[0].quantity) {
         const productMap = new Map();
         user.cart.forEach(productId => {
@@ -219,16 +194,13 @@ router.get("/addtocart/:productid", isLoggedIn, async function (req, res) {
 
     // Check if item already exists in cart
     const existingItem = user.cart.find(item => {
-        // Handle both old and new format gracefully
         const productId = item.product ? item.product.toString() : item.toString();
         return productId === req.params.productid;
     });
 
     if (existingItem) {
-        // If exists, increment quantity
         existingItem.quantity = (existingItem.quantity || 1) + 1;
     } else {
-        // If not, add new item with quantity 1
         user.cart.push({
             product: req.params.productid,
             quantity: 1
@@ -300,18 +272,11 @@ router.get("/removefromwishlist/:productid", isLoggedIn, async function (req, re
 });
 
 router.get("/cart/delete/:id", isLoggedIn, async function (req, res) {
-    let user = await userModel.findOne({ email: req.user.email });
-
-    // Remove the item from cart array (with new schema, cart items are objects)
-    user.cart = user.cart.filter(item => {
-        // Handle potential nulls or mixed schema types safely
+    let user = await userModel.findOne({ email: req.user.email }); user.cart = user.cart.filter(item => {
         if (!item) return false;
-
-        // If the item has a product reference (new schema)
         if (item.product) {
             return item.product.toString() !== req.params.id;
         }
-        // If the item itself is an ID (legacy schema, though unlikely given new structure)
         else {
             return item.toString() !== req.params.id;
         }
@@ -328,14 +293,10 @@ router.get("/cart", isLoggedIn, async function (req, res) {
         .findOne({ email: req.user.email })
         .populate("cart.product");
 
-    // Handle migration from old cart format
     let needsMigration = false;
     if (user.cart.length > 0) {
-        // Check if old format (direct ObjectIds instead of {product, quantity})
         if (!user.cart[0].product && !user.cart[0].quantity) {
             needsMigration = true;
-
-            // Migrate old format to new format AND consolidate duplicates
             const productMap = new Map();
             user.cart.forEach(productId => {
                 const idString = productId.toString();
@@ -362,21 +323,17 @@ router.get("/cart", isLoggedIn, async function (req, res) {
 
     let bill = 0;
     if (user.cart.length > 0) {
-        // Calculate total with quantities, skip items without product data
-        user.cart = user.cart.filter(item => item.product); // Remove any null/undefined products
+        user.cart = user.cart.filter(item => item.product);
         user.cart.forEach(item => {
             const itemTotal = (Number(item.product.price) - Number(item.product.discount)) * item.quantity;
             bill += itemTotal;
         });
-        // Add Platform Fee
         bill += 20;
     }
 
     res.render("cart", { user, bill });
 });
 
-<<<<<<< HEAD
-=======
 router.get("/checkout", isLoggedIn, async function (req, res) {
     let user = await userModel
         .findOne({ email: req.user.email })
@@ -387,7 +344,10 @@ router.get("/checkout", isLoggedIn, async function (req, res) {
         // Filter out any items without product data
         user.cart = user.cart.filter(item => item.product);
         user.cart.forEach(item => {
-            const itemTotal = (Number(item.product.price) - Number(item.product.discount)) * item.quantity;
+            const price = Number(item.product.price) || 0;
+            const discount = Number(item.product.discount) || 0;
+            const quantity = Number(item.quantity) || 1;
+            const itemTotal = (price - discount) * quantity;
             bill += itemTotal;
         });
         bill += 20;
@@ -401,9 +361,7 @@ router.post("/cart/updatequantity", isLoggedIn, async function (req, res) {
         const { productId, quantity } = req.body;
         let user = await userModel.findOne({ email: req.user.email });
 
-        // Find the cart item and update quantity
         const cartItem = user.cart.find(item => {
-            // Handle if product is object or id 
             const id = item.product ? (item.product._id || item.product).toString() : item.toString();
             return id === productId;
         });
@@ -412,18 +370,19 @@ router.post("/cart/updatequantity", isLoggedIn, async function (req, res) {
             console.log(`Updating quantity for ${productId}. Old: ${cartItem.quantity}, New: ${quantity}`);
             cartItem.quantity = Math.max(1, parseInt(quantity)); // Ensure minimum quantity of 1
 
-            // Explicitly mark modified just in case
             user.markModified('cart');
 
             await user.save();
             console.log("Cart saved.");
 
-            // Recalculate bill
             await user.populate('cart.product');
             let bill = 0;
             user.cart.forEach(item => {
                 if (item.product) {
-                    const itemTotal = (Number(item.product.price) - Number(item.product.discount)) * item.quantity;
+                    const price = Number(item.product.price) || 0;
+                    const discount = Number(item.product.discount) || 0;
+                    const quantity = Number(item.quantity) || 1;
+                    const itemTotal = (price - discount) * quantity;
                     bill += itemTotal;
                 }
             });
@@ -495,7 +454,6 @@ router.get("/cleanup-cart", isLoggedIn, async function (req, res) {
     }
 });
 
->>>>>>> 9ab3a03 (feat: redesign UI with premium dark/gold theme, fix shop and help center layouts)
 router.get("/account", isLoggedIn, async function (req, res) {
     let user = await userModel.findOne({ email: req.user.email }).populate("wishlist");
     res.render("myaccount", { user });

@@ -25,19 +25,20 @@
             </div>
 
             <!-- Page Title -->
-            <h1 class="text-4xl font-bold text-[#18181B] mb-10">My Cart</h1>
+            <!-- Page Title -->
+            <h1 class="text-3xl md:text-4xl font-bold text-[#18181B] mb-6 md:mb-10">My Cart</h1>
 
             <% if (user.cart && user.cart.length> 0) { %>
                 <div class="flex flex-col lg:flex-row gap-8 items-start">
 
                     <!-- Left: Cart Items -->
                     <div class="w-full lg:w-[60%]">
-                        <div class="bg-white rounded-2xl shadow-sm p-6">
+                        <div class="bg-white rounded-2xl shadow-sm p-4 md:p-6">
                             <h2 class="text-xl font-semibold text-[#18181B] mb-6">My Cart (<%= user.cart.length %>)</h2>
 
                             <div class="space-y-6">
                                 <% user.cart.forEach(function(item){ %>
-                                    <div class="flex gap-4 pb-6 border-b border-zinc-100 last:border-0"
+                                    <div class="grid grid-cols-[auto_1fr] sm:flex sm:flex-row gap-4 pb-6 border-b border-zinc-100 last:border-0"
                                         data-item-id="<%= item.product._id %>"
                                         data-item-price="<%= item.product.price - item.product.discount %>"
                                         data-quantity="<%= item.quantity %>">
@@ -75,7 +76,8 @@
                                         </div>
 
                                         <!-- Quantity & Remove -->
-                                        <div class="flex flex-col items-end justify-between">
+                                        <div
+                                            class="col-span-2 sm:col-span-auto flex flex-row sm:flex-col items-center sm:items-end justify-between sm:justify-between border-t sm:border-t-0 pt-4 sm:pt-0 border-zinc-50 mt-2 sm:mt-0">
                                             <a href="/cart/delete/<%= item.product._id %>"
                                                 class="text-zinc-400 hover:text-red-500 transition text-sm flex items-center gap-1">
                                                 <i class="ri-close-line"></i> Remove
@@ -105,40 +107,7 @@
                     <div class="w-full lg:w-[40%] sticky top-24">
                         <div class="bg-white rounded-2xl shadow-sm p-6 space-y-6">
 
-<<<<<<< HEAD
-                        <div class="space-y-4">
-                            <div class="flex justify-between text-zinc-600">
-                                <span>Total MRP</span>
-                                <% let totalMRP=0; let totalDiscount=0; user.cart.forEach(item=> {
-                                    totalMRP += Number(item.price);
-                                    totalDiscount += Number(item.discount);
-                                    });
-                                    %>
-                                    <span>₹ <%= totalMRP %></span>
-                            </div>
-                            <div class="flex justify-between text-zinc-600">
-                                <span>Discount</span>
-                                <span class="text-green-600">- ₹ <%= totalDiscount %></span>
-                            </div>
-                            <div class="flex justify-between text-zinc-600">
-                                <span>Platform Fee</span>
-                                <span>₹ 20</span>
-                            </div>
-                            <div class="flex justify-between text-zinc-600">
-                                <span>Shipping</span>
-                                <span class="text-green-600">FREE</span>
-                            </div>
 
-                            <div class="border-t border-zinc-100 pt-4 mt-4">
-                                <div class="flex justify-between items-center mb-6">
-                                    <span class="text-lg font-bold text-zinc-800">Total Amount</span>
-                                    <span class="text-xl font-bold text-zinc-900">₹ <%= bill %></span>
-                                </div>
-                                <button
-                                    class="w-full py-3.5 bg-zinc-900 text-white font-bold rounded-full hover:bg-black transition shadow-lg shadow-zinc-500/20">
-                                    Place Order
-                                </button>
-=======
                             <!-- Coupons -->
                             <div>
                                 <h3 class="text-lg font-semibold text-[#18181B] mb-3">Coupons</h3>
@@ -257,7 +226,7 @@
                                         PROCEED TO CHECKOUT
                                     </button>
                                 </a>
->>>>>>> 9ab3a03 (feat: redesign UI with premium dark/gold theme, fix shop and help center layouts)
+
                             </div>
                         </div>
                     </div>

@@ -30,7 +30,7 @@ router.post("/create", upload.single("image"), async function (req, res) {
         res.redirect("/owners/admin");
     } catch (err) {
         req.flash("error", err.message);
-        res.redirect("/products/create"); // Or wherever the form is
+        res.redirect("/products/create"); 
     }
 });
 

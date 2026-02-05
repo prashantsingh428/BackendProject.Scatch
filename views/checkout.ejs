@@ -31,10 +31,10 @@
                 </div>
             </div>
 
-            <div class="flex flex-col lg:flex-row gap-12 items-start">
+            <div class="flex flex-col lg:grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
 
                 <!-- Left: Payment Details -->
-                <div class="w-full lg:w-[65%] order-2 lg:order-1 space-y-8">
+                <div class="w-full lg:col-span-8 order-2 lg:order-1 space-y-8">
 
                     <!-- Express Checkout Section -->
                     <div
@@ -163,7 +163,7 @@
                 </div>
 
                 <!-- Right: Order Summary (Receipt Style) -->
-                <div class="w-full lg:w-[35%] order-1 lg:order-2 sticky top-8">
+                <div class="w-full lg:col-span-4 order-1 lg:order-2 sticky top-8">
                     <div
                         class="bg-white rounded-[2rem] shadow-xl shadow-zinc-200/50 border border-zinc-100 relative overflow-hidden">
 
@@ -195,7 +195,8 @@
                                             </p>
                                         </div>
                                         <div class="text-sm font-bold text-[#1B3C29] tabular-nums">₹<%=
-                                                (item.product.price - item.product.discount) * item.quantity %>
+                                                ((Number(item.product.price) || 0) - (Number(item.product.discount) ||
+                                                0)) * (Number(item.quantity) || 1) %>
                                         </div>
                                     </div>
                                     <% }) %>

@@ -4,7 +4,7 @@ const ownerModel = require("../models/owner-model");
 const jwt = require("jsonwebtoken");
 const productModel = require("../models/product-model");
 
-const upload = require("../config/multer-config"); // Ensure this is imported
+const upload = require("../config/multer-config");
 const isOwnerLoggedIn = require("../middlewares/isOwnerLoggedIn");
 
 if (process.env.NODE_ENV === "development") {

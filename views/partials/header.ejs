@@ -12,10 +12,8 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Custom Font Import if needed, using backup for now since local file assumption is risky without font file check */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
 
-        /* Dark Mode CSS Variables */
         :root {
             --bg-primary: #ffffff;
             --bg-secondary: #F8F9FD;
@@ -59,14 +57,11 @@
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        /* Global Text Selection Highlight */
         ::selection {
             background-color: #B88E2F;
-            /* Gold Brand Color */
             color: #ffffff;
         }
 
-        /* Override Tailwind classes for dark mode */
         [data-theme="dark"] .bg-white {
             background-color: var(--bg-card) !important;
         }
@@ -111,14 +106,12 @@
             box-shadow: 0 1px 3px 0 var(--shadow-sm), 0 1px 2px -1px var(--shadow-md) !important;
         }
 
-        /* Navbar specific dark mode */
         [data-theme="dark"] nav {
             background-color: var(--navbar-bg) !important;
             border-color: var(--border-color) !important;
         }
     </style>
     <script>
-        // Dark Mode Toggle Script - Load immediately to prevent flash
         (function () {
             const theme = localStorage.getItem('theme') || 'light';
             document.documentElement.setAttribute('data-theme', theme);
@@ -137,17 +130,14 @@
 </head>
 
 <body class="flex flex-col min-h-screen font-['helvetica_now_display']">
-    <!-- Professional Navbar with Logo -->
     <nav
-        class="w-full fixed top-0 left-0 px-10 md:px-16 py-6 flex justify-between items-center z-50 bg-white/95 backdrop-blur-lg border-b border-zinc-200 shadow-sm">
-        <!-- Logo -->
+        class="w-full fixed top-0 left-0 px-4 md:px-8 py-4 flex justify-between items-center z-50 bg-white/95 backdrop-blur-lg border-b border-zinc-200 shadow-sm">
         <a href="<%= typeof loggedin !== 'undefined' && loggedin ? '/shop' : '/' %>"
             class="flex items-center gap-2 hover:opacity-90 transition-all active:scale-95">
             <img src="/images/scatch-logo.png" alt="Scatch" class="h-16 w-auto">
         </a>
 
         <% if(typeof loggedin !=='undefined' && loggedin){ %>
-            <!-- Centered Search Bar (Only for logged in users) -->
             <div class="hidden md:block flex-1 max-w-xl mx-6">
                 <form action="/shop" method="GET" class="relative w-full">
                     <div class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
@@ -159,9 +149,7 @@
                 </form>
             </div>
 
-            <!-- Right Side Actions (Links + Icons) -->
             <div class="flex items-center gap-8">
-                <!-- Navigation Links -->
                 <div class="hidden md:flex items-center gap-5 font-medium text-sm text-zinc-700">
                     <a class="relative hover:text-[#18181B] transition-colors group" href="/shop">
                         Shop
@@ -180,9 +168,7 @@
                     </a>
                 </div>
 
-                <!-- Right Section: Icons & Profile -->
                 <div class="flex items-center gap-4">
-                    <!-- Cart Icon with Badge -->
                     <a href="/cart" class="relative hover:opacity-70 transition-all hover:scale-110 active:scale-95">
                         <i class="ri-shopping-cart-line text-2xl text-zinc-700"></i>
                         <% let totalQty=(typeof user !=='undefined' && user.cart) ? user.cart.reduce((total, item)=>
@@ -194,7 +180,6 @@
                             </span>
                     </a>
 
-                    <!-- Wishlist Icon with Badge -->
                     <a href="/account?active=wishlist"
                         class="relative hover:opacity-70 transition-all hover:scale-110 active:scale-95">
                         <i class="ri-heart-line text-2xl text-zinc-700"></i>
@@ -205,10 +190,8 @@
                             </span>
                     </a>
 
-                    <!-- User Profile with Name & Dropdown -->
                     <a href="/account"
                         class="flex items-center gap-3 cursor-pointer hover:brightness-90 transition-all active:scale-95 active:brightness-75 relative group">
-                        <!-- Avatar -->
                         <a href="/account" class="w-10 h-10 rounded-full overflow-hidden border-2 border-zinc-300">
                             <% if(typeof user !=='undefined' && user.picture){ %>
                                 <img class="w-full h-full object-cover" src="/images/uploads/<%= user.picture %>"
@@ -221,7 +204,6 @@
                                     <% } %>
                         </a>
 
-                        <!-- User Name & Dropdown Arrow -->
                         <div class="flex items-center gap-1">
                             <span class="text-sm font-semibold text-[#18181B]">
                                 <%= typeof user !=='undefined' && user.fullname ? user.fullname : 'User' %>
@@ -232,7 +214,6 @@
             </div>
             </div>
             <% } else { %>
-                <!-- Navigation for logged out users -->
                 <div class="flex items-center gap-8 font-medium text-sm text-zinc-700">
                     <a class="hover:text-[#18181B] transition-colors relative group" href="/about">
                         About

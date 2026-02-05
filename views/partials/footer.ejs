@@ -93,22 +93,37 @@
 <!-- Mobile Bottom Navigation (Android Friendly) -->
 <div
     class="fixed bottom-0 left-0 w-full bg-white border-t border-zinc-200 py-3 px-6 flex justify-between items-center z-50 md:hidden pb-safe">
-    <a href="/" class="flex flex-col items-center gap-1 text-zinc-500 hover:text-[#18181B] transition-colors">
-        <i class="ri-home-5-line text-xl"></i>
-        <span class="text-[10px] font-medium">Home</span>
+    <a href="/shop"
+        class="<%= (typeof currentRoute !== 'undefined' && currentRoute === '/shop') ? 'flex flex-col items-center gap-1 text-[#18181B] transition-colors' : 'flex flex-col items-center gap-1 text-zinc-500 hover:text-[#18181B] transition-colors' %>">
+        <% if(typeof currentRoute !=='undefined' && currentRoute==='/shop' ) { %>
+            <i class="ri-home-5-fill text-xl"></i>
+            <% } else { %>
+                <i class="ri-home-5-line text-xl"></i>
+                <% } %>
+                    <span class="text-[10px] font-medium">Home</span>
     </a>
-    <a href="/shop" class="flex flex-col items-center gap-1 text-[#18181B] transition-colors">
-        <i class="ri-store-2-fill text-xl"></i>
-        <span class="text-[10px] font-medium">Shop</span>
+    <a href="/account?active=wishlist"
+        class="<%= (typeof active !== 'undefined' && active === 'wishlist') || (typeof currentRoute !== 'undefined' && currentRoute === '/account' && typeof activeTab !== 'undefined' && activeTab === 'wishlist') ? 'flex flex-col items-center gap-1 text-[#18181B] transition-colors' : 'flex flex-col items-center gap-1 text-zinc-500 hover:text-[#18181B] transition-colors' %>">
+        <% if((typeof active !=='undefined' && active==='wishlist' ) || (typeof currentRoute !=='undefined' &&
+            currentRoute==='/account' && typeof activeTab !=='undefined' && activeTab==='wishlist' )) { %>
+            <i class="ri-heart-3-fill text-xl"></i>
+            <% } else { %>
+                <i class="ri-heart-3-line text-xl"></i>
+                <% } %>
+                    <span class="text-[10px] font-medium">Wishlist</span>
     </a>
     <a href="/cart"
-        class="flex flex-col items-center gap-1 text-zinc-500 hover:text-[#18181B] transition-colors relative">
-        <i class="ri-shopping-bag-3-line text-xl"></i>
-        <span class="text-[10px] font-medium">Cart</span>
-        <!-- Optional Badge -->
-        <% if(typeof user !=='undefined' && user && user.cart && user.cart.length> 0) { %>
-            <span class="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full"></span>
-            <% } %>
+        class="<%= (typeof currentRoute !== 'undefined' && currentRoute === '/cart') ? 'flex flex-col items-center gap-1 text-[#18181B] transition-colors relative' : 'flex flex-col items-center gap-1 text-zinc-500 hover:text-[#18181B] transition-colors relative' %>">
+        <% if(typeof currentRoute !=='undefined' && currentRoute==='/cart' ) { %>
+            <i class="ri-shopping-bag-3-fill text-xl"></i>
+            <% } else { %>
+                <i class="ri-shopping-bag-3-line text-xl"></i>
+                <% } %>
+                    <span class="text-[10px] font-medium">Cart</span>
+                    <!-- Optional Badge -->
+                    <% if(typeof user !=='undefined' && user && user.cart && user.cart.length> 0) { %>
+                        <span class="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+                        <% } %>
     </a>
     <a href="/account" class="flex flex-col items-center gap-1 text-zinc-500 hover:text-[#18181B] transition-colors">
         <i class="ri-user-3-line text-xl"></i>

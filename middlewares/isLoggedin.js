@@ -23,7 +23,7 @@ module.exports = async function isLoggedIn(req, res, next) {
         // Attach user to request
         req.user = user;
 
-        // Make user available to all views
+    
         res.locals.user = user;
 
         next();
@@ -32,6 +32,3 @@ module.exports = async function isLoggedIn(req, res, next) {
         return res.redirect("/login");
     }
 };
-
-
-// safjksdf

@@ -1,7 +1,7 @@
 <%- include('./partials/header') %>
-    <!-- Google Fonts: Inter -->
+    
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Leaflet Map -->
+    
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
@@ -24,17 +24,17 @@
     <div class="w-full min-h-screen bg-[#F8F9FD] pt-24 pb-20 px-4 md:px-8">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row gap-8">
 
-            <!-- Sidebar -->
+            
             <aside class="w-full md:w-64 flex-shrink-0 hidden md:block">
                 <div
                     class="bg-white rounded-2xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-zinc-100 overflow-hidden sticky top-28 py-6 px-4">
-                    <!-- Brand/Spacer -->
+                    
                     <div class="px-4 mb-2">
                         <div class="text-xs font-bold text-zinc-400 uppercase tracking-widest pl-1">Menu</div>
                     </div>
 
                     <nav class="space-y-1">
-                        <!-- Main Menu -->
+                        
                         <a href="javascript:void(0)" onclick="switchTab('dashboard')" id="nav-dashboard"
                             class="flex items-center gap-3 px-4 py-3 text-zinc-900 bg-zinc-100 rounded-xl transition-all duration-200 font-semibold text-sm border-l-4 border-zinc-900 shadow-sm">
                             <i class="ri-dashboard-fill text-lg"></i> <span>Dashboard</span>
@@ -47,19 +47,27 @@
                             class="flex items-center gap-3 px-4 py-3 text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50 hover:pl-5 rounded-xl transition-all duration-200 font-medium text-sm border-l-4 border-transparent">
                             <i class="ri-heart-3-line text-lg"></i> <span>Wishlist</span>
                         </a>
+                        <a href="/cart"
+                            class="flex items-center gap-3 px-4 py-3 text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50 hover:pl-5 rounded-xl transition-all duration-200 font-medium text-sm border-l-4 border-transparent">
+                            <i class="ri-shopping-cart-2-line text-lg"></i> <span>Cart</span>
+                        </a>
+                        <a href="javascript:void(0)" onclick="switchTab('bill-payment')" id="nav-bill-payment"
+                            class="flex items-center gap-3 px-4 py-3 text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50 hover:pl-5 rounded-xl transition-all duration-200 font-medium text-sm border-l-4 border-transparent">
+                            <i class="ri-wallet-3-line text-lg"></i> <span>Bill & Payment</span>
+                        </a>
 
 
 
-                        <!-- Settings Section -->
+                        
                         <div class="pt-6 pb-2">
                             <div class="px-4 mb-2">
                                 <div class="text-xs font-bold text-zinc-400 uppercase tracking-widest pl-1">
                                     Settings</div>
                             </div>
 
-                            <!-- Settings Menu Items -->
+                            
                             <div class="space-y-0.5">
-                                <!-- Profile Information -->
+                                
                                 <a href="javascript:void(0)" onclick="switchTab('personalization')"
                                     id="nav-personalization"
                                     class="flex items-center justify-between gap-3 px-4 py-3 text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50 hover:pl-5 rounded-xl transition-all duration-200 font-medium text-sm border-l-4 border-transparent group">
@@ -71,7 +79,7 @@
                                         class="ri-arrow-right-s-line text-zinc-400 group-hover:text-zinc-600 transition-colors"></i>
                                 </a>
 
-                                <!-- Privacy & Security -->
+                                
                                 <a href="javascript:void(0)" onclick="switchTab('security')" id="nav-security"
                                     class="flex items-center justify-between gap-3 px-4 py-3 text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50 hover:pl-5 rounded-xl transition-all duration-200 font-medium text-sm border-l-4 border-transparent group">
                                     <div class="flex items-center gap-3">
@@ -86,7 +94,7 @@
 
 
 
-                                <!-- Notifications Toggle -->
+                                
                                 <div class="flex items-center justify-between gap-3 px-4 py-3 text-zinc-500 rounded-xl">
                                     <div class="flex items-center gap-3">
                                         <i class="ri-notification-3-line text-lg"></i>
@@ -102,7 +110,7 @@
 
 
 
-                                <!-- Language -->
+                                
                                 <a href="#"
                                     class="flex items-center justify-between gap-3 px-4 py-3 text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50 hover:pl-5 rounded-xl transition-all duration-200 font-medium text-sm border-l-4 border-transparent group">
                                     <div class="flex items-center gap-3">
@@ -116,7 +124,7 @@
                                     </div>
                                 </a>
 
-                                <!-- Help Center -->
+                                
                                 <a href="javascript:void(0)" onclick="switchTab('help')" id="nav-help"
                                     class="flex items-center justify-between gap-3 px-4 py-3 text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50 hover:pl-5 rounded-xl transition-all duration-200 font-medium text-sm border-l-4 border-transparent group">
                                     <div class="flex items-center gap-3">
@@ -127,7 +135,7 @@
                                         class="ri-arrow-right-s-line text-zinc-400 group-hover:text-zinc-600 transition-colors"></i>
                                 </a>
 
-                                <!-- About -->
+                                
                                 <a href="javascript:void(0)" onclick="switchTab('about')" id="nav-about"
                                     class="flex items-center justify-between gap-3 px-4 py-3 text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50 hover:pl-5 rounded-xl transition-all duration-200 font-medium text-sm border-l-4 border-transparent group">
                                     <div class="flex items-center gap-3">
@@ -140,7 +148,7 @@
                             </div>
                         </div>
 
-                        <!-- Footer Links -->
+                        
                         <div class="pt-8 space-y-2 border-t border-zinc-100 mt-4">
                             <a href="/logout"
                                 class="flex items-center gap-3 px-4 py-2.5 text-zinc-400 hover:text-red-600 hover:bg-red-50 rounded-xl transition-colors font-medium text-sm group">
@@ -153,10 +161,10 @@
                 </div>
             </aside>
 
-            <!-- Main Content -->
+            
             <main class="flex-1">
 
-                <!-- Dashboard Tab (Default) -->
+                
                 <div id="tab-dashboard" class="tab-content active">
                     <div class="mb-8">
                         <h1 class="text-3xl font-bold text-zinc-900 tracking-tight">Dashboard</h1>
@@ -167,11 +175,11 @@
                     </div>
 
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                        <!-- Left Column: Stats & Actions -->
+                        
                         <div class="lg:col-span-2 space-y-8">
-                            <!-- Stats Grid -->
+                            
                             <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
-                                <!-- Orders -->
+                                
                                 <a href="javascript:void(0)" onclick="switchTab('orders')" class="block group">
                                     <div
                                         class="bg-white p-5 rounded-2xl border border-zinc-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-1 transition-all duration-300 relative overflow-hidden">
@@ -197,7 +205,7 @@
                                     </div>
                                 </a>
 
-                                <!-- Wishlist -->
+                                
                                 <a href="javascript:void(0)" onclick="switchTab('wishlist')" class="block group">
                                     <div
                                         class="bg-white p-5 rounded-2xl border border-zinc-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-1 transition-all duration-300 relative overflow-hidden">
@@ -223,7 +231,7 @@
                                     </div>
                                 </a>
 
-                                <!-- Cart -->
+                                
                                 <a href="/cart" class="block group">
                                     <div
                                         class="bg-white p-5 rounded-2xl border border-zinc-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-1 transition-all duration-300 relative overflow-hidden">
@@ -264,7 +272,7 @@
                                 </div>
                                 <div class="p-6">
                                     <div class="flex flex-col sm:flex-row gap-8 items-start">
-                                        <!-- Photo -->
+                                        
                                         <div class="flex-shrink-0 relative group">
                                             <div
                                                 class="w-28 h-28 rounded-[2rem] bg-zinc-50 overflow-hidden border-4 border-white shadow-lg shadow-zinc-200/50">
@@ -278,13 +286,13 @@
                                                         </div>
                                                         <% } %>
                                             </div>
-                                            <!-- Verified Badge if needed -->
+                                            
                                             <div class="absolute -bottom-1 -right-1 w-8 h-8 bg-amber-600 rounded-full border-4 border-white flex items-center justify-center text-white shadow-sm"
                                                 title="Verified Member">
                                                 <i class="ri-check-line font-bold"></i>
                                             </div>
                                         </div>
-                                        <!-- Details Grid -->
+                                        
                                         <div class="flex-grow w-full">
                                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-6">
                                                 <div class="border-b border-zinc-50 pb-2">
@@ -337,7 +345,7 @@
                                                     </div>
                                                 </div>
 
-                                                <!-- Full Width Address -->
+                                                
                                                 <div class="sm:col-span-2 pt-2">
                                                     <div
                                                         class="text-[10px] text-zinc-400 font-bold uppercase tracking-widest mb-2 flex items-center gap-1">
@@ -373,11 +381,11 @@
                             </div>
                         </div>
 
-                        <!-- Right Column: Quick Promo/Status -->
+                        
                         <div class="lg:col-span-1">
                             <div
                                 class="bg-zinc-900 rounded-3xl p-8 text-white shadow-xl shadow-zinc-200 relative overflow-hidden group h-full">
-                                <!-- Abstract Shapes/Texture -->
+                                
                                 <div
                                     class="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl">
                                 </div>
@@ -433,7 +441,7 @@
                     </div>
                 </div>
 
-                <!-- Personalization Tab (Edit Profile) -->
+                
                 <div id="tab-personalization" class="tab-content">
                     <div class="mb-6">
                         <h1 class="text-2xl font-bold text-zinc-900">Personalization</h1>
@@ -442,17 +450,17 @@
 
                     <div class="bg-white rounded-2xl shadow-sm border border-zinc-200 p-6 md:p-8">
 
-                        <!-- Profile Picture Upload Section -->
+                        
                         <div class="mb-10 flex flex-col items-center md:items-start">
                             <div class="relative group">
-                                <!-- Hidden Upload Form -->
+                                
                                 <form id="profile-upload-form" action="/update-profile-picture" method="post"
                                     enctype="multipart/form-data" class="hidden">
                                     <input type="file" name="image" id="profile-upload-input"
                                         onchange="document.getElementById('profile-upload-form').submit()">
                                 </form>
 
-                                <!-- Clickable Image -->
+                                
                                 <div class="w-24 h-24 rounded-full overflow-hidden border-4 border-zinc-50 cursor-pointer shadow-sm relative"
                                     onclick="document.getElementById('profile-upload-input').click()">
                                     <% if (user.picture) { %>
@@ -464,7 +472,7 @@
                                                 <i class="ri-user-fill"></i>
                                             </div>
                                             <% } %>
-                                                <!-- Hover Overlay -->
+                                                
                                                 <div
                                                     class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                                                     <i class="ri-camera-line text-white text-2xl"></i>
@@ -477,10 +485,10 @@
                             </div>
                         </div>
 
-                        <!-- Form -->
+                        
                         <form action="/update-profile" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-                            <!-- Full Name -->
+                            
                             <div class="space-y-1.5">
                                 <label class="text-sm font-semibold text-zinc-700">Full Name</label>
                                 <div class="relative">
@@ -490,7 +498,7 @@
                                 </div>
                             </div>
 
-                            <!-- Username -->
+                            
                             <div class="space-y-1.5">
                                 <label class="text-sm font-semibold text-zinc-700">Username</label>
                                 <div class="relative">
@@ -501,7 +509,7 @@
                                 </div>
                             </div>
 
-                            <!-- Email -->
+                            
                             <div class="space-y-1.5">
                                 <div class="flex justify-between items-center">
                                     <label class="text-sm font-semibold text-zinc-700">Email Address</label>
@@ -515,7 +523,7 @@
                                 </div>
                             </div>
 
-                            <!-- Phone -->
+                            
                             <div class="space-y-1.5">
                                 <label class="text-sm font-semibold text-zinc-700">Phone Number</label>
                                 <div class="relative">
@@ -526,7 +534,7 @@
                                 </div>
                             </div>
 
-                            <!-- Date of Birth -->
+                            
                             <div class="space-y-1.5">
                                 <label class="text-sm font-semibold text-zinc-700">Date of Birth</label>
                                 <div class="relative">
@@ -535,7 +543,7 @@
                                 </div>
                             </div>
 
-                            <!-- Country (Fixed to India) -->
+                            
                             <div class="space-y-1.5">
                                 <label class="text-sm font-semibold text-zinc-700">Country</label>
                                 <div class="relative">
@@ -545,7 +553,7 @@
                                 </div>
                             </div>
 
-                            <!-- State -->
+                            
                             <div class="space-y-1.5">
                                 <label class="text-sm font-semibold text-zinc-700">State</label>
                                 <div class="relative">
@@ -555,7 +563,7 @@
                                 </div>
                             </div>
 
-                            <!-- City -->
+                            
                             <div class="space-y-1.5">
                                 <label class="text-sm font-semibold text-zinc-700">City</label>
                                 <div class="relative">
@@ -565,7 +573,7 @@
                                 </div>
                             </div>
 
-                            <!-- Address -->
+                            
                             <div class="col-span-1 md:col-span-2 space-y-1.5">
                                 <label class="text-sm font-semibold text-zinc-700">Address</label>
                                 <div class="relative">
@@ -576,7 +584,7 @@
                                 </div>
                             </div>
 
-                            <!-- Save Button -->
+                            
                             <div class="col-span-1 md:col-span-2 pt-4">
                                 <button type="submit"
                                     class="w-full md:w-auto px-8 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold rounded-xl transition-all shadow-lg shadow-blue-200 hover:shadow-blue-300 hover:-translate-y-0.5 flex items-center justify-center gap-2">
@@ -587,7 +595,7 @@
                     </div>
                 </div>
 
-                <!-- Security & Privacy Tab -->
+                
                 <div id="tab-security" class="tab-content">
                     <div class="mb-6">
                         <h1 class="text-2xl font-bold text-zinc-900">Security & Privacy</h1>
@@ -595,11 +603,11 @@
                     </div>
 
                     <div class="space-y-6">
-                        <!-- Account Details Section -->
+                        
                         <div class="bg-white rounded-2xl shadow-sm border border-zinc-200 p-6 md:p-8">
                             <h3 class="font-bold text-zinc-900 mb-6">Account Details</h3>
 
-                            <!-- Verify Email Address -->
+                            
                             <div class="flex items-center justify-between py-4 border-b border-zinc-100">
                                 <div class="flex-1">
                                     <h4 class="font-semibold text-zinc-900 mb-1">Verify Email Address</h4>
@@ -610,7 +618,7 @@
                                     class="px-4 py-1.5 bg-emerald-50 text-emerald-600 text-xs font-bold rounded-lg border border-emerald-100">Verified</span>
                             </div>
 
-                            <!-- Update Password -->
+                            
                             <div class="flex items-center justify-between py-4">
                                 <div class="flex-1">
                                     <h4 class="font-semibold text-zinc-900 mb-1">Update Password</h4>
@@ -624,11 +632,11 @@
                             </div>
                         </div>
 
-                        <!-- Recovery Settings Section -->
+                        
                         <div class="bg-white rounded-2xl shadow-sm border border-zinc-200 p-6 md:p-8">
                             <h3 class="font-bold text-zinc-900 mb-6">Recovery Settings</h3>
 
-                            <!-- Recovery Email Address -->
+                            
                             <div class="mb-6">
                                 <h4 class="font-semibold text-zinc-900 mb-1">Recovery Email Address</h4>
                                 <p class="text-xs text-zinc-500 mb-3">Setup Recovery Email to Secure your Account</p>
@@ -642,7 +650,7 @@
                                 </div>
                             </div>
 
-                            <!-- Recovery Phone Number -->
+                            
                             <div class="pt-6 border-t border-zinc-100">
                                 <div class="flex items-center justify-between">
                                     <div class="flex-1">
@@ -658,7 +666,7 @@
                             </div>
                         </div>
 
-                        <!-- Deactivate Account Section -->
+                        
                         <div class="bg-white rounded-2xl shadow-sm border border-zinc-200 p-6 md:p-8">
                             <div class="flex items-center justify-between">
                                 <div class="flex-1">
@@ -675,9 +683,9 @@
                     </div>
                 </div>
 
-                <!-- NEW TABS -->
+                
 
-                <!-- Orders Tab ("Track Your Order" Redesign) -->
+                
                 <div id="tab-orders" class="tab-content">
                     <div class="mb-8 text-center pt-2">
                         <h1 class="text-3xl font-bold text-zinc-900 mb-2">Track Your Order</h1>
@@ -685,7 +693,7 @@
                     </div>
 
                     <div class="space-y-6">
-                        <!-- Find Your Order Section -->
+                        
                         <div class="bg-white rounded-2xl shadow-sm border border-zinc-200 p-6 md:p-8">
                             <h3 class="font-bold text-zinc-900 mb-4">Find Your Order</h3>
                             <p class="text-xs text-zinc-400 mb-4">Enter your order ID and email address to track your
@@ -712,7 +720,7 @@
                             </button>
                         </div>
 
-                        <!-- Order Header Panel -->
+                        
                         <div
                             class="bg-white rounded-2xl shadow-sm border border-zinc-200 p-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                             <div>
@@ -735,17 +743,17 @@
                             </div>
                         </div>
 
-                        <!-- Delivery Progress Bar -->
+                        
                         <div class="bg-white rounded-2xl shadow-sm border border-zinc-200 p-8">
                             <h3 class="font-bold text-zinc-900 mb-6">Delivery Progress</h3>
                             <div class="relative px-4">
-                                <!-- Progress Line Background -->
+                                
                                 <div class="absolute top-5 left-0 w-full h-1.5 bg-zinc-100 rounded-full"></div>
-                                <!-- Active Progress Line (75%) -->
+                                
                                 <div class="absolute top-5 left-0 w-3/4 h-1.5 bg-zinc-900 rounded-full"></div>
 
                                 <div class="relative flex justify-between">
-                                    <!-- Ordered -->
+                                    
                                     <div class="flex flex-col items-center">
                                         <div
                                             class="w-10 h-10 rounded-full bg-green-500 text-white flex items-center justify-center z-10 border-4 border-white shadow-sm">
@@ -754,7 +762,7 @@
                                         <div class="text-xs font-bold text-zinc-900 mt-2">Ordered</div>
                                         <div class="text-[10px] text-zinc-500">Jan 15</div>
                                     </div>
-                                    <!-- Confirmed -->
+                                    
                                     <div class="flex flex-col items-center">
                                         <div
                                             class="w-10 h-10 rounded-full bg-green-500 text-white flex items-center justify-center z-10 border-4 border-white shadow-sm">
@@ -763,7 +771,7 @@
                                         <div class="text-xs font-bold text-zinc-900 mt-2">Confirmed</div>
                                         <div class="text-[10px] text-zinc-500">Jan 15</div>
                                     </div>
-                                    <!-- Shipped -->
+                                    
                                     <div class="flex flex-col items-center">
                                         <div
                                             class="w-10 h-10 rounded-full bg-green-500 text-white flex items-center justify-center z-10 border-4 border-white shadow-sm">
@@ -772,7 +780,7 @@
                                         <div class="text-xs font-bold text-zinc-900 mt-2">Shipped</div>
                                         <div class="text-[10px] text-zinc-500">Jan 17</div>
                                     </div>
-                                    <!-- Delivered -->
+                                    
                                     <div class="flex flex-col items-center opacity-50">
                                         <div
                                             class="w-10 h-10 rounded-full bg-zinc-200 text-zinc-400 flex items-center justify-center z-10 border-4 border-white">
@@ -785,7 +793,7 @@
                             </div>
                         </div>
 
-                        <!-- Track Location Section -->
+                        
                         <div class="bg-white rounded-2xl shadow-sm border border-zinc-200 p-8 my-6">
                             <div
                                 class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
@@ -808,11 +816,11 @@
                                 </div>
                             </div>
 
-                            <!-- Map Container -->
+                            
                             <div class="relative w-full h-[400px] rounded-xl overflow-hidden border border-zinc-200">
                                 <div id="tracking-map" class="w-full h-full z-0"></div>
 
-                                <!-- Overlay Info (Optional) -->
+                                
                                 <div
                                     class="absolute bottom-4 left-4 right-4 md:right-auto md:w-72 bg-white/90 backdrop-blur-sm p-4 rounded-xl border border-zinc-200 shadow-lg z-[1000]">
                                     <div class="flex items-start gap-3">
@@ -878,7 +886,7 @@
                                             .openPopup();
 
                                         // Add Route Line
-                                        var routeLine = L.polyline([warehouseLoc, currentVanLoc, homeLoc], {
+                                        var routeLine = L.polyline([warehouseLoc, homeLoc], {
                                             color: '#3b82f6', // blue-500
                                             weight: 4,
                                             opacity: 0.7,
@@ -907,13 +915,13 @@
                             </script>
                         </div>
 
-                        <!-- Timeline & Tracking Info Grid -->
+                        
                         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                            <!-- Order Timeline -->
+                            
                             <div class="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-zinc-200 p-6 md:p-8">
                                 <h3 class="font-bold text-zinc-900 mb-6">Order Timeline</h3>
                                 <div class="relative pl-4 border-l-2 border-zinc-100 space-y-8">
-                                    <!-- Item 1 -->
+                                    
                                     <div class="relative pl-6">
                                         <div
                                             class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-green-500 border-2 border-white shadow-sm">
@@ -922,7 +930,7 @@
                                         <p class="text-xs text-zinc-500 mt-0.5">Your order has been received</p>
                                         <span class="text-[10px] text-zinc-400 mt-1 block">2024-01-15 10:30 AM</span>
                                     </div>
-                                    <!-- Item 2 -->
+                                    
                                     <div class="relative pl-6">
                                         <div
                                             class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-green-500 border-2 border-white shadow-sm">
@@ -931,7 +939,7 @@
                                         <p class="text-xs text-zinc-500 mt-0.5">We've confirmed your order</p>
                                         <span class="text-[10px] text-zinc-400 mt-1 block">2024-01-15 11:45 AM</span>
                                     </div>
-                                    <!-- Item 3 -->
+                                    
                                     <div class="relative pl-6">
                                         <div
                                             class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-green-500 border-2 border-white shadow-sm">
@@ -941,7 +949,7 @@
                                             shipment</p>
                                         <span class="text-[10px] text-zinc-400 mt-1 block">2024-01-16 09:15 AM</span>
                                     </div>
-                                    <!-- Item 4 (Active) -->
+                                    
                                     <div class="relative pl-6">
                                         <div
                                             class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-orange-500 border-2 border-white shadow-sm ring-4 ring-orange-50 animate-pulse">
@@ -954,7 +962,7 @@
                                         <p class="text-xs text-zinc-500 mt-0.5">Your order is on the way</p>
                                         <span class="text-[10px] text-zinc-400 mt-1 block">2024-01-17 02:30 PM</span>
                                     </div>
-                                    <!-- Item 5 (Pending) -->
+                                    
                                     <div class="relative pl-6 opacity-40">
                                         <div
                                             class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-zinc-200 border-2 border-white">
@@ -966,7 +974,7 @@
                                 </div>
                             </div>
 
-                            <!-- Tracking Info -->
+                            
                             <div
                                 class="bg-white rounded-2xl shadow-sm border border-zinc-200 p-6 md:p-8 flex flex-col justify-between">
                                 <div>
@@ -1011,13 +1019,13 @@
 
 
 
-                        <!-- Order Items -->
+                        
                         <div class="bg-white rounded-2xl shadow-sm border border-zinc-200 overflow-hidden">
                             <div class="p-6 md:p-8 border-b border-zinc-100">
                                 <h3 class="font-bold text-zinc-900">Order Items</h3>
                             </div>
                             <div class="p-6 md:p-8 space-y-6">
-                                <!-- Item 1 -->
+                                
                                 <div class="flex flex-col sm:flex-row items-center sm:justify-between gap-4">
                                     <div class="flex items-center gap-4 w-full sm:w-auto">
                                         <div
@@ -1038,7 +1046,7 @@
                                     </div>
                                 </div>
 
-                                <!-- Item 2 -->
+                                
                                 <div class="flex flex-col sm:flex-row items-center sm:justify-between gap-4">
                                     <div class="flex items-center gap-4 w-full sm:w-auto">
                                         <div
@@ -1064,9 +1072,9 @@
                             </div>
                         </div>
 
-                        <!-- Footer Info Grid -->
+                        
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <!-- Shipping Address -->
+                            
                             <div class="bg-white rounded-2xl shadow-sm border border-zinc-200 p-6 md:p-8">
                                 <div class="flex items-center gap-2 mb-4 text-zinc-900 font-bold">
                                     <i class="ri-map-pin-line"></i> Shipping Address
@@ -1079,7 +1087,7 @@
                                     +1 (555) 123-4567
                                 </div>
                             </div>
-                            <!-- Payment Method -->
+                            
                             <div class="bg-white rounded-2xl shadow-sm border border-zinc-200 p-6 md:p-8">
                                 <div class="flex items-center gap-2 mb-4 text-zinc-900 font-bold">
                                     <i class="ri-bank-card-line"></i> Payment Method
@@ -1096,7 +1104,7 @@
                             </div>
                         </div>
 
-                        <!-- Support Actions -->
+                        
                         <div class="bg-zinc-50 rounded-2xl border border-zinc-200/60 p-6 text-center">
                             <h4 class="font-bold text-zinc-900 text-sm mb-1">Need Help with Your Order?</h4>
                             <p class="text-xs text-zinc-500 mb-4">Our support team is here to help you with any
@@ -1113,10 +1121,10 @@
                     </div>
                 </div>
 
-                <!-- Wishlist Tab -->
+                
                 <div id="tab-wishlist" class="tab-content">
 
-                    <!-- Header Section from Reference -->
+                    
                     <div class="mb-8 text-center pt-4">
                         <h1 class="text-3xl font-bold text-zinc-900 mb-2">Wishlist</h1>
                         <p class="text-zinc-500 text-sm">Home / Wishlist</p>
@@ -1124,24 +1132,24 @@
 
                     <% if (user.wishlist && user.wishlist.length> 0) { %>
                         <div class="bg-white rounded-none shadow-sm overflow-hidden">
-                            <!-- Table Header -->
+                            
                             <div
                                 class="hidden md:grid grid-cols-12 gap-4 bg-[#FACC15]/40 py-4 px-6 font-bold text-zinc-700 text-sm uppercase tracking-wide">
-                                <div class="col-span-1"></div> <!-- Remove Icon -->
+                                <div class="col-span-1"></div> 
                                 <div class="col-span-4">Product</div>
                                 <div class="col-span-2">Price</div>
                                 <div class="col-span-2">Date Added</div>
                                 <div class="col-span-1">Stock Status</div>
-                                <div class="col-span-2"></div> <!-- Add to Cart -->
+                                <div class="col-span-2"></div> 
                             </div>
 
-                            <!-- Table Body -->
+                            
                             <div class="divide-y divide-zinc-100">
                                 <% user.wishlist.forEach(function(product) { %>
                                     <div
                                         class="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-4 items-center p-6 md:py-4 md:px-6 hover:bg-zinc-50 transition-colors group relative">
 
-                                        <!-- Remove Button -->
+                                        
                                         <div class="col-span-1 flex justify-center md:justify-start">
                                             <button onclick="removeFromWishlist(event, '<%= product._id %>')"
                                                 class="text-zinc-400 hover:text-red-500 transition-colors">
@@ -1149,7 +1157,7 @@
                                             </button>
                                         </div>
 
-                                        <!-- Product Info -->
+                                        
                                         <div
                                             class="col-span-1 md:col-span-4 flex flex-col md:flex-row items-center md:items-center gap-4 text-center md:text-left">
                                             <div class="w-20 h-24 bg-zinc-100 flex-shrink-0 overflow-hidden rounded-md">
@@ -1166,23 +1174,23 @@
                                             </div>
                                         </div>
 
-                                        <!-- Price -->
+                                        
                                         <div class="col-span-1 md:col-span-2 text-center md:text-left">
                                             <span class="font-bold text-zinc-800">₹<%= product.price %></span>
                                         </div>
 
-                                        <!-- Date Added (Mock) -->
+                                        
                                         <div
                                             class="col-span-1 md:col-span-2 text-center md:text-left text-sm text-zinc-500">
                                             25 January 2026
                                         </div>
 
-                                        <!-- Stock Status -->
+                                        
                                         <div class="col-span-1 md:col-span-1 text-center md:text-left">
                                             <span class="text-emerald-500 text-sm font-medium">Instock</span>
                                         </div>
 
-                                        <!-- Add to Cart -->
+                                        
                                         <div class="col-span-1 md:col-span-2 flex justify-center md:justify-end">
                                             <button onclick="addToCart(event, '<%= product._id %>')"
                                                 class="bg-[#3E2723] text-white px-6 py-2.5 text-sm font-medium hover:bg-[#2D1B18] transition-colors shadow-sm w-full md:w-auto">
@@ -1194,7 +1202,7 @@
                             </div>
                         </div>
 
-                        <!-- Footer Actions -->
+                        
                         <div
                             class="mt-10 flex flex-col md:flex-row gap-6 justify-end items-center border-t border-zinc-100 pt-8">
                             <div class="flex gap-4">
@@ -1204,7 +1212,7 @@
                             </div>
                         </div>
 
-                        <!-- Info Icons Footer -->
+                        
                         <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 pb-12">
                             <div class="flex items-start gap-4">
                                 <div
@@ -1250,20 +1258,90 @@
                             <% } %>
                 </div>
 
-                <!-- Products Tab -->
+                
+                <div id="tab-bill-payment" class="tab-content">
+                    <div class="mb-6">
+                        <h1 class="text-2xl font-bold text-zinc-900">Bill & Payment</h1>
+                        <p class="text-zinc-500 text-sm">Manage your payment methods and billing information.</p>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div class="bg-white rounded-2xl shadow-sm border border-zinc-200 p-6 md:p-8">
+                            <div class="flex justify-between items-center mb-6">
+                                <h3 class="font-bold text-zinc-900">Payment Methods</h3>
+                                <button
+                                    class="text-sm font-semibold text-blue-600 hover:text-blue-700 bg-blue-50 hover:bg-blue-100 px-4 py-2 rounded-lg transition-colors">
+                                    + Add New Card
+                                </button>
+                            </div>
+
+                            <div class="space-y-4">
+                                <div
+                                    class="flex items-center justify-between p-4 border border-zinc-200 rounded-xl hover:border-zinc-300 transition-colors group">
+                                    <div class="flex items-center gap-4">
+                                        <div
+                                            class="w-12 h-8 bg-zinc-100 rounded border border-zinc-200 flex items-center justify-center">
+                                            <i class="ri-visa-line text-xl text-blue-800"></i>
+                                        </div>
+                                        <div>
+                                            <div class="font-bold text-zinc-900 flex items-center gap-2">
+                                                Visa ending in 4242
+                                                <span
+                                                    class="px-2 py-0.5 bg-zinc-100 text-zinc-600 text-[10px] font-bold rounded uppercase">Default</span>
+                                            </div>
+                                            <div class="text-xs text-zinc-500 mt-0.5">Expires 12/28</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <button
+                                            class="p-2 text-zinc-400 hover:text-zinc-600 transition-colors rounded-lg hover:bg-zinc-50">
+                                            <i class="ri-pencil-line"></i>
+                                        </button>
+                                        <button
+                                            class="p-2 text-zinc-400 hover:text-red-600 transition-colors rounded-lg hover:bg-red-50">
+                                            <i class="ri-delete-bin-line"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-2xl shadow-sm border border-zinc-200 p-6 md:p-8">
+                            <div class="flex justify-between items-center mb-6">
+                                <h3 class="font-bold text-zinc-900">Billing Address</h3>
+                                <button onclick="switchTab('personalization')"
+                                    class="text-sm font-semibold text-zinc-600 hover:text-zinc-900">Edit</button>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="mt-1 text-zinc-400"><i class="ri-map-pin-2-line"></i></div>
+                                <div class="text-sm text-zinc-600 leading-relaxed">
+                                    <span class="text-zinc-900 font-medium">
+                                        <%= user.fullname %>
+                                    </span><br>
+                                    <%= user.address || 'No street address' %><br>
+                                        <%= user.city ? user.city + ',' : '' %>
+                                            <%= user.state ? user.state : '' %>
+                                                <%= user.country ? '- ' + user.country : '' %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
 
 
 
-                <!-- Help Center Tab -->
+                
                 <div id="tab-help" class="tab-content">
-                    <!-- Hero Section -->
+                    
                     <div class="rounded-3xl overflow-hidden relative mb-12 shadow-xl shadow-zinc-900/20">
                         <div class="absolute inset-0 bg-[#18181B]"></div>
                         <div
                             class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10">
                         </div>
 
-                        <!-- Decorative Circles -->
+                        
                         <div
                             class="absolute top-0 left-0 w-64 h-64 bg-zinc-800 rounded-full -translate-x-1/2 -translate-y-1/2 blur-3xl opacity-50">
                         </div>
@@ -1275,7 +1353,7 @@
                             <h2 class="text-3xl md:text-4xl font-bold text-white mb-8 tracking-tight">How can we help
                                 you?</h2>
 
-                            <!-- Search Bar -->
+                            
                             <div class="max-w-2xl mx-auto relative group">
                                 <div class="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none">
                                     <i
@@ -1288,9 +1366,9 @@
                         </div>
                     </div>
 
-                    <!-- Category Grid -->
+                    
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
-                        <!-- Getting Started -->
+                        
                         <div
                             class="bg-white p-6 rounded-2xl border border-zinc-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-1 transition-all cursor-pointer group flex items-start gap-5">
                             <div
@@ -1306,7 +1384,7 @@
                             </div>
                         </div>
 
-                        <!-- User Account -->
+                        
                         <div
                             class="bg-white p-6 rounded-2xl border border-zinc-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-1 transition-all cursor-pointer group flex items-start gap-5">
                             <div
@@ -1322,7 +1400,7 @@
                             </div>
                         </div>
 
-                        <!-- Product Features -->
+                        
                         <div
                             class="bg-white p-6 rounded-2xl border border-zinc-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-1 transition-all cursor-pointer group flex items-start gap-5">
                             <div
@@ -1338,7 +1416,7 @@
                             </div>
                         </div>
 
-                        <!-- Customization Options -->
+                        
                         <div
                             class="bg-white p-6 rounded-2xl border border-zinc-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-1 transition-all cursor-pointer group flex items-start gap-5">
                             <div
@@ -1354,7 +1432,7 @@
                             </div>
                         </div>
 
-                        <!-- Payment Gateways -->
+                        
                         <div
                             class="bg-white p-6 rounded-2xl border border-zinc-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-1 transition-all cursor-pointer group flex items-start gap-5">
                             <div
@@ -1370,7 +1448,7 @@
                             </div>
                         </div>
 
-                        <!-- Security Options -->
+                        
                         <div
                             class="bg-white p-6 rounded-2xl border border-zinc-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-1 transition-all cursor-pointer group flex items-start gap-5">
                             <div
@@ -1387,12 +1465,12 @@
                         </div>
                     </div>
 
-                    <!-- FAQ Section -->
+                    
                     <div class="max-w-3xl mx-auto mb-20">
                         <h3 class="text-2xl font-bold text-zinc-900 text-center mb-10">Frequently asked questions</h3>
 
                         <div class="space-y-4">
-                            <!-- Question 1 -->
+                            
                             <details
                                 class="group bg-white rounded-xl border border-zinc-200 overflow-hidden [&_summary::-webkit-details-marker]:hidden">
                                 <summary
@@ -1409,7 +1487,7 @@
                                 </div>
                             </details>
 
-                            <!-- Question 2 -->
+                            
                             <details
                                 class="group bg-white rounded-xl border border-zinc-200 overflow-hidden [&_summary::-webkit-details-marker]:hidden">
                                 <summary
@@ -1427,7 +1505,7 @@
                                 </div>
                             </details>
 
-                            <!-- Question 3 -->
+                            
                             <details
                                 class="group bg-white rounded-xl border border-zinc-200 overflow-hidden [&_summary::-webkit-details-marker]:hidden">
                                 <summary
@@ -1445,7 +1523,7 @@
                                 </div>
                             </details>
 
-                            <!-- Question 4 -->
+                            
                             <details
                                 class="group bg-white rounded-xl border border-zinc-200 overflow-hidden [&_summary::-webkit-details-marker]:hidden">
                                 <summary
@@ -1465,13 +1543,13 @@
                         </div>
                     </div>
 
-                    <!-- Footer / Support Team -->
+                    
                     <div class="text-center mb-10">
                         <h3 class="text-xl font-bold text-zinc-900 mb-2">Didn't find an answer?</h3>
                         <p class="text-zinc-500 text-sm mb-8">Our team is just an email away and ready to answer your
                             questions.</p>
 
-                        <!-- Avatars -->
+                        
                         <div class="flex justify-center items-center gap-4 mb-8 flex-wrap">
                             <div class="flex flex-col items-center gap-2">
                                 <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=100&auto=format&fit=crop"
@@ -1500,7 +1578,7 @@
                         </div>
                     </div>
 
-                    <!-- About Tab -->
+                    
                     <div id="tab-about" class="tab-content">
                         <div class="mb-6">
                             <h1 class="text-2xl font-bold text-zinc-900">About Us</h1>
@@ -1508,7 +1586,7 @@
                         </div>
                         <div class="bg-white rounded-2xl shadow-sm border border-zinc-200 overflow-hidden">
                             <div class="h-48 bg-zinc-100 relative">
-                                <!-- Placeholder for a banner image -->
+                                
                                 <div class="absolute inset-0 flex items-center justify-center text-zinc-300">
                                     <i class="ri-image-line text-4xl"></i>
                                 </div>
